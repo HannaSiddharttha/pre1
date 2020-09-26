@@ -1,0 +1,35 @@
+<resources>
+  <string name="app_name">Crazy Quiz</string>
+  <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
+  <string name="question_text_2">¿Como se llama el actor que interpresa al personaje de HP?</string>
+  <string name="question_text_3">¿Como se llama el director de Hogwarts?</string>
+  <string name="question_text_4">¿Como se llama la profesora que se convierte en gato?</string>
+  <string name="question_text_5">¿Como se llaman los amigos de Harry Potter?</string>
+  <string name="question_text_6">¿Como se llama la lechuza de Harry?</string>
+  <string name="question_text_7">¿Como se llama el mejor amigo de Harry?</string>
+  <string name="question_text_8">¿Como se llama el enemigo principal de Harry Potter?</string>
+  <string name="question_text_9">¿Como se llaman la novia de Harry Potter?</string>
+  <string name="question_text_10">¿Como se llama el profesor que mas odia a harry?</string>
+
+  <string name="question_text_11">¿Cual es la raza de gatos egipcia?</string>
+  <string name="question_text_12">¿Como podemos saber si una coralillo es falsa o venenosa?</string>
+  <string name="question_text_13">¿Cual es la serpiente constrictor mas grande del mundo?</string>
+  <string name="question_text_14">¿Cual es la serpiente mas grande del estado de Yucatan?</string>
+  <string name="question_text_15">¿Los gatos negros deberian ser usados para?</string>
+  <string name="question_text_16">¿En que habitas viven los cocodrilos?</string>
+  <string name="question_text_17">¿Las serpientes que comen ratones se les dice?</string>
+  <string name="question_text_18">¿Como se llama la especie de gato que es color gris?</string>
+  <string name="question_text_19">¿Como se llama la especie de gato que tiene color cafe y crema?</string>
+  <string name="question_text_20">¿Como se llama el reptil mas grande del mundo?</string>
+
+  <string name="question_text_21">¿Cual es el principe del pop?</string>
+  <string name="question_text_22">¿En que pelicula sale Han Solo?</string>
+  <string name="question_text_23">¿De que pais es shakira?</string>
+  <string name="question_text_24">¿De que pais es nativa la familia de Hitler?</string>
+  <string name="question_text_25">¿Como se llama el expresidente de color de EUA?</string>
+  <string name="question_text_26">¿Como se llama el primer ministro actual de canada?</string>
+  <string name="question_text_27">¿Como se llama la reina de inglaterra?</string>
+  <string name="question_text_28">¿Como se llama la cantante de Poker Face?</string>
+  <string name="question_text_29">¿Como se llama el animal emblematico de peru?</string>
+  <string name="question_text_30">¿Cual es el sitio arqueologico mas visitado de todo mexico?</string>
+</resources>

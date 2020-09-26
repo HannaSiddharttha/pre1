@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background5"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="207dp"
+        android:layout_height="205dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/applogo8" />
+
+    <Button
+        android:id="@+id/button_juego"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/custom_button"
+        android:text="Juego"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_5act"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_logo" />
+
+    <Button
+        android:id="@+id/button_options"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/custom_button"
+        android:text="Opciones"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_5act"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_juego"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_logo" />
+
+    <Button
+        android:id="@+id/button_5act"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="168dp"
+        android:background="@drawable/custom_button"
+        android:text="5 activity"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
