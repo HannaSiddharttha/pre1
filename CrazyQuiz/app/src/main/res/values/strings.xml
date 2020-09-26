@@ -1,6 +1,12 @@
 <resources>
   <string name="app_name">Crazy Quiz</string>
+
   <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
+  <string name="p1_respuesta_1"> 2001 </string>
+<string name="p2_respuesta_2"></string>
+
+
+
   <string name="question_text_2">¿Como se llama el actor que interpresa al personaje de HP?</string>
   <string name="question_text_3">¿Como se llama el director de Hogwarts?</string>
   <string name="question_text_4">¿Como se llama la profesora que se convierte en gato?</string>
