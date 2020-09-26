@@ -1,35 +1,11 @@
 <resources>
   <string name="app_name">Crazy Quiz</string>
 
-   <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
-  <string name="p1_respuesta_1"> 2001 </string>
-  <string name="p2_respuesta_2"></string>
-
-  <string name="question_text_31">¿Cual es un platillo de Yucatan?</string>
-  <string name="p1_respuesta_1"> Relleno Negro </string>
-  <string name="p2_respuesta_2">Pozole</string>
-  <string name="p3_respuesta_3"> Chiles Rellenos </string>
-  <string name="p4_respuesta_4">Barbacoa</string>
-
-  <string name="question_text_32">¿De que estado es el Pozole?</string>
-  <string name="p1_respuesta_1">Jalisco</string>
-  <string name="p2_respuesta_2">Chiapas</string>
-  <string name="p3_respuesta_3">Veracruz</string>
-  <string name="p4_respuesta_4">Cd. de Mexico</string>
-
-  <string name="question_text_33">¿De que estado es la cochinita?</string>
-  <string name="p1_respuesta_1">Yucatan</string>
-  <string name="p2_respuesta_2">Tabasco</string>
-  <string name="p3_respuesta_3">Jalisco</string>
-  <string name="p4_respuesta_4">Cd. de Mexico</string>
-
-
-
   <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
   <string name="p1_respuesta_1"> 2001 </string> //correcta
-<string name="p1_respuesta_2"> 2003 </string>
-<string name="p1_respuesta_3"> 2000 </string>
-<string name="p1_respuesta_4"> 2002 </string>
+  <string name="p1_respuesta_2"> 2003 </string>
+  <string name="p1_respuesta_3"> 2000 </string>
+  <string name="p1_respuesta_4"> 2002 </string>
 
   <string name="question_text_2">¿Como se llama el actor que interpresa al personaje de HP?</string>
   <string name="p2_respuesta_1"> Daniel Radcliffe </string> //correcta
@@ -102,9 +78,27 @@
   <string name="question_text_29">¿Como se llama el animal emblematico de peru?</string>
   <string name="question_text_30">¿Cual es el sitio arqueologico mas visitado de todo mexico?</string>
 
+
+
+
   <string name="question_text_31">¿Cual es un platillo de Yucatan?</string>
+  <string name="p31_respuesta_1"> Relleno Negro </string>
+  <string name="p31_respuesta_2">Pozole</string>
+  <string name="p31_respuesta_3"> Chiles Rellenos </string>
+  <string name="p31_respuesta_4">Barbacoa</string>
+
   <string name="question_text_32">¿De que estado es el Pozole?</string>
+  <string name="p32_respuesta_1">Jalisco</string>
+  <string name="p32_respuesta_2">Chiapas</string>
+  <string name="p32_respuesta_3">Veracruz</string>
+  <string name="p32_respuesta_4">Cd. de Mexico</string>
+
   <string name="question_text_33">¿De que estado es la cochinita?</string>
+  <string name="p33_respuesta_1">Yucatan</string>
+  <string name="p33_respuesta_2">Tabasco</string>
+  <string name="p33_respuesta_3">Jalisco</string>
+  <string name="p33_respuesta_4">Cd. de Mexico</string>
+
   <string name="question_text_34">¿De que pais es la pizza y la pasta?</string>
   <string name="question_text_35">¿De que pais son originarios los tacos en trompo?</string>
   <string name="question_text_36">¿Es un platillo Japones?</string>
