@@ -1,6 +1,9 @@
 <resources>
   <string name="app_name">Crazy Quiz</string>
 
+
+  // HP ------------------------------------------------------------------------------------------------
+
   <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
   <string name="p1_respuesta_1"> 2001 </string> //correcta
   <string name="p1_respuesta_2"> 2003 </string>
@@ -52,25 +55,123 @@
   <string name="p8_respuesta_4"> Bellatrix</string>
 
   <string name="question_text_9">¿Como se llama la novia de Harry Potter?</string>
-
+  <string name="p9_respuesta_1">  Ginni </string> //correcta
+  <string name="p9_respuesta_2"> Hermione </string>
+  <string name="p9_respuesta_3"> Luna </string>
+  <string name="p9_respuesta_4"> Lily </string>
 
   <string name="question_text_10">¿Como se llama el profesor que mas odia a harry?</string>
+  <string name="p10_respuesta_1"> Snape </string> //correcta
+  <string name="p10_respuesta_2"> Lupin </string>
+  <string name="p10_respuesta_3"> McGonagall </string>
+  <string name="p10_respuesta_4"> Dumbledore </string>
+
+
+  //Sankes and Cats --------------------------------------------------------------------------------
+
 
   <string name="question_text_11">¿Cual es la raza de gatos egipcia?</string>
-  <string name="question_text_12">¿Como podemos saber si una coralillo es falsa o venenosa?</string>
-  <string name="question_text_13">¿Cual es la serpiente constrictor mas grande del mundo?</string>
-  <string name="question_text_14">¿Cual es la serpiente mas grande del estado de Yucatan?</string>
-  <string name="question_text_15">¿Los gatos negros deberian ser usados para?</string>
-  <string name="question_text_16">¿En que habitas viven los cocodrilos?</string>
-  <string name="question_text_17">¿Las serpientes que comen ratones se les dice?</string>
-  <string name="question_text_18">¿Como se llama la especie de gato que es color gris?</string>
-  <string name="question_text_19">¿Como se llama la especie de gato que tiene color cafe y crema?</string>
-  <string name="question_text_20">¿Como se llama el reptil mas grande del mundo?</string>
+  <string name="p11_respuesta_1"> Sphynx </string> //correcta
+  <string name="p11_respuesta_2"> Egipto </string>
+  <string name="p11_respuesta_3"> Sin pelo </string>
+  <string name="p11_respuesta_4"> Pelonsin </string>
 
+  <string name="question_text_12">¿Como podemos saber si una coralillo es falsa o venenosa?</string>
+  <string name="p12_respuesta_1"> Patron de sus lineas</string> //correcta
+  <string name="p12_respuesta_2"> Forma de la cabeza </string>
+  <string name="p12_respuesta_3"> Su color de ojos</string>
+  <string name="p12_respuesta_4"> La longitud de su cuerpo </string>
+
+
+  <string name="question_text_13">¿Cual es la serpiente constrictor mas grande del mundo?</string>
+  <string name="p13_respuesta_1"> Anaconda </string> //correcta
+  <string name="p13_respuesta_2"> Cascabel </string>
+  <string name="p13_respuesta_3"> Boa Amarilla </string>
+  <string name="p13_respuesta_4"> Christian Cabral </string>
+
+
+  <string name="question_text_14">¿Cual es la serpiente mas grande del estado de Yucatan?</string>
+  <string name="p14_respuesta_1"> Boa Constrictor </string> //correcta
+  <string name="p14_respuesta_2"> Christian Cabral </string>
+  <string name="p14_respuesta_3"> Boa Amarilla </string>
+  <string name="p14_respuesta_4"> Coralillo </string>
+
+  <string name="question_text_15">¿Los gatos negros deberian ser usados para?</string>
+  <string name="p15_respuesta_1"> Amar </string> //correcta
+  <string name="p15_respuesta_2"> Sacrificios </string>
+  <string name="p15_respuesta_3"> Mala suerte </string>
+  <string name="p15_respuesta_4"> Asustar a Christian </string>
+
+
+  <string name="question_text_16">¿En que habitad viven los cocodrilos?</string>
+  <string name="p16_respuesta_1"> Manglares </string> //correcta
+  <string name="p16_respuesta_2"> Pantanos con el shrek </string>
+  <string name="p16_respuesta_3"> Lagos </string>
+  <string name="p16_respuesta_4"> Rios </string>
+
+
+
+  <string name="question_text_17">¿Las serpientes que comen ratones se les dice?</string>
+  <string name="p17_respuesta_1"> Ratoneras </string> //correcta
+  <string name="p17_respuesta_2"> Come ratones </string>
+  <string name="p17_respuesta_3"> Ratoncitas </string>
+  <string name="p17_respuesta_4"> Rateras </string>
+
+
+
+  <string name="question_text_18">¿Como se llama la especie de gato que es color gris?</string>
+  <string name="p18_respuesta_1"> Russian Blue </string> //correcta
+  <string name="p18_respuesta_2"> Grey Cat </string>
+  <string name="p18_respuesta_3"> No existe </string>
+  <string name="p18_respuesta_4"> Ninguna de las anteriores </string>
+
+
+  <string name="question_text_19">¿Como se llama la especie de gato que tiene color cafe y crema?</string>
+  <string name="p19_respuesta_1"> Siames </string> //correcta
+  <string name="p19_respuesta_2"> Gatos normales </string>
+  <string name="p19_respuesta_3"> White Brown Cat </string>
+  <string name="p19_respuesta_4"> Ninguna de las anteriores </string>
+
+
+  <string name="question_text_20">¿Como se llama el reptil mas grande del mundo?</string>
+  <string name="p20_respuesta_1"> Cocodrilo de agua salada </string> //correcta
+  <string name="p20_respuesta_2"> Lagarto cola en espiga </string>
+  <string name="p20_respuesta_3"> Boa Amarilla</string>
+  <string name="p20_respuesta_4"> Piton </string>
+
+
+
+  // Cultura General -------------------------------------------------------------------------------
   <string name="question_text_21">¿Cual es el principe del pop?</string>
+  <string name="p21_respuesta_1"> Michael Jackson </string> //correcta
+  <string name="p21_respuesta_2"> Justin Bieber </string>
+  <string name="p21_respuesta_3"> Adan Levine </string>
+  <string name="p21_respuesta_4"> Justin Timberlake </string>
+
   <string name="question_text_22">¿En que pelicula sale Han Solo?</string>
+  <string name="p22_respuesta_1"> Star Wars </string> //correcta
+  <string name="p22_respuesta_2"> The Walking dead </string>
+  <string name="p22_respuesta_3"> Harry Potter</string>
+  <string name="p22_respuesta_4"> El señor de los anillos </string>
+
+
+
   <string name="question_text_23">¿De que pais es shakira?</string>
+  <string name="p23_respuesta_1"> Colombia </string> //correcta
+  <string name="p23_respuesta_2"> Brasil </string>
+  <string name="p23_respuesta_3"> Perú </string>
+  <string name="p23_respuesta_4"> México </string>
+
+
+
   <string name="question_text_24">¿De que pais es nativa la familia de Hitler?</string>
+  <string name="p24_respuesta_1"> Alemania </string> //correcta
+  <string name="p24_respuesta_2"> Brasil </string>
+  <string name="p24_respuesta_3"> Perú </string>
+  <string name="p24_respuesta_4"> México </string>
+
+
+
   <string name="question_text_25">¿Como se llama el expresidente de color de EUA?</string>
   <string name="question_text_26">¿Como se llama el primer ministro actual de canada?</string>
   <string name="question_text_27">¿Como se llama la reina de inglaterra?</string>
@@ -79,7 +180,7 @@
   <string name="question_text_30">¿Cual es el sitio arqueologico mas visitado de todo mexico?</string>
 
 
-
+//FOOD ---------------------------------------------------------------------------------------------
 
   <string name="question_text_31">¿Cual es un platillo de Yucatan?</string>
   <string name="p31_respuesta_1"> Relleno Negro </string>
@@ -94,7 +195,7 @@
   <string name="p32_respuesta_4">Cd. de Mexico</string>
 
   <string name="question_text_33">¿De que estado es la cochinita?</string>
-  <string name="p33_respuesta_1">Yucatan</string>
+  <string name="p33_respuesta_1">Yucatan</string> //Correcta
   <string name="p33_respuesta_2">Tabasco</string>
   <string name="p33_respuesta_3">Jalisco</string>
   <string name="p33_respuesta_4">Cd. de Mexico</string>
@@ -107,6 +208,8 @@
   <string name="question_text_39">¿De que estado es la barbacoa?</string>
   <string name="question_text_40">¿De donde es originario el pate de pato?</string>
 
+  //Terror -----------------------------------------------------------------------------------------
+
   <string name="question_text_41">¿Cual es el autor de IT?</string>
   <string name="question_text_42">¿Como se llama la pelicula de Michaell Mayers?</string>
   <string name="question_text_43">¿De que pelicula es Freddie Krugger?</string>
@@ -118,6 +221,8 @@
   <string name="question_text_49">¿En donde se encuentran las catapultas mas grandes del mundo?</string>
   <string name="question_text_50">¿Como se llama la mansion embrujada mas grande del mundo?</string>
 
+  // Arte y Geografia ------------------------------------------------------------------------------
+
   <string name="question_text_51">¿En que continente queda Marruecos?</string>
   <string name="question_text_52">¿Como se llama el continente donde esta australia?</string>
   <string name="question_text_53">¿Quien pinto la MonaLisa?</string>
@@ -128,4 +233,6 @@
   <string name="question_text_58">¿En que pais se encuentra Macao?</string>
   <string name="question_text_59">¿A que pais pertenece Hawaii?</string>
   <string name="question_text_60">¿En que pais se habla el idioma Catalan?</string>
+
+
 </resources>
