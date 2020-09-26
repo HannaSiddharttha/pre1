@@ -43,4 +43,26 @@
   <string name="question_text_38">¿Es un platillo Español?</string>
   <string name="question_text_39">¿De que estado es la barbacoa?</string>
   <string name="question_text_40">¿De donde es originario el pate de pato?</string>
+
+  <string name="question_text_41">¿Cual es el autor de IT?</string>
+  <string name="question_text_42">¿Como se llama la pelicula de Michaell Mayers?</string>
+  <string name="question_text_43">¿De que pelicula es Freddie Krugger?</string>
+  <string name="question_text_44">¿De que pais es originaria la llorona?</string>
+  <string name="question_text_45">¿De que estado son originarios los aluxes?</string>
+  <string name="question_text_46">¿De donde es el ritual Hitori Kakurendo?</string>
+  <string name="question_text_47">¿Como se llama el ojeto mas maldito del museo de los Warren?</string>
+  <string name="question_text_48">¿Como se llama el muñeno en el que se inspiro Choky?</string>
+  <string name="question_text_49">¿En donde se encuentran las catapultas mas grandes del mundo?</string>
+  <string name="question_text_50">¿Como se llama la mansion embrujada mas grande del mundo?</string>
+
+  <string name="question_text_51">¿En que continente queda Marruecos?</string>
+  <string name="question_text_52">¿Como se llama el continente donde esta australia?</string>
+  <string name="question_text_53">¿Quien pinto la MonaLisa?</string>
+  <string name="question_text_54">¿De que pais es el dia de ST.Patricks Day?</string>
+  <string name="question_text_55">¿En que pais se encuentra Alaska?</string>
+  <string name="question_text_56">¿En que pais se encuentra la torre Eiffel?</string>
+  <string name="question_text_57">¿En que contienente se encuentra Rusia?</string>
+  <string name="question_text_58">¿En que pais se encuentra Macao?</string>
+  <string name="question_text_59">¿A que pais pertenece Hawaii?</string>
+  <string name="question_text_60">¿En que pais se habla el idioma Catalan?</string>
 </resources>
