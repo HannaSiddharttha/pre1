@@ -16,7 +16,7 @@ class GameModel : ViewModel() {
 
     private var questionBank = listOf(
         Question(R.string.question_text_1, R.string.p1_respuesta_1, R.string.p1_respuesta_1, R.string.p1_respuesta_2, R.string.p1_respuesta_3, R.string.p1_respuesta_4, HARRY_POTTER),
-        Question(R.string.question_text_2, false),
+       /* Question(R.string.question_text_2, false),
         Question(R.string.question_text_3, true),
         Question(R.string.question_text_4, false),
         Question(R.string.question_text_5, false) ,
@@ -74,7 +74,7 @@ class GameModel : ViewModel() {
         Question(R.string.question_text_57, false),
         Question(R.string.question_text_58, true),
         Question(R.string.question_text_59, false),
-        Question(R.string.question_text_60, false),
+        Question(R.string.question_text_60, false),*/
 
 
     )
