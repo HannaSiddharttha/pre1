@@ -19,8 +19,7 @@ class GameModel {
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        //Log.d()
-    }
+   // override fun onCleared() {
+     //   super.onCleared()
+        //Log.d()}
 }
