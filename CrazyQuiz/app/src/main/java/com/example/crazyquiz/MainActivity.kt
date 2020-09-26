@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ListView
-import android.widget.ScrollView
 import androidx.activity.viewModels
+
+
 
 class MainActivity : AppCompatActivity() {
 
