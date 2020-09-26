@@ -1,6 +1,8 @@
 package com.example.crazyquiz
 
-class GameModel {
+import androidx.lifecycle.ViewModel
+
+class GameModel : ViewModel() {
 
     private var questionBank = listOf(
         Question(R.string.question_text_1, true),
