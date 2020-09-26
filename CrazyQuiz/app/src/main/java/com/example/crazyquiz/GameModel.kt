@@ -4,6 +4,16 @@ import androidx.lifecycle.ViewModel
 
 class GameModel : ViewModel() {
 
+    //CATEGORIAS
+
+    val HARRY_POTTER = 1
+    val CATS_REPTILES = 2
+    val FOOD = 3
+    val TERROR = 4
+    val CULTURA_GENERAL = 5
+    val ARTE_GEOGRAFIA = 6
+
+
     private var questionBank = listOf(
         Question(R.string.question_text_1, true),
         Question(R.string.question_text_2, false),
