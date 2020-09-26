@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_options.*
 
 class Options : AppCompatActivity() {
 
@@ -46,6 +47,150 @@ class Options : AppCompatActivity() {
         switch_pistas = findViewById(R.id.switch_pistas)
 
         button_return.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        button_apply.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        checkBox_todos.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_hp.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_gatosyreptiles.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_culturageneral.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_comida.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_terror.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        checkBox_arteygeografia.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(
+                    this,
+                    "Encendido",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Apagado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        spinner_numpreguntas.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        spinner_pistas.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        radioGroup.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        radioButton_alta.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        radioButton_media.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        radioButton_baja.setOnClickListener{  View ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        switch_pistas.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
