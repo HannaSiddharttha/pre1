@@ -2,19 +2,58 @@
   <string name="app_name">Crazy Quiz</string>
 
   <string name="question_text_1">¿En que año se estreno HP y la piedra filosofal?</string>
-  <string name="p1_respuesta_1"> 2001 </string>
-<string name="p2_respuesta_2"></string>
-
-
+  <string name="p1_respuesta_1"> 2001 </string> //correcta
+<string name="p1_respuesta_2"> 2003 </string>
+<string name="p1_respuesta_3"> 2000 </string>
+<string name="p1_respuesta_4"> 2002 </string>
 
   <string name="question_text_2">¿Como se llama el actor que interpresa al personaje de HP?</string>
+  <string name="p2_respuesta_1"> Daniel Radcliffe </string> //correcta
+  <string name="p2_respuesta_2"> Daniel Radclif </string>
+  <string name="p2_respuesta_3"> Draco Malfoy </string>
+  <string name="p2_respuesta_4"> Rupert Grint </string>
+
   <string name="question_text_3">¿Como se llama el director de Hogwarts?</string>
+  <string name="p3_respuesta_1"> Albus Dumbledore </string> //correcta
+  <string name="p3_respuesta_2"> Salazar Slyterin </string>
+  <string name="p3_respuesta_3"> Godric Gryfindor </string>
+  <string name="p3_respuesta_4"> Severus Snape </string>
+
   <string name="question_text_4">¿Como se llama la profesora que se convierte en gato?</string>
+  <string name="p4_respuesta_1"> Minerva McGonagall </string> //correcta
+  <string name="p4_respuesta_2"> Wilhelmina Grubbly-Plank </string>
+  <string name="p4_respuesta_3"> Aurora Sinistra </string>
+  <string name="p4_respuesta_4"> Dolores Umbridge </string>
+
+
   <string name="question_text_5">¿Como se llaman los 3 amigos de Harry Potter?</string>
+  <string name="p5_respuesta_1"> Ron, Hermione y Dobby </string> //correcta
+  <string name="p5_respuesta_2"> Fred, George y Dumbledore </string>
+  <string name="p5_respuesta_3"> Voldemort, MAcGonagall y Malfoy </string>
+  <string name="p5_respuesta_4"> Hagrid, Luna y Neville </string>
+
   <string name="question_text_6">¿Como se llama la lechuza de Harry?</string>
+  <string name="p6_respuesta_1"> Hedwig </string> //correcta
+  <string name="p6_respuesta_2"> Dobby </string>
+  <string name="p6_respuesta_3"> Ron </string>
+  <string name="p6_respuesta_4"> Draco</string>
+
   <string name="question_text_7">¿Como se llama el mejor amigo de Harry?</string>
+  <string name="p7_respuesta_1"> Hagrid </string> //correcta
+  <string name="p7_respuesta_2"> Ron </string>
+  <string name="p7_respuesta_3"> Hedwig </string>
+  <string name="p7_respuesta_4"> Draco</string>
+
+
   <string name="question_text_8">¿Como se llama el enemigo principal de Harry Potter?</string>
+  <string name="p8_respuesta_1"> Voldemort </string> //correcta
+  <string name="p8_respuesta_2"> Draco </string>
+  <string name="p8_respuesta_3"> Snape </string>
+  <string name="p8_respuesta_4"> Bellatrix</string>
+
   <string name="question_text_9">¿Como se llama la novia de Harry Potter?</string>
+
+
   <string name="question_text_10">¿Como se llama el profesor que mas odia a harry?</string>
 
   <string name="question_text_11">¿Cual es la raza de gatos egipcia?</string>
