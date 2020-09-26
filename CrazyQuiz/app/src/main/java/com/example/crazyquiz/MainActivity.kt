@@ -29,5 +29,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,Options::class.java)
             startActivity(intent)
         }
+        button_juego.setOnClickListener{  View ->
+            val intent = Intent(this,QuestionActivity::class.java)
+            startActivity(intent)
+        }
+        button_5act.setOnClickListener{  View ->
+            val intent = Intent(this,FinalScoreActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
