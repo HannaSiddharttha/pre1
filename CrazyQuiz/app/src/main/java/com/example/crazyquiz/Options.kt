@@ -166,14 +166,16 @@ class Options : AppCompatActivity() {
                 ).show()
             }
         }
-        spinner_numpreguntas.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        }
-        spinner_pistas.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        }
+
+        var spinner_info = arrayOf("5","6", "8", "9","10")
+        val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info)
+        spinner_numpreguntas.adapter = adapter1
+
+
+        var spinner_info2 = arrayOf("1","2", "3")
+        val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
+        spinner_pistas.adapter = adapter2
+
         radioGroup.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
