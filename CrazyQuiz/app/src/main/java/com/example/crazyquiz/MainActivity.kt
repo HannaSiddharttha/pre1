@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         button_5act = findViewById(R.id.button_5act)
 
         button_options.setOnClickListener{  View ->
-            val intent = Intent(this,Options::class.java)
+            val intent = Intent(this,OptionsActivity::class.java)
             startActivity(intent)
         }
         button_juego.setOnClickListener{  View ->

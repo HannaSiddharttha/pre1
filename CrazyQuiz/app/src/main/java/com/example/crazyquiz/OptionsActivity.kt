@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_options.*
 
-class Options : AppCompatActivity() {
+class OptionsActivity : AppCompatActivity() {
 
     private lateinit var button_return : Button
     private lateinit var button_aply : Button
@@ -24,6 +24,9 @@ class Options : AppCompatActivity() {
     private lateinit var radioButton_media: RadioButton
     private lateinit var radioButton_baja: RadioButton
     private lateinit var switch_pistas: Switch
+    private var settings: Settings? = null
+    private var adapter1: ArrayAdapter<String>? = null
+    private var adapter2: ArrayAdapter<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +54,7 @@ class Options : AppCompatActivity() {
             startActivity(intent)
         }
         button_apply.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+
         }
         checkBox_todos.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -167,13 +169,13 @@ class Options : AppCompatActivity() {
             }
         }
 
-        var spinner_info = arrayOf("5","6", "8", "9","10")
-        val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info)
+        var spinner_info = arrayOf("5","6","7", "8", "9","10")
+        adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info)
         spinner_numpreguntas.adapter = adapter1
 
 
         var spinner_info2 = arrayOf("1","2", "3")
-        val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
+        adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
         spinner_pistas.adapter = adapter2
 
         radioGroup.setOnClickListener{  View ->
@@ -196,5 +198,24 @@ class Options : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
+
+        settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+        loadSettings()
+    }
+
+    fun loadSettings() {
+        checkBox_todos.isChecked = settings?.allThemes ?: false
+        checkBox_hp.isChecked = settings?.harryPotter ?: false
+        checkBox_gatosyreptiles.isChecked = settings?.catReptiles ?: false
+        checkBox_culturageneral.isChecked = settings?.culturaGen?: false
+        checkBox_comida.isChecked = settings?.food ?: false
+        checkBox_terror.isChecked = settings?.terror ?: false
+        checkBox_arteygeografia.isChecked = settings?.arteGeo ?: false
+        spinner_numpreguntas.setSelection(adapter1?.getPosition(settings?.numPreguntas) ?: 1);
+        spinner_pistas.setSelection(adapter2?.getPosition(settings?.numPistas) ?: 1);
+    }
+
+    fun saveSettings() {
+
     }
 }

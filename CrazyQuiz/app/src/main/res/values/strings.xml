@@ -173,11 +173,40 @@
 
 
   <string name="question_text_25">¿Como se llama el expresidente de color de EUA?</string>
+  <string name="p25_respuesta_1"> Obama </string> //correcta
+  <string name="p25_respuesta_2"> Trump </string>
+  <string name="p25_respuesta_3"> AMLO </string>
+  <string name="p25_respuesta_4"> George Bush </string>
+
   <string name="question_text_26">¿Como se llama el primer ministro actual de canada?</string>
+  <string name="p26_respuesta_1"> Justin Trudeau </string> //correcta
+  <string name="p26_respuesta_2"> Trump </string>
+  <string name="p26_respuesta_3"> AMLO </string>
+  <string name="p26_respuesta_4"> Reina Isabel II </string>
+
   <string name="question_text_27">¿Como se llama la reina de inglaterra?</string>
+  <string name="p27_respuesta_1"> Reina Isabell II </string> //correcta
+  <string name="p27_respuesta_2"> Sofia </string>
+  <string name="p27_respuesta_3"> AMLO </string>
+  <string name="p27_respuesta_4"> Kate Middelton </string>
+
   <string name="question_text_28">¿Como se llama la cantante de Poker Face?</string>
+  <string name="p28_respuesta_1"> Lady Gaga </string> //correcta
+  <string name="p28_respuesta_2"> Ariana Grande </string>
+  <string name="p28_respuesta_3"> Shakira </string>
+  <string name="p28_respuesta_4"> Kate Middelton </string>
+
   <string name="question_text_29">¿Como se llama el animal emblematico de peru?</string>
+  <string name="p29_respuesta_1"> Llama </string> //correcta
+  <string name="p29_respuesta_2"> Tigre </string>
+  <string name="p29_respuesta_3"> Perro </string>
+  <string name="p29_respuesta_4"> Lobo </string>
+
   <string name="question_text_30">¿Cual es el sitio arqueologico mas visitado de todo mexico?</string>
+  <string name="p30_respuesta_1"> Chichen Itza</string> //correcta
+  <string name="p30_respuesta_2"> Tulum </string>
+  <string name="p30_respuesta_3"> Technotitlan</string>
+  <string name="p30_respuesta_4"> La venta </string>
 
 
 //FOOD ---------------------------------------------------------------------------------------------
@@ -201,38 +230,170 @@
   <string name="p33_respuesta_4">Cd. de Mexico</string>
 
   <string name="question_text_34">¿De que pais es la pizza y la pasta?</string>
+  <string name="p34_respuesta_1"> Italia </string> //correcta
+  <string name="p34_respuesta_2"> Francia </string>
+  <string name="p34_respuesta_3"> Mexico </string>
+  <string name="p34_respuesta_4"> Ukrania </string>
+
   <string name="question_text_35">¿De que pais son originarios los tacos en trompo?</string>
+  <string name="p35_respuesta_1"> Libano </string> //correcta
+  <string name="p35_respuesta_2"> Mexico </string>
+  <string name="p35_respuesta_3"> Australia </string>
+  <string name="p35_respuesta_4"> Brazil </string>
+
   <string name="question_text_36">¿Es un platillo Japones?</string>
+  <string name="p36_respuesta_1"> Yakimeshi </string> //correcta
+  <string name="p36_respuesta_2"> Teriyaki </string>
+  <string name="p36_respuesta_3"> Chow Mein </string>
+  <string name="p36_respuesta_4"> Pollo Agridulce </string>
+
   <string name="question_text_37">¿Es un platillo Chino?</string>
+  <string name="p37_respuesta_1"> Chow Mein </string> //correcta
+  <string name="p37_respuesta_2"> Sushi </string>
+  <string name="p37_respuesta_3"> Ramen </string>
+  <string name="p37_respuesta_4"> Yakimeshi </string>
+
   <string name="question_text_38">¿Es un platillo Español?</string>
+  <string name="p38_respuesta_1"> Paella </string> //correcta
+  <string name="p38_respuesta_2"> Caldo de Pollo </string>
+  <string name="p38_respuesta_3"> Toritos </string>
+  <string name="p38_respuesta_4"> Ceviche </string>
+
   <string name="question_text_39">¿De que estado es la barbacoa?</string>
+  <string name="p39_respuesta_1"> Hidalgo </string> //correcta
+  <string name="p39_respuesta_2"> Durango </string>
+  <string name="p39_respuesta_3"> Cd. de Mexico </string>
+  <string name="p39_respuesta_4"> Tamaulipas </string>
+
   <string name="question_text_40">¿De donde es originario el pate de pato?</string>
+  <string name="p40_respuesta_1"> Francia </string> //correcta
+  <string name="p40_respuesta_2"> Mexico </string>
+  <string name="p40_respuesta_3"> Australia </string>
+  <string name="p40_respuesta_4"> Brazil </string>
 
   //Terror -----------------------------------------------------------------------------------------
 
   <string name="question_text_41">¿Cual es el autor de IT?</string>
+  <string name="p41_respuesta_1"> Stephen King </string> //correcta
+  <string name="p41_respuesta_2"> Stephani Mayer </string>
+  <string name="p41_respuesta_3"> Paulo Cohello </string>
+  <string name="p41_respuesta_4"> Miguel Cervantes </string>
+
   <string name="question_text_42">¿Como se llama la pelicula de Michaell Mayers?</string>
+  <string name="p42_respuesta_1"> Halloween </string> //correcta
+  <string name="p42_respuesta_2"> Pesadilla en la calle del infierno </string>
+  <string name="p42_respuesta_3"> El Exorcista </string>
+  <string name="p42_respuesta_4"> La Cabaña </string>
+
   <string name="question_text_43">¿De que pelicula es Freddie Krugger?</string>
+  <string name="p43_respuesta_1"> Pesadilla en la calle ELM </string> //correcta
+  <string name="p43_respuesta_2"> Halloween </string>
+  <string name="p43_respuesta_3"> El Aro </string>
+  <string name="p43_respuesta_4"> Chuky </string>
+
   <string name="question_text_44">¿De que pais es originaria la llorona?</string>
+  <string name="p44_respuesta_1"> Mexico </string> //correcta
+  <string name="p44_respuesta_2"> Uruguay </string>
+  <string name="p44_respuesta_3"> Venezuela </string>
+  <string name="p44_respuesta_4"> Salvador </string>
+
   <string name="question_text_45">¿De que estado son originarios los aluxes?</string>
+  <string name="p45_respuesta_1"> Yucatán </string> //correcta
+  <string name="p45_respuesta_2"> Chiapas </string>
+  <string name="p45_respuesta_3"> Veracruz </string>
+  <string name="p45_respuesta_4"> Tabasco </string>
+
   <string name="question_text_46">¿De donde es el ritual Hitori Kakurendo?</string>
-  <string name="question_text_47">¿Como se llama el ojeto mas maldito del museo de los Warren?</string>
+  <string name="p46_respuesta_1"> Japon </string> //correcta
+  <string name="p46_respuesta_2"> China </string>
+  <string name="p46_respuesta_3"> Philipinas </string>
+  <string name="p46_respuesta_4"> India </string>
+
+  <string name="question_text_47">¿Cual es el ojeto mas maldito del museo de los Warren?</string>
+  <string name="p47_respuesta_1"> Una Muñeca </string> //correcta
+  <string name="p47_respuesta_2"> Un Espejo </string>
+  <string name="p47_respuesta_3"> Un Llavero </string>
+  <string name="p47_respuesta_4"> Una Armadura </string>
+
   <string name="question_text_48">¿Como se llama el muñeno en el que se inspiro Choky?</string>
+  <string name="p48_respuesta_1"> Robert </string> //correcta
+  <string name="p48_respuesta_2"> Choky </string>
+  <string name="p48_respuesta_3"> Jorge </string>
+  <string name="p48_respuesta_4"> Angel </string>
+
   <string name="question_text_49">¿En donde se encuentran las catapultas mas grandes del mundo?</string>
+  <string name="p49_respuesta_1"> Francia </string> //correcta
+  <string name="p49_respuesta_2"> Mexico </string>
+  <string name="p49_respuesta_3"> Republica Checa </string>
+  <string name="p49_respuesta_4"> Medio Oriente </string>
+
   <string name="question_text_50">¿Como se llama la mansion embrujada mas grande del mundo?</string>
+  <string name="p50_respuesta_1"> Winchester </string> //correcta
+  <string name="p50_respuesta_2"> Amytiville </string>
+  <string name="p50_respuesta_3"> Warren </string>
+  <string name="p50_respuesta_4"> St.Asylum </string>
 
   // Arte y Geografia ------------------------------------------------------------------------------
 
   <string name="question_text_51">¿En que continente queda Marruecos?</string>
+  <string name="p51_respuesta_1"> Africa </string> //correcta
+  <string name="p51_respuesta_2"> Oceania </string>
+  <string name="p51_respuesta_3"> Sudamerica </string>
+  <string name="p51_respuesta_4"> Asia </string>
+
   <string name="question_text_52">¿Como se llama el continente donde esta australia?</string>
+  <string name="p52_respuesta_1"> Oceania </string> //correcta
+  <string name="p52_respuesta_2"> Europa </string>
+  <string name="p52_respuesta_3"> Asia </string>
+  <string name="p52_respuesta_4"> Africa </string>
+
   <string name="question_text_53">¿Quien pinto la MonaLisa?</string>
+  <string name="p53_respuesta_1"> Leonardo DaVinci </string> //correcta
+  <string name="p53_respuesta_2"> Leonardo Dicaprio </string>
+  <string name="p53_respuesta_3"> Leonardo Gallejos </string>
+  <string name="p53_respuesta_4"> Leonardo Favio </string>
+
   <string name="question_text_54">¿De que pais es el dia de ST.Patricks Day?</string>
+  <string name="p54_respuesta_1"> Irlanda </string> //correcta
+  <string name="p54_respuesta_2"> Nueva Zelanda </string>
+  <string name="p54_respuesta_3"> España </string>
+  <string name="p54_respuesta_4"> Austria </string>
+
   <string name="question_text_55">¿En que pais se encuentra Alaska?</string>
+  <string name="p55_respuesta_1"> Canada </string> //correcta
+  <string name="p55_respuesta_2"> Estados Unidos </string>
+  <string name="p55_respuesta_3"> Inglaterra </string>
+  <string name="p55_respuesta_4"> Australia </string>
+
   <string name="question_text_56">¿En que pais se encuentra la torre Eiffel?</string>
+  <string name="p56_respuesta_1"> Francia </string> //correcta
+  <string name="p56_respuesta_2"> Reino Unido </string>
+  <string name="p56_respuesta_3"> España </string>
+  <string name="p56_respuesta_4"> Austria </string>
+
   <string name="question_text_57">¿En que contienente se encuentra Rusia?</string>
+  <string name="p57_respuesta_1"> Asia y Europa</string> //correcta
+  <string name="p57_respuesta_2"> Europa y Oceania </string>
+  <string name="p57_respuesta_3"> Asia y Medio Oriente </string>
+  <string name="p57_respuesta_4"> Africa y Europa </string>
+
   <string name="question_text_58">¿En que pais se encuentra Macao?</string>
+  <string name="p58_respuesta_1"> China </string> //correcta
+  <string name="p58_respuesta_2"> Hong Kong </string>
+  <string name="p58_respuesta_3"> Japon </string>
+  <string name="p58_respuesta_4"> India </string>
+
   <string name="question_text_59">¿A que pais pertenece Hawaii?</string>
+  <string name="p59_respuesta_1"> EUA. </string> //correcta
+  <string name="p59_respuesta_2"> Canada </string>
+  <string name="p59_respuesta_3"> Reino Unido </string>
+  <string name="p59_respuesta_4"> Argentina </string>
+
   <string name="question_text_60">¿En que pais se habla el idioma Catalan?</string>
+  <string name="p60_respuesta_1"> España </string> //correcta
+  <string name="p60_respuesta_2"> Nueva Zelanda </string>
+  <string name="p60_respuesta_3"> Australia </string>
+  <string name="p60_respuesta_4"> Netherlands </string>
 
 
 </resources>
