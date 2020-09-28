@@ -14,7 +14,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:background="@color/naranja"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/round_corner"
-        android:backgroundTint="#E99C03"
+        android:backgroundTint="#8BC34A"
         android:fontFamily="@font/baloo_bhaina"
 
         android:gravity="center"
