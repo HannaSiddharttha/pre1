@@ -14,7 +14,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/naranja"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
             android:fontFamily="@font/baloo_bhaina"
             android:gravity="center"
             android:text="Question"
+
             android:textColor="@android:color/background_light"
             android:textSize="18dp" />
     </LinearLayout>
@@ -119,7 +120,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/round_corner"
-        android:backgroundTint="@color/Amarillo2"
+        android:backgroundTint="#E99C03"
         android:fontFamily="@font/baloo_bhaina"
 
         android:gravity="center"
