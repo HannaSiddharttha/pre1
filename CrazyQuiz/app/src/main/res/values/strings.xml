@@ -394,6 +394,9 @@
   <string name="p60_respuesta_2"> Nueva Zelanda </string>
   <string name="p60_respuesta_3"> Australia </string>
   <string name="p60_respuesta_4"> Netherlands </string>
+  <string name="radioButton_alta">Alta</string>
+  <string name="radioButton_media">Media</string>
+  <string name="radioButton_baja">Baja</string>
 
 
 </resources>

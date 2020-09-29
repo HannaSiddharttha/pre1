@@ -93,6 +93,10 @@ class GameModel : ViewModel() {
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 
+    fun filterQuestions() {
+        // aqui deberia filtrarse la lista de preguntas por la nueva lista basada en los "settings".
+    }
+
     override fun onCleared() {
         super.onCleared()
         //Log.d()

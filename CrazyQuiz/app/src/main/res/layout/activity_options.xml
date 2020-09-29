@@ -170,6 +170,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="107dp"
         android:layout_height="116dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
@@ -182,8 +183,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@android:drawable/btn_star_big_off"
+            android:Onclick="dificultadSeleccionada"
             android:fontFamily="@font/baloo_bhaina"
-            android:text="Alta"
+            android:text="@string/radioButton_alta"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
 
@@ -192,8 +194,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@android:drawable/star_big_on"
+            android:Onclick="dificultadSeleccionada"
             android:fontFamily="@font/baloo_bhaina"
-            android:text="Media"
+            android:text="@string/radioButton_media"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
 
@@ -202,8 +205,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@android:drawable/btn_star_big_off"
+            android:Onclick="dificultadSeleccionada"
             android:fontFamily="@font/baloo_bhaina"
-            android:text="Baja"
+            android:text="@string/radioButton_baja"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
     </RadioGroup>

@@ -3,6 +3,7 @@ package com.example.crazyquiz
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_options.*
 
@@ -51,9 +52,14 @@ class OptionsActivity : AppCompatActivity() {
 
         button_return.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
+            // aqui se debe enviar "settings" a "MainActivity"
             startActivity(intent)
         }
         button_apply.setOnClickListener{  View ->
+            saveSettings()
+            val intent = Intent(this,QuestionActivity::class.java)
+            // aqui se debe enviar "settings" a el nuevo activity de las preguntas
+            startActivity(intent)
 
         }
         checkBox_todos.setOnCheckedChangeListener { _, isChecked ->
@@ -178,6 +184,23 @@ class OptionsActivity : AppCompatActivity() {
         adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
         spinner_pistas.adapter = adapter2
 
+        fun dificultadSeleccionada(view: View) {
+            val radioButtonSeleccionado= view as RadioButton
+
+            when(view.id){
+                R.id.radioButton_alta ->{
+                    Toast.makeText(this,"Haz escogido dificultad Alta", Toast.LENGTH_SHORT).show()
+                }
+                R.id.radioButton_media ->{
+                    Toast.makeText(this,"Haz escogido dificultad Media", Toast.LENGTH_SHORT).show()
+                }
+                R.id.radioButton_baja ->{
+                    Toast.makeText(this,"Haz escogido dificultad Baja", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
         radioGroup.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
@@ -213,9 +236,19 @@ class OptionsActivity : AppCompatActivity() {
         checkBox_arteygeografia.isChecked = settings?.arteGeo ?: false
         spinner_numpreguntas.setSelection(adapter1?.getPosition(settings?.numPreguntas) ?: 1);
         spinner_pistas.setSelection(adapter2?.getPosition(settings?.numPistas) ?: 1);
+
     }
 
     fun saveSettings() {
-
+        settings?.allThemes = checkBox_todos.isChecked
+        settings?.harryPotter = checkBox_hp.isChecked
+        settings?.catReptiles = checkBox_gatosyreptiles.isChecked
+        settings?.catReptiles = checkBox_gatosyreptiles.isChecked
+        settings?.culturaGen = checkBox_culturageneral.isChecked
+        settings?.food = checkBox_comida.isChecked
+        settings?.terror = checkBox_terror.isChecked
+        settings?.arteGeo = checkBox_arteygeografia.isChecked
+        settings?.numPreguntas = spinner_numpreguntas.selectedItem.toString()
+        settings?.numPistas = spinner_pistas.selectedItem.toString()
     }
 }
