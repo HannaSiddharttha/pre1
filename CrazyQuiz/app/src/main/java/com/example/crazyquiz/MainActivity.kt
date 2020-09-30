@@ -1,6 +1,7 @@
 package com.example.crazyquiz
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         button_juego = findViewById(R.id. button_juego)
         button_options = findViewById(R.id. button_options)
         button_5act = findViewById(R.id.button_5act)
@@ -36,6 +39,13 @@ class MainActivity : AppCompatActivity() {
         button_5act.setOnClickListener{  View ->
             val intent = Intent(this,FinalScoreActivity::class.java)
             startActivity(intent)
+
+
+
+
         }
+
+
     }
+
 }

@@ -1,10 +1,12 @@
 package com.example.crazyquiz
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_options.*
 
 class OptionsActivity : AppCompatActivity() {
@@ -53,11 +55,15 @@ class OptionsActivity : AppCompatActivity() {
         button_return.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             // aqui se debe enviar "settings" a "MainActivity"
+          //  intent.putExtras("Settings", settings)
             startActivity(intent)
         }
+
         button_apply.setOnClickListener{  View ->
             saveSettings()
             val intent = Intent(this,QuestionActivity::class.java)
+
+
             // aqui se debe enviar "settings" a el nuevo activity de las preguntas
             startActivity(intent)
 
@@ -251,4 +257,19 @@ class OptionsActivity : AppCompatActivity() {
         settings?.numPreguntas = spinner_numpreguntas.selectedItem.toString()
         settings?.numPistas = spinner_pistas.selectedItem.toString()
     }
+
+
+    //SharedPreferences -----------------------------------------
+
+    //no supe si es asi :s me salia error a cada rato con la pagina que me diste y con lo que buscaba :s
+
+    private fun saveData(){
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply{this
+        settings}.apply()
+
+        Toast.makeText(this, "SharedPreferences funciona", Toast.LENGTH_LONG).show()
+    }
+
 }

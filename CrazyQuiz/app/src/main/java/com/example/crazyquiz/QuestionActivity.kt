@@ -1,5 +1,6 @@
 package com.example.crazyquiz
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -9,5 +10,11 @@ class QuestionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_question)
 
         // aqui se debe recibir "settings" por medio de un intent
+
+
+
+
     }
+
+
 }
