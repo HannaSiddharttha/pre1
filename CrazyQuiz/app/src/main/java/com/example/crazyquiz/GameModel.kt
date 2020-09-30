@@ -1,6 +1,7 @@
 package com.example.crazyquiz
 
 import androidx.lifecycle.ViewModel
+import kotlin.random.Random
 
 class GameModel : ViewModel() {
 
@@ -13,6 +14,14 @@ class GameModel : ViewModel() {
     val CULTURA_GENERAL = 5
     val ARTE_GEOGRAFIA = 6
 
+    lateinit var settings: Settings
+    lateinit var selectedQuestions: MutableList<SelectedQuestion>
+
+    init {
+        settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+        selectedQuestions = mutableListOf<SelectedQuestion>()
+        filterQuestions()
+    }
 
     private var questionBank = listOf(
         Question(R.string.question_text_1, R.string.p1_respuesta_1, R.string.p1_respuesta_1, R.string.p1_respuesta_2, R.string.p1_respuesta_3, R.string.p1_respuesta_4, HARRY_POTTER),
@@ -86,15 +95,76 @@ class GameModel : ViewModel() {
 
     private var currentIndex = 0
 
-    val currentQuestion: Question
-        get() = questionBank[currentIndex]
+    val currentQuestion: SelectedQuestion
+        get() = selectedQuestions[currentIndex]
 
     fun nextQuestion() {
-        currentIndex = (currentIndex + 1) % questionBank.size
+        currentIndex = (currentIndex + 1) % selectedQuestions.size
     }
 
-    fun filterQuestions() {
-        // aqui deberia filtrarse la lista de preguntas por la nueva lista basada en los "settings".
+    private fun filterQuestions() {
+        // filtrado de preguntas por categoría
+        var filteredQuestions: MutableList<Question> = ArrayList<Question>();
+
+        //ciclo para filtrar
+        questionBank.forEach() {
+
+            // si esta marcado "todos" se agrega a fuerza
+            if(settings.allThemes) {
+                filteredQuestions.add(it)
+            } else {
+
+                //si las categorias estan marcadas en settings esas se agregan a la lista nueva
+                if(
+                    (settings.harryPotter && it.Categoria == HARRY_POTTER) ||
+                    (settings.catReptiles && it.Categoria == CATS_REPTILES) ||
+                    (settings.culturaGen && it.Categoria == CULTURA_GENERAL) ||
+                    (settings.food && it.Categoria == FOOD) ||
+                    (settings.terror && it.Categoria == TERROR) ||
+                    (settings.arteGeo && it.Categoria == ARTE_GEOGRAFIA)
+                ) {
+                    filteredQuestions.add(it)
+                }
+            }
+
+        }
+
+        var x : Int = 0
+        // ciclo para acumular preguntas aleatoreamente
+        while(x < settings.numPreguntas.toInt()) {
+
+            // se obtiene un numero al azar no mayor al numero de elementos de la lista
+            var index = rand(0, filteredQuestions.size - 1)
+            var randomQuestion : Question = filteredQuestions.get(index)
+
+            // si la preguntas aleatoria no se ha agregado, se agregará.
+            if(selectedQuestions.find { it.question.strRestId == randomQuestion.strRestId } == null) {
+
+                // lista de las 4 posibles respuestas de la pregunta seleccionada
+                var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
+
+                // las respuesta se ordenan al azar
+                randomAnswers.shuffle()
+
+                // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
+                var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
+                    0,
+                    randomQuestion,
+                    randomAnswers[0],
+                    randomAnswers[1],
+                    randomAnswers[2],
+                    randomAnswers[3]
+                )
+                selectedQuestions.add(currentSelectedQuestion)
+
+                x++
+            }
+        }
+    }
+
+    fun rand(start: Int, end: Int): Int {
+        require(!(start > end || end - start + 1 > Int.MAX_VALUE)) { "Illegal Argument" }
+        return Random(System.nanoTime()).nextInt(end - start + 1) + start
     }
 
     override fun onCleared() {

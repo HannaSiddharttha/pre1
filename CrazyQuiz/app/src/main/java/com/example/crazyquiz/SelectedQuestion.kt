@@ -1,6 +1,6 @@
 package com.example.crazyquiz
 
-data class SelectedQuestion (val answer : Int, val question: Question, val answer1: Int, val answer2: Int, val answer3: Int, val answer4: Int) {
+data class SelectedQuestion (var answer : Int, var question: Question, var answer1: Int, var answer2: Int, var answer3: Int, var answer4: Int) {
     fun isAnswered(): Boolean {
         return answer != null && answer > 0
     }
