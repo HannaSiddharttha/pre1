@@ -61,13 +61,15 @@ class OptionsActivity : AppCompatActivity() {
 
         button_apply.setOnClickListener{  View ->
             saveSettings()
-            val intent = Intent(this,QuestionActivity::class.java)
+            saveData()
+            val intent = Intent(this,MainActivity::class.java)
 
 
             // aqui se debe enviar "settings" a el nuevo activity de las preguntas
             startActivity(intent)
 
         }
+        /*
         checkBox_todos.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 Toast.makeText(
@@ -180,7 +182,7 @@ class OptionsActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
+    */
         var spinner_info = arrayOf("5","6","7", "8", "9","10")
         adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info)
         spinner_numpreguntas.adapter = adapter1
@@ -190,47 +192,43 @@ class OptionsActivity : AppCompatActivity() {
         adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
         spinner_pistas.adapter = adapter2
 
-        fun dificultadSeleccionada(view: View) {
-            val radioButtonSeleccionado= view as RadioButton
-
-            when(view.id){
-                R.id.radioButton_alta ->{
-                    Toast.makeText(this,"Haz escogido dificultad Alta", Toast.LENGTH_SHORT).show()
-                }
-                R.id.radioButton_media ->{
-                    Toast.makeText(this,"Haz escogido dificultad Media", Toast.LENGTH_SHORT).show()
-                }
-                R.id.radioButton_baja ->{
-                    Toast.makeText(this,"Haz escogido dificultad Baja", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        }
-
         radioGroup.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
         radioButton_alta.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            settings.dificultad = 3
         }
         radioButton_media.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            settings.dificultad = 2
         }
         radioButton_baja.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            settings.dificultad = 1
         }
         switch_pistas.setOnClickListener{  View ->
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+
         }
 
         settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
         loadSettings()
     }
+
+//    fun dificultadSeleccionada(view: View) {
+//        val radioButtonSeleccionado= view as RadioButton
+//
+//        when(view.id){
+//            R.id.radioButton_alta ->{
+//                Toast.makeText(this,"Haz escogido dificultad Alta", Toast.LENGTH_SHORT).show()
+//            }
+//            R.id.radioButton_media ->{
+//                Toast.makeText(this,"Haz escogido dificultad Media", Toast.LENGTH_SHORT).show()
+//            }
+//            R.id.radioButton_baja ->{
+//                Toast.makeText(this,"Haz escogido dificultad Baja", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//    }
 
     fun loadSettings() {
         checkBox_todos.isChecked = settings.allThemes
