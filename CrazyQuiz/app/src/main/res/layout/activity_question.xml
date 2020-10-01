@@ -45,6 +45,7 @@
 
             android:textColor="@android:color/background_light"
             android:textSize="18dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -149,9 +150,28 @@
 
     <TextView
         android:id="@+id/PuntuacionTextView"
-        android:layout_width="64dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="118dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="248dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/round_corner"
+        android:backgroundTint="#3F51B5"
+        android:fontFamily="@font/baloo_bhaina"
+
+        android:gravity="center"
+        android:text="Pista: 2"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/puntuacionTextView2"
+        android:layout_width="127dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/round_corner"
         android:backgroundTint="#8BC34A"
@@ -164,6 +184,6 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.904" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
