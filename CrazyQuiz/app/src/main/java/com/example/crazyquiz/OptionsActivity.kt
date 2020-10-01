@@ -2,7 +2,6 @@ package com.example.crazyquiz
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -27,13 +26,14 @@ class OptionsActivity : AppCompatActivity() {
     private lateinit var radioButton_media: RadioButton
     private lateinit var radioButton_baja: RadioButton
     private lateinit var switch_pistas: Switch
-    private var settings: Settings? = null
-    private var adapter1: ArrayAdapter<String>? = null
-    private var adapter2: ArrayAdapter<String>? = null
+    private lateinit var settings: Settings
+    private lateinit var adapter1: ArrayAdapter<String>
+    private lateinit var adapter2: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_options)
+        ModelPreferencesManager.with(this.application)
 
         button_aply = findViewById(R.id. button_apply)
         button_return = findViewById(R.id. button_return)
@@ -233,29 +233,29 @@ class OptionsActivity : AppCompatActivity() {
     }
 
     fun loadSettings() {
-        checkBox_todos.isChecked = settings?.allThemes ?: false
-        checkBox_hp.isChecked = settings?.harryPotter ?: false
-        checkBox_gatosyreptiles.isChecked = settings?.catReptiles ?: false
-        checkBox_culturageneral.isChecked = settings?.culturaGen?: false
-        checkBox_comida.isChecked = settings?.food ?: false
-        checkBox_terror.isChecked = settings?.terror ?: false
-        checkBox_arteygeografia.isChecked = settings?.arteGeo ?: false
-        spinner_numpreguntas.setSelection(adapter1?.getPosition(settings?.numPreguntas) ?: 1);
-        spinner_pistas.setSelection(adapter2?.getPosition(settings?.numPistas) ?: 1);
+        checkBox_todos.isChecked = settings.allThemes
+        checkBox_hp.isChecked = settings.harryPotter
+        checkBox_gatosyreptiles.isChecked = settings.catReptiles
+        checkBox_culturageneral.isChecked = settings.culturaGen
+        checkBox_comida.isChecked = settings.food
+        checkBox_terror.isChecked = settings.terror
+        checkBox_arteygeografia.isChecked = settings.arteGeo
+        spinner_numpreguntas.setSelection(adapter1.getPosition(settings.numPreguntas));
+        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas));
 
     }
 
     fun saveSettings() {
-        settings?.allThemes = checkBox_todos.isChecked
-        settings?.harryPotter = checkBox_hp.isChecked
-        settings?.catReptiles = checkBox_gatosyreptiles.isChecked
-        settings?.catReptiles = checkBox_gatosyreptiles.isChecked
-        settings?.culturaGen = checkBox_culturageneral.isChecked
-        settings?.food = checkBox_comida.isChecked
-        settings?.terror = checkBox_terror.isChecked
-        settings?.arteGeo = checkBox_arteygeografia.isChecked
-        settings?.numPreguntas = spinner_numpreguntas.selectedItem.toString()
-        settings?.numPistas = spinner_pistas.selectedItem.toString()
+        settings.allThemes = checkBox_todos.isChecked
+        settings.harryPotter = checkBox_hp.isChecked
+        settings.catReptiles = checkBox_gatosyreptiles.isChecked
+        settings.catReptiles = checkBox_gatosyreptiles.isChecked
+        settings.culturaGen = checkBox_culturageneral.isChecked
+        settings.food = checkBox_comida.isChecked
+        settings.terror = checkBox_terror.isChecked
+        settings.arteGeo = checkBox_arteygeografia.isChecked
+        settings.numPreguntas = spinner_numpreguntas.selectedItem.toString()
+        settings.numPistas = spinner_pistas.selectedItem.toString()
     }
 
 
@@ -264,12 +264,7 @@ class OptionsActivity : AppCompatActivity() {
     //no supe si es asi :s me salia error a cada rato con la pagina que me diste y con lo que buscaba :s
 
     private fun saveData(){
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.apply{this
-        settings}.apply()
-
-        Toast.makeText(this, "SharedPreferences funciona", Toast.LENGTH_LONG).show()
+        ModelPreferencesManager.put(settings, "SETTINGS")
     }
 
 }
