@@ -213,23 +213,7 @@ class OptionsActivity : AppCompatActivity() {
         loadSettings()
     }
 
-//    fun dificultadSeleccionada(view: View) {
-//        val radioButtonSeleccionado= view as RadioButton
 //
-//        when(view.id){
-//            R.id.radioButton_alta ->{
-//                Toast.makeText(this,"Haz escogido dificultad Alta", Toast.LENGTH_SHORT).show()
-//            }
-//            R.id.radioButton_media ->{
-//                Toast.makeText(this,"Haz escogido dificultad Media", Toast.LENGTH_SHORT).show()
-//            }
-//            R.id.radioButton_baja ->{
-//                Toast.makeText(this,"Haz escogido dificultad Baja", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//    }
-
     fun loadSettings() {
         checkBox_todos.isChecked = settings.allThemes
         checkBox_hp.isChecked = settings.harryPotter
