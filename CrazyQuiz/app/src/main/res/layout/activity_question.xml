@@ -34,7 +34,7 @@
 
         <TextView
 
-            android:id="@+id/idPregunta"
+            android:id="@+id/preguntaTextView"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_gravity="center"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button
-            android:id="@+id/idOpcion1"
+            android:id="@+id/btnOpcion1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -74,7 +74,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/idOpcion2"
+            android:id="@+id/btnOpcion2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
@@ -86,7 +86,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/idOpcion3"
+            android:id="@+id/btnOpcion3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
@@ -98,7 +98,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/idOpcion4"
+            android:id="@+id/btnOpcion4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
@@ -116,7 +116,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnNext2"
+                android:id="@+id/prev_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -124,13 +124,13 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/verde"
                 android:fontFamily="@font/baloo_bhaina"
-                android:text="PrevQ"
+                android:text="Prev"
 
                 android:textColor="#FFFFFF"
                 tools:text="Prev" />
 
             <Button
-                android:id="@+id/btnNext"
+                android:id="@+id/next_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -148,7 +148,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/idPuntuacion"
+        android:id="@+id/PuntuacionTextView"
         android:layout_width="64dp"
         android:layout_height="48dp"
         android:layout_marginEnd="36dp"

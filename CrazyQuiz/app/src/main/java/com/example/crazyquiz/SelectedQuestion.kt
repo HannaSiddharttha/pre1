@@ -14,27 +14,13 @@ data class SelectedQuestion (var answer : Int, var question: Question, var answe
     }
 
 
-
-    //Cambia de color Dependiendo de la respuesta **********
-
-   private fun AnsColor() {
-
-       if (answer == question.Correcta) {
-           var colorCorreta = question.toString()
-           colorCorreta.setTextColor(Color.GREEN)
-       }
-       else if (answer != question.Correcta && answer!=null){
-           var colorIncorrecta = question.toString()
-           colorIncorrecta.setTextColor(Color.RED)
-       }
-
-   }
-
 }
 
-private fun String.setTextColor(red: Int) {
 
-}
+
+
+
+
 
 
 

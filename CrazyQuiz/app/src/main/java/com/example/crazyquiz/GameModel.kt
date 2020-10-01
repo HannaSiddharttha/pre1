@@ -93,6 +93,10 @@ class GameModel : ViewModel() {
 
     )
 
+    //----
+    var numberOfGoodAnswers: Int = 0
+    var puntuacion_actual: Int =  0
+
     private var currentIndex = 0
 
     val currentQuestion: SelectedQuestion
@@ -101,6 +105,19 @@ class GameModel : ViewModel() {
     fun nextQuestion() {
         currentIndex = (currentIndex + 1) % selectedQuestions.size
     }
+
+    fun prevQuestion() {
+        if (currentIndex == 0) currentIndex = selectedQuestions.size
+        currentIndex = (currentIndex -1)% selectedQuestions.size
+    }
+
+        //VE SI ES LA RESPUESTA CORRECTA -----
+
+        var RespuestaCorrecta: Boolean
+    get() = selectedQuestions[currentIndex].isCorrect()
+    set(value) {selectedQuestions[currentIndex].isCorrect() }
+
+
 
     private fun filterQuestions() {
         // filtrado de preguntas por categoría
@@ -128,6 +145,14 @@ class GameModel : ViewModel() {
             }
 
         }
+
+
+        //total preguntas----------------
+        val TotalQuestions: Int
+        selectedQuestions.size
+
+
+
 
         var x : Int = 0
         // ciclo para acumular preguntas aleatoreamente
