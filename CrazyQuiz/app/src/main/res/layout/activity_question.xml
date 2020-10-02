@@ -147,12 +147,12 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/PuntuacionTextView"
         android:layout_width="159dp"
         android:layout_height="53dp"
         android:layout_marginVertical="5dp"
         android:layout_marginStart="32dp"
         android:background="@drawable/round_corner2"
-        android:id="@+id/btnNumPistas"
         android:fontFamily="@font/baloo_bhaina"
         android:text="Puntos 100pts"
         android:textColor="#FFFFFF"
