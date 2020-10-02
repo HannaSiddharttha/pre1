@@ -34,6 +34,7 @@ class QuestionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
+        ModelPreferencesManager.with(this.application)
 
         prevButton = findViewById(R.id.prev_button)
         nextButton = findViewById(R.id.next_button)
@@ -45,6 +46,12 @@ class QuestionActivity : AppCompatActivity() {
         Opcion4 = findViewById(R.id.btnOpcion4)
         PuntuacionTotal = findViewById(R.id.PuntuacionTextView) // <- score Total
         numPistas = findViewById(R.id.btnPistas)
+
+        val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
+        if(savedSettings != null) {
+            model.settings = savedSettings
+        }
+        model.filterQuestions()
 
         // ocultar opciones dependiendo de dificultad
 
@@ -61,6 +68,8 @@ class QuestionActivity : AppCompatActivity() {
 
         if(!model.settings.habilitarPistas) {
             numPistas.setVisibility(View.INVISIBLE)
+        } else {
+            numPistas.setText("Pistas: ${model.settings.numPistas}")
         }
 
         // se pone la primera pregunta
@@ -73,6 +82,13 @@ class QuestionActivity : AppCompatActivity() {
         nextButton.setOnClickListener { view: View ->
             model.nextQuestion()
             loadQuestion()
+        }
+        numPistas.setOnClickListener { view: View ->
+            if(model.settings.numPistas > 0 && model.notLockedButtons() >= 2) {
+                model.settings.numPistas--
+                model.blockButton()
+                loadQuestion()
+            }
         }
 
         //Opción1 ---
@@ -182,10 +198,25 @@ class QuestionActivity : AppCompatActivity() {
         var green : Int = Color.parseColor("#008F39")
         var red : Int = Color.parseColor("#FF0000")
         var white : Int = Color.parseColor("#FFFFFF")
+        var gray : Int = Color.parseColor("#616161")
+
         Opcion1.setTextColor(white)
         Opcion2.setTextColor(white)
         Opcion3.setTextColor(white)
         Opcion4.setTextColor(white)
+
+        if(model.currentQuestion.answer1Locked) {
+            Opcion1.setTextColor(gray)
+        }
+        if(model.currentQuestion.answer2Locked) {
+            Opcion2.setTextColor(gray)
+        }
+        if(model.currentQuestion.answer3Locked) {
+            Opcion3.setTextColor(gray)
+        }
+        if(model.currentQuestion.answer4Locked) {
+            Opcion4.setTextColor(gray)
+        }
 
         if (model.currentQuestion.isAnswered()) {
             if(model.currentQuestion.answer == model.currentQuestion.answer1) {

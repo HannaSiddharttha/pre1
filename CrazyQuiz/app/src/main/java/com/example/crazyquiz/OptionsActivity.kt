@@ -214,7 +214,7 @@ class OptionsActivity : AppCompatActivity() {
         if(savedSettings != null) {
             settings = savedSettings
         } else {
-            settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+            settings = Settings(true, false, false, false, false, false, false, "6", 2, false, 2)
         }
         loadSettings()
     }
@@ -229,7 +229,7 @@ class OptionsActivity : AppCompatActivity() {
         checkBox_terror.isChecked = settings.terror
         checkBox_arteygeografia.isChecked = settings.arteGeo
         spinner_numpreguntas.setSelection(adapter1.getPosition(settings.numPreguntas))
-        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas))
+        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas.toString()))
         switch_pistas.isChecked = settings.habilitarPistas
 
         if(settings.dificultad == 3) {
@@ -255,7 +255,7 @@ class OptionsActivity : AppCompatActivity() {
         settings.terror = checkBox_terror.isChecked
         settings.arteGeo = checkBox_arteygeografia.isChecked
         settings.numPreguntas = spinner_numpreguntas.selectedItem.toString()
-        settings.numPistas = spinner_pistas.selectedItem.toString()
+        settings.numPistas = spinner_pistas.selectedItem.toString().toInt()
         settings.habilitarPistas = switch_pistas.isChecked
     }
 

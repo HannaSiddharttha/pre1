@@ -19,16 +19,9 @@ class GameModel : ViewModel() {
     lateinit var selectedQuestions: MutableList<SelectedQuestion>
 
     init {
-        //val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
-        //if(savedSettings != null) {
-        //    settings = savedSettings
-        //} else {
-            settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
-        //}
-
+        settings = Settings(true, false, false, false, false, false, false, "6", 2, false, 2)
         selectedQuestions = mutableListOf<SelectedQuestion>()
         setQuestionBank()
-        filterQuestions()
     }
 
     fun setQuestionBank() {
@@ -139,7 +132,52 @@ class GameModel : ViewModel() {
         return true;
     }
 
-    private fun filterQuestions() {
+    fun notLockedButtons() : Int {
+        var notLockedButtons : Int = 0
+        if(!currentQuestion.answer1Locked) {
+            notLockedButtons++
+        }
+        if(!currentQuestion.answer2Locked) {
+            notLockedButtons++
+        }
+        if(currentQuestion.answer3 != 0 && !currentQuestion.answer3Locked) {
+            notLockedButtons++
+        }
+        if(currentQuestion.answer4 != 0 && !currentQuestion.answer4Locked) {
+            notLockedButtons++
+        }
+        return notLockedButtons
+    }
+
+    fun blockButton() {
+        var buttonFound : Boolean = false
+
+        if(notLockedButtons() < 2) {
+            buttonFound = true
+        }
+
+        while (!buttonFound) {
+            var randomNumber = rand(1,4)
+            if(randomNumber == 1 && !currentQuestion.answer1Locked && currentQuestion.answer1 != currentQuestion.question.Correcta) {
+                currentQuestion.answer1Locked = true
+                buttonFound = true
+            }
+            if(randomNumber == 2 && !currentQuestion.answer2Locked && currentQuestion.answer2 != currentQuestion.question.Correcta) {
+                currentQuestion.answer2Locked = true
+                buttonFound = true
+            }
+            if(randomNumber == 3 && !currentQuestion.answer3Locked && currentQuestion.answer3 != currentQuestion.question.Correcta) {
+                currentQuestion.answer3Locked = true
+                buttonFound = true
+            }
+            if(randomNumber == 4 && !currentQuestion.answer4Locked && currentQuestion.answer4 != currentQuestion.question.Correcta) {
+                currentQuestion.answer4Locked = true
+                buttonFound = true
+            }
+        }
+    }
+
+    fun filterQuestions() {
         // filtrado de preguntas por categoría
         var filteredQuestions: MutableList<Question> = ArrayList<Question>();
 
