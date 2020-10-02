@@ -10,6 +10,7 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.core.graphics.toColorInt
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_question.*
 
 
@@ -42,6 +43,19 @@ class QuestionActivity : AppCompatActivity() {
         Opcion3 = findViewById(R.id.btnOpcion3)
         Opcion4 = findViewById(R.id.btnOpcion4)
         PuntuacionTotal = findViewById(R.id.PuntuacionTextView) // <- score Total
+
+        // ocultar opciones dependiendo de dificultad
+
+        // dificultad media - ocultar ultima pregunta
+        if(model.settings.dificultad == 2) {
+            Opcion4.setVisibility(View.GONE)
+        }
+
+        // dificultad baja - ocultar ultimas 2 preguntas
+        if(model.settings.dificultad == 1) {
+            Opcion3.setVisibility(View.GONE)
+            Opcion4.setVisibility(View.GONE)
+        }
 
         // se pone la primera pregunta
         loadQuestion()
@@ -148,8 +162,12 @@ class QuestionActivity : AppCompatActivity() {
         numPreguntaTextView.setText("${model.currentQuestionNumber}/${model.questionsSize}")
         Opcion1.setText(model.currentQuestion.answer1)
         Opcion2.setText(model.currentQuestion.answer2)
-        Opcion3.setText(model.currentQuestion.answer3)
-        Opcion4.setText(model.currentQuestion.answer4)
+        if(model.settings.dificultad >= 2) {
+            Opcion3.setText(model.currentQuestion.answer3)
+        }
+        if(model.settings.dificultad == 3) {
+            Opcion4.setText(model.currentQuestion.answer4)
+        }
         AnsColor()
     }
 
