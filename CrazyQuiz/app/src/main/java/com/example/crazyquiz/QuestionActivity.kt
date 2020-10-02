@@ -88,6 +88,7 @@ class QuestionActivity : AppCompatActivity() {
                 model.settings.numPistas--
                 model.blockButton()
                 loadQuestion()
+                numPistas.setText("Pistas: ${model.settings.numPistas}")
             }
         }
 
