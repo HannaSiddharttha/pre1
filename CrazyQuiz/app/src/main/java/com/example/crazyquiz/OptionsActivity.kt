@@ -209,7 +209,13 @@ class OptionsActivity : AppCompatActivity() {
 
         }
 
-        settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+        //settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+        val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
+        if(savedSettings != null) {
+            settings = savedSettings
+        } else {
+            settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
+        }
         loadSettings()
     }
 
