@@ -43,8 +43,8 @@ class QuestionActivity : AppCompatActivity() {
         Opcion2 = findViewById(R.id.btnOpcion2)
         Opcion3 = findViewById(R.id.btnOpcion3)
         Opcion4 = findViewById(R.id.btnOpcion4)
-        PuntuacionTotal = findViewById(R.id.PuntuacionTextView) // <- score Total
-        numPistas = findViewById(R.id.btnPistas)
+        PuntuacionTotal = findViewById(R.id.puntuacionTextView2) // <- score Total
+        numPistas = findViewById(R.id.btnNumPistas)
 
         // ocultar opciones dependiendo de dificultad
 
