@@ -228,8 +228,20 @@ class OptionsActivity : AppCompatActivity() {
         checkBox_comida.isChecked = settings.food
         checkBox_terror.isChecked = settings.terror
         checkBox_arteygeografia.isChecked = settings.arteGeo
-        spinner_numpreguntas.setSelection(adapter1.getPosition(settings.numPreguntas));
-        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas));
+        spinner_numpreguntas.setSelection(adapter1.getPosition(settings.numPreguntas))
+        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas))
+        switch_pistas.isChecked = settings.habilitarPistas
+
+        if(settings.dificultad == 3) {
+            radioButton_alta.isChecked = true;
+        }
+        if(settings.dificultad == 2) {
+            radioButton_media.isChecked = true;
+        }
+        if(settings.dificultad == 1) {
+            radioButton_baja.isChecked = true;
+        }
+
 
     }
 
@@ -244,6 +256,7 @@ class OptionsActivity : AppCompatActivity() {
         settings.arteGeo = checkBox_arteygeografia.isChecked
         settings.numPreguntas = spinner_numpreguntas.selectedItem.toString()
         settings.numPistas = spinner_pistas.selectedItem.toString()
+        settings.habilitarPistas = switch_pistas.isChecked
     }
 
 
