@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_question.*
+import kotlin.math.roundToInt
 
 
 class QuestionActivity : AppCompatActivity() {
@@ -143,7 +144,10 @@ class QuestionActivity : AppCompatActivity() {
             */
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
-                PuntuacionTotal.text = "final: ${model.totalPuntos()} pts"
+                var maxPuntos = model.selectedQuestions.size * model.settings.dificultad
+                var totalPuntos = model.totalPuntos()
+                var porcentaje : Int = (((totalPuntos.toFloat()/maxPuntos.toFloat()).toFloat())*100).roundToInt()
+                PuntuacionTotal.text = "final: ${totalPuntos} pts ${porcentaje}%"
             } else {
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
