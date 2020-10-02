@@ -84,7 +84,8 @@ class QuestionActivity : AppCompatActivity() {
             loadQuestion()
         }
         numPistas.setOnClickListener { view: View ->
-            if(model.settings.numPistas > 0 && model.notLockedButtons() >= 2) {
+            // si no esta respondida, te quedan pistas y hay al menos 2 botones sin bloquear continúa
+            if(!model.currentQuestion.isAnswered() && model.settings.numPistas > 0 && model.notLockedButtons() >= 2) {
                 model.settings.numPistas--
                 model.blockButton()
                 loadQuestion()
@@ -132,11 +133,19 @@ class QuestionActivity : AppCompatActivity() {
                 model.puntuacion_actual++
             }
 
+            /*
             if (model.gameFinished()) {
                 PuntuacionTotal.text =
                     "Score: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} puntos"
             } else {
                 PuntuacionTotal.text = "${model.puntuacion_actual}/${model.questionsSize}"
+            }
+            */
+            if(model.gameFinished()) {
+                // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
+                PuntuacionTotal.text = "final: ${model.totalPuntos()} pts"
+            } else {
+                PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
 
             if (model.puntuacion_actual == model.questionsSize) {
@@ -208,15 +217,30 @@ class QuestionActivity : AppCompatActivity() {
 
         if(model.currentQuestion.answer1Locked) {
             Opcion1.setTextColor(gray)
+            Opcion1.setEnabled(false)
+        } else {
+            Opcion1.setEnabled(true)
         }
+
         if(model.currentQuestion.answer2Locked) {
             Opcion2.setTextColor(gray)
+            Opcion2.setEnabled(false)
+        } else {
+            Opcion2.setEnabled(true)
         }
+
         if(model.currentQuestion.answer3Locked) {
             Opcion3.setTextColor(gray)
+            Opcion3.setEnabled(false)
+        } else {
+            Opcion3.setEnabled(true)
         }
+
         if(model.currentQuestion.answer4Locked) {
             Opcion4.setTextColor(gray)
+            Opcion4.setEnabled(false)
+        } else {
+            Opcion4.setEnabled(true)
         }
 
         if (model.currentQuestion.isAnswered()) {

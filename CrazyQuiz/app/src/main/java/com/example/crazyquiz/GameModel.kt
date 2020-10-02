@@ -123,6 +123,32 @@ class GameModel : ViewModel() {
         }
     }
 
+    fun totalPuntos(): Int {
+        var puntos: Int = 0
+
+        // 3 puntos para alta, 2 para media y 1 para baja
+        var maxPerQuestion: Int = settings.dificultad
+        selectedQuestions.forEach() {
+            if(it.isCorrect()) {
+                // se agregan los puntos maximos, pero se restan puntos si se usa alguna pista
+                puntos += maxPerQuestion
+                if(it.answer1Locked) {
+                    puntos--
+                }
+                if(it.answer2Locked) {
+                    puntos--
+                }
+                if(it.answer3Locked) {
+                    puntos--
+                }
+                if(it.answer4Locked) {
+                    puntos--
+                }
+            }
+        }
+        return puntos
+    }
+
     fun gameFinished(): Boolean {
         selectedQuestions.forEach() {
             if(!it.isAnswered()) {
