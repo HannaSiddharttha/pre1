@@ -27,6 +27,7 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var Opcion4: Button
     private lateinit var AnswerCorrect: Button
     private lateinit var PuntuacionTotal: TextView
+    private lateinit var numPistas: Button
 
     private val model: GameModel by viewModels()
 
@@ -42,7 +43,8 @@ class QuestionActivity : AppCompatActivity() {
         Opcion2 = findViewById(R.id.btnOpcion2)
         Opcion3 = findViewById(R.id.btnOpcion3)
         Opcion4 = findViewById(R.id.btnOpcion4)
-        PuntuacionTotal = findViewById(R.id.PuntuacionTextView) // <- score Total
+        PuntuacionTotal = findViewById(R.id.puntuacionTextView2) // <- score Total
+        numPistas = findViewById(R.id.btnNumPistas)
 
         // ocultar opciones dependiendo de dificultad
 
@@ -55,6 +57,10 @@ class QuestionActivity : AppCompatActivity() {
         if(model.settings.dificultad == 1) {
             Opcion3.setVisibility(View.GONE)
             Opcion4.setVisibility(View.GONE)
+        }
+
+        if(!model.settings.habilitarPistas) {
+            numPistas.setVisibility(View.INVISIBLE)
         }
 
         // se pone la primera pregunta
