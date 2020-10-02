@@ -171,29 +171,69 @@ class GameModel : ViewModel() {
             // si la preguntas aleatoria no se ha agregado, se agregará.
             if(selectedQuestions.find { it.question.strRestId == randomQuestion.strRestId } == null) {
 
-                // lista de las 4 posibles respuestas de la pregunta seleccionada
-                var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
+                // dificultad alta
+                if(settings.dificultad == 3) {
+                    // lista de las 4 posibles respuestas de la pregunta seleccionada
+                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
 
-                // las respuesta se ordenan al azar
-                randomAnswers.shuffle()
+                    // las respuesta se ordenan al azar
+                    randomAnswers.shuffle()
 
-                // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
-                var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
-                    0,
-                    randomQuestion,
-                    randomAnswers[0],
-                    randomAnswers[1],
-                    randomAnswers[2],
-                    randomAnswers[3]
-                )
-                selectedQuestions.add(currentSelectedQuestion)
+                    // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
+                    var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
+                        0,
+                        randomQuestion,
+                        randomAnswers[0],
+                        randomAnswers[1],
+                        randomAnswers[2],
+                        randomAnswers[3]
+                    )
+                    selectedQuestions.add(currentSelectedQuestion)
+                }
 
+                // dificultad media
+                if(settings.dificultad == 2) {
+                    // lista de las 4 posibles respuestas de la pregunta seleccionada
+                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3)
+
+                    // las respuesta se ordenan al azar
+                    randomAnswers.shuffle()
+
+                    // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
+                    var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
+                        0,
+                        randomQuestion,
+                        randomAnswers[0],
+                        randomAnswers[1],
+                        randomAnswers[2],
+                        0
+                    )
+                    selectedQuestions.add(currentSelectedQuestion)
+                }
+
+                // dificultad baja
+                if(settings.dificultad == 1) {
+                    // lista de las 4 posibles respuestas de la pregunta seleccionada
+                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2)
+
+                    // las respuesta se ordenan al azar
+                    randomAnswers.shuffle()
+
+                    // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
+                    var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
+                        0,
+                        randomQuestion,
+                        randomAnswers[0],
+                        randomAnswers[1],
+                        0,
+                        0
+                    )
+                    selectedQuestions.add(currentSelectedQuestion)
+                }
                 x++
             }
         }
     }
-
-
 
     fun rand(start: Int, end: Int): Int {
         require(!(start > end || end - start + 1 > Int.MAX_VALUE)) { "Illegal Argument" }
