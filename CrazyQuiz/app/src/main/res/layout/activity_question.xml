@@ -152,7 +152,7 @@
         android:layout_marginVertical="5dp"
         android:layout_marginStart="32dp"
         android:background="@drawable/round_corner2"
-        android:id="@+id/btnNumPistas"
+        android:id="@+id/PuntuacionTextView"
         android:fontFamily="@font/baloo_bhaina"
         android:text="Puntos 100pts"
         android:textColor="#FFFFFF"
@@ -162,7 +162,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.571" />
 
-    <TextView
+    <Button
         android:id="@+id/btnPistas"
         android:layout_width="165dp"
         android:layout_height="53dp"
