@@ -1,5 +1,6 @@
 package com.example.crazyquiz
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -134,20 +135,21 @@ class QuestionActivity : AppCompatActivity() {
                 model.puntuacion_actual++
             }
 
-            /*
-            if (model.gameFinished()) {
-                PuntuacionTotal.text =
-                    "Score: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} puntos"
-            } else {
-                PuntuacionTotal.text = "${model.puntuacion_actual}/${model.questionsSize}"
-            }
-            */
+
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
                 var maxPuntos = model.selectedQuestions.size * model.settings.dificultad
                 var totalPuntos = model.totalPuntos()
                 var porcentaje : Int = (((totalPuntos.toFloat()/maxPuntos.toFloat()).toFloat())*100).roundToInt()
                 PuntuacionTotal.text = "final: ${totalPuntos} pts ${porcentaje}%"
+
+
+                    val intent = Intent(this, FinalScoreActivity::class.java)
+                    intent.putExtra("Porcentaje", porcentaje)
+                    startActivity(intent)
+
+
+
             } else {
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }

@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var button_juego: Button
     private lateinit var button_options: Button
-    private lateinit var button_5act: Button
 
     private val model: GameModel by viewModels()
 
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         button_juego = findViewById(R.id. button_juego)
         button_options = findViewById(R.id. button_options)
-        button_5act = findViewById(R.id.button_5act)
 
         button_options.setOnClickListener{  View ->
             val intent = Intent(this,OptionsActivity::class.java)
@@ -36,9 +34,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,QuestionActivity::class.java)
             startActivity(intent)
         }
-        button_5act.setOnClickListener{  View ->
-            val intent = Intent(this,FinalScoreActivity::class.java)
-            startActivity(intent)
 
 
 
@@ -48,4 +43,3 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-}
