@@ -49,6 +49,7 @@ class QuestionActivity : AppCompatActivity() {
         PuntuacionTotal = findViewById(R.id.PuntuacionTextView) // <- score Total
         numPistas = findViewById(R.id.btnPistas)
 
+        // obtiene los settings, si los encuentra los asigna a settings.
         val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
         if(savedSettings != null) {
             model.settings = savedSettings
@@ -147,9 +148,6 @@ class QuestionActivity : AppCompatActivity() {
                     val intent = Intent(this, FinalScoreActivity::class.java)
                     intent.putExtra("Porcentaje", porcentaje)
                     startActivity(intent)
-
-
-
             } else {
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
@@ -162,36 +160,6 @@ class QuestionActivity : AppCompatActivity() {
                 ).show()
             }
             AnsColor()
-
-            /*
-            model.puntuacion_actual++
-            if (!model.currentQuestion.answer) {
-                model.numberOfGoodAnswers++
-                model.currentQuestion.isCorrect() = true
-            }
-            if (model.puntuacion_actual == model.questionsSize) {
-                PuntuacionTotal.text =
-                    "Score: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} puntos"
-            } else {
-                PuntuacionTotal.text = "${model.puntuacion_actual}/${model.questionsSize}"
-            }
-            model.currentQuestion.isCorrect() = true
-            val result = if (!model.currentQuestion.isCorrect()) "correcto" else "incorrecto"
-
-            Toast.makeText(
-                this,
-                result,
-                Toast.LENGTH_SHORT
-            ).show()
-            if (model.puntuacion_actual == model.questionsSize) {
-                Toast.makeText(
-                    this,
-                    "Game Over",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            */
-
         }
     }
 

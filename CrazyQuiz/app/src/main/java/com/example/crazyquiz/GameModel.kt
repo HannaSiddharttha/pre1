@@ -184,6 +184,7 @@ class GameModel : ViewModel() {
 
         while (!buttonFound) {
             var randomNumber = rand(1,4)
+            // si reviso la primera respuesta, y no esta bloqueada y NO ES LA RESPUESTA CORRECTA
             if(randomNumber == 1 && !currentQuestion.answer1Locked && currentQuestion.answer1 != currentQuestion.question.Correcta) {
                 currentQuestion.answer1Locked = true
                 buttonFound = true

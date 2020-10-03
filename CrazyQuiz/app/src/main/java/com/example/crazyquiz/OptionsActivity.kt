@@ -118,7 +118,7 @@ class OptionsActivity : AppCompatActivity() {
                 checkBox_todos.isChecked = false
             }
         }
-        
+
         radioGroup.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
@@ -168,8 +168,6 @@ class OptionsActivity : AppCompatActivity() {
         if(settings.dificultad == 1) {
             radioButton_baja.isChecked = true;
         }
-
-
     }
 
     fun saveSettings() {

@@ -11,7 +11,6 @@ data class SelectedQuestion (var answer : Int, var question: Question, var answe
     }
 
     fun isCorrect(): Boolean {
-
         return answer == question.Correcta
     }
 
