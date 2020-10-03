@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_final_score.*
+import kotlinx.android.synthetic.main.activity_final_score.view.*
 
 class FinalScoreActivity : AppCompatActivity() {
 
@@ -19,11 +20,9 @@ class FinalScoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_final_score)
 
-        gatoView = findViewById(R.id.GatoImageView)
         idpuntos = findViewById(R.id. idPuntos)
         idMenuPrincipal = findViewById(R.id.idMenuPrincipal)
 
-    
 
 
         val intent = this.intent
@@ -33,6 +32,16 @@ class FinalScoreActivity : AppCompatActivity() {
         idMenuPrincipal.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+        }
+
+        if( porcentaje == 100){
+            GatoImageView.setImageResource(R.drawable.happy1)
+        }
+        else if(porcentaje <100 && porcentaje >= 50){
+            GatoImageView.setImageResource(R.drawable.confuse1)
+        }
+        else if (porcentaje>=0 && porcentaje<50){
+            GatoImageView.setImageResource(R.drawable.sad1)
         }
 
 
