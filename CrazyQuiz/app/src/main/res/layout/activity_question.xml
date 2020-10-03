@@ -154,7 +154,7 @@
         android:background="@drawable/round_corner2"
         android:id="@+id/PuntuacionTextView"
         android:fontFamily="@font/baloo_bhaina"
-        android:text="Puntos 100pts"
+        android:text="0 Pts"
         android:textColor="#FFFFFF"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
