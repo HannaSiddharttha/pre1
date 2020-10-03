@@ -74,11 +74,51 @@ class OptionsActivity : AppCompatActivity() {
         adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info)
         spinner_numpreguntas.adapter = adapter1
 
-
         var spinner_info2 = arrayOf("1","2", "3")
         adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner_info2)
         spinner_pistas.adapter = adapter2
 
+        checkBox_todos.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_hp.isChecked = false
+                checkBox_arteygeografia.isChecked = false
+                checkBox_terror.isChecked = false
+                checkBox_comida.isChecked = false
+                checkBox_culturageneral.isChecked = false
+                checkBox_gatosyreptiles.isChecked = false
+            }
+        }
+        checkBox_hp.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        checkBox_gatosyreptiles.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        checkBox_culturageneral.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        checkBox_comida.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        checkBox_terror.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        checkBox_arteygeografia.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox_todos.isChecked = false
+            }
+        }
+        
         radioGroup.setOnClickListener{  View ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
