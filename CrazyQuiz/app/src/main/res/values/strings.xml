@@ -397,6 +397,7 @@
   <string name="radioButton_alta">Alta</string>
   <string name="radioButton_media">Media</string>
   <string name="radioButton_baja">Baja</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 
 </resources>
