@@ -185,9 +185,7 @@ class OptionsActivity : AppCompatActivity() {
     }
 
 
-    //SharedPreferences -----------------------------------------
 
-    //no supe si es asi :s me salia error a cada rato con la pagina que me diste y con lo que buscaba :s
 
     private fun saveData(){
         ModelPreferencesManager.put(settings, "SETTINGS")
