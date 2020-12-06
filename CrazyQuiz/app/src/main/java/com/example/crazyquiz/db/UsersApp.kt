@@ -8,3 +8,5 @@ class UsersApp : Application() {
         .databaseBuilder(this, AppDatabase::class.java, "Users")
         .build()
 }
+
+//video de youtube de como crear la bd : https://www.youtube.com/watch?v=7N8X4DPQlNY

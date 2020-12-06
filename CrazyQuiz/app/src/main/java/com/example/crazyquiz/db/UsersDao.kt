@@ -10,6 +10,8 @@ interface UsersDao {
     @Query("Select * from Users")
      fun getAll(): LiveData<List<Users>>
 
+    @Query("Select * from Users where userEmail = :email and userPassword = :password")
+    fun getEmailPassword(email: String, password: String) : Users
 
     @Query("Select * from Users where userId = :id")
     fun getById(id: Int): Users
