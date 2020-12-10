@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//Base de datos ??
+//Para poder mostrar la bd en Chrome.
         Stetho.initializeWithDefaults(this)
 
 
