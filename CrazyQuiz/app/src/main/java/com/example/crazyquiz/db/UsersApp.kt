@@ -21,6 +21,10 @@ class UsersApp : Application() {
                 db.execSQL("INSERT INTO themes(id, description) VALUES(5, 'Arte')")
             }
         }).build()
+
+
 }
+
+
 
 //video de youtube de como crear la bd : https://www.youtube.com/watch?v=7N8X4DPQlNY
