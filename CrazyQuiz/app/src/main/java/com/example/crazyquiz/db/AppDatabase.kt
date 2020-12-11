@@ -10,12 +10,14 @@ import com.example.crazyquiz.db.UsersDao
 
 
 @Database(
-    entities = [Users:: class],
+    entities = [Users:: class, Question::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun UsersDao(): UsersDao
+    abstract fun QuestionDao(): QuestionDao
+
 
     companion object {
         private const val DATABASE_NAME = "quiz_database"

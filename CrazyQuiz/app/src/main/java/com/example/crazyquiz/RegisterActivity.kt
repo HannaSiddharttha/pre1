@@ -33,8 +33,8 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             */
-            var user = Users(0, "prueba","prueba@gmail.com", "1234")
-            repository.insert(user)
+            var user = Users(0, "prueba","prueba@gmail.com", "1234", true, false , false, false, false, false,false, "10", 3, true,3)
+            repository.insertUser(user)
             var users = repository.getUsers()
             val observer = Observer<List<Users>> { users ->
                 if (users != null) {

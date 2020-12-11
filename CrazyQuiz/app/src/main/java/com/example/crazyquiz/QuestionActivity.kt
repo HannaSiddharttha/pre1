@@ -12,6 +12,7 @@ import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
+import com.example.crazyquiz.db.QuizRepository
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlin.math.roundToInt
 
@@ -28,6 +29,8 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var AnswerCorrect: Button
     private lateinit var PuntuacionTotal: TextView
     private lateinit var numPistas: Button
+    private lateinit var repository: QuizRepository
+
 
     private val model: GameModel by viewModels()
 
@@ -35,6 +38,8 @@ class QuestionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         ModelPreferencesManager.with(this.application)
+        repository = QuizRepository(this.application) //hace referencia al repositorio de la bd
+
 
         prevButton = findViewById(R.id.prev_button)
         nextButton = findViewById(R.id.next_button)

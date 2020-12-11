@@ -7,9 +7,16 @@ import androidx.lifecycle.MutableLiveData
 
 class QuizRepository(application: Application) {
     private val usersDao: UsersDao? = AppDatabase.getInstance(application)?.UsersDao()
+    private val questionDao: QuestionDao? = AppDatabase.getInstance(application)?.QuestionDao()
 
-    fun insert(user: Users) {
+
+    fun insertUser(user: Users) {
         if (usersDao != null) InsertAsyncTask(usersDao).execute(user)
+    }
+
+    fun insertQuestion(question: Question){
+       
+
     }
 
     fun getUsers(): LiveData<List<Users>> {
@@ -27,5 +34,9 @@ class QuizRepository(application: Application) {
             return null
         }
     }
+
+
+
+
 
 }

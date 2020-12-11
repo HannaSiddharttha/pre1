@@ -13,12 +13,12 @@ class UsersApp : Application() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
 
-                db.execSQL("INSERT INTO themes(id, description) VALUES(0, 'Cine')")
+                /*db.execSQL("INSERT INTO themes(id, description) VALUES(0, 'Cine')")
                 db.execSQL("INSERT INTO themes(id, description) VALUES(1, 'Física')")
                 db.execSQL("INSERT INTO themes(id, description) VALUES(2, 'Historia')")
                 db.execSQL("INSERT INTO themes(id, description) VALUES(3, 'Matemáticas')")
                 db.execSQL("INSERT INTO themes(id, description) VALUES(4, 'Videojuegos')")
-                db.execSQL("INSERT INTO themes(id, description) VALUES(5, 'Arte')")
+                db.execSQL("INSERT INTO themes(id, description) VALUES(5, 'Arte')")*/
             }
         }).build()
 
