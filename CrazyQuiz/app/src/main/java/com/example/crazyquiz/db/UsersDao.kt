@@ -20,7 +20,8 @@ interface UsersDao {
     fun update(users: Users)
 
     @Insert
-   fun insert(people: List<Users>)
+    fun insert(people: Users)
+   //fun insert(people: List<Users>)
 
     @Delete
     fun delete(users: Users)

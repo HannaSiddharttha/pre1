@@ -15,9 +15,7 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlin.math.roundToInt
 
-
 class QuestionActivity : AppCompatActivity() {
-
 
     private lateinit var prevButton: Button
     private lateinit var nextButton: Button
