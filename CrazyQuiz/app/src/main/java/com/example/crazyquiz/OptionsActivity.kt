@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.crazyquiz.db.QuizRepository
+import com.example.crazyquiz.db.Users
 import kotlinx.android.synthetic.main.activity_options.*
 
 class OptionsActivity : AppCompatActivity() {
@@ -26,14 +28,17 @@ class OptionsActivity : AppCompatActivity() {
     private lateinit var radioButton_media: RadioButton
     private lateinit var radioButton_baja: RadioButton
     private lateinit var switch_pistas: Switch
-    private lateinit var settings: Settings
     private lateinit var adapter1: ArrayAdapter<String>
     private lateinit var adapter2: ArrayAdapter<String>
+    private lateinit var user: Users
+    private lateinit var repository: QuizRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_options)
         ModelPreferencesManager.with(this.application)
+
+        repository = QuizRepository(this.application)
 
         button_aply = findViewById(R.id. button_apply)
         button_return = findViewById(R.id. button_return)
@@ -124,71 +129,71 @@ class OptionsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         radioButton_alta.setOnClickListener{  View ->
-            settings.dificultad = 3
+            user.dificultad = 3
         }
         radioButton_media.setOnClickListener{  View ->
-            settings.dificultad = 2
+            user.dificultad = 2
         }
         radioButton_baja.setOnClickListener{  View ->
-            settings.dificultad = 1
+            user.dificultad = 1
         }
         switch_pistas.setOnClickListener{  View ->
 
         }
 
         //settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
-        val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
-        if(savedSettings != null) {
-            settings = savedSettings
-        } else {
-            settings = Settings(true, false, false, false, false, false, false, "6", 2, false, 2)
+        var savedUser = ModelPreferencesManager.get<Users>("USER")
+
+        if(savedUser != null) {
+            user = savedUser
         }
         loadSettings()
     }
 
 //
     fun loadSettings() {
-        checkBox_todos.isChecked = settings.allThemes
-        checkBox_hp.isChecked = settings.harryPotter
-        checkBox_gatosyreptiles.isChecked = settings.catReptiles
-        checkBox_culturageneral.isChecked = settings.culturaGen
-        checkBox_comida.isChecked = settings.food
-        checkBox_terror.isChecked = settings.terror
-        checkBox_arteygeografia.isChecked = settings.arteGeo
-        spinner_numpreguntas.setSelection(adapter1.getPosition(settings.numPreguntas))
-        spinner_pistas.setSelection(adapter2.getPosition(settings.numPistas.toString()))
-        switch_pistas.isChecked = settings.habilitarPistas
+        checkBox_todos.isChecked = user.allThemes
+        checkBox_hp.isChecked = user.harryPotter
+        checkBox_gatosyreptiles.isChecked = user.catReptiles
+        checkBox_culturageneral.isChecked = user.culturaGen
+        checkBox_comida.isChecked = user.food
+        checkBox_terror.isChecked = user.terror
+        checkBox_arteygeografia.isChecked = user.arteGeo
+        spinner_numpreguntas.setSelection(adapter1.getPosition(user.numPreguntas))
+        spinner_pistas.setSelection(adapter2.getPosition(user.numPistas.toString()))
+        switch_pistas.isChecked = user.habilitarPistas
 
-        if(settings.dificultad == 3) {
+        if(user.dificultad == 3) {
             radioButton_alta.isChecked = true;
         }
-        if(settings.dificultad == 2) {
+        if(user.dificultad == 2) {
             radioButton_media.isChecked = true;
         }
-        if(settings.dificultad == 1) {
+        if(user.dificultad == 1) {
             radioButton_baja.isChecked = true;
         }
     }
 
     fun saveSettings() {
-        settings.allThemes = checkBox_todos.isChecked
-        settings.harryPotter = checkBox_hp.isChecked
-        settings.catReptiles = checkBox_gatosyreptiles.isChecked
-        settings.catReptiles = checkBox_gatosyreptiles.isChecked
-        settings.culturaGen = checkBox_culturageneral.isChecked
-        settings.food = checkBox_comida.isChecked
-        settings.terror = checkBox_terror.isChecked
-        settings.arteGeo = checkBox_arteygeografia.isChecked
-        settings.numPreguntas = spinner_numpreguntas.selectedItem.toString()
-        settings.numPistas = spinner_pistas.selectedItem.toString().toInt()
-        settings.habilitarPistas = switch_pistas.isChecked
+        user.allThemes = checkBox_todos.isChecked
+        user.harryPotter = checkBox_hp.isChecked
+        user.catReptiles = checkBox_gatosyreptiles.isChecked
+        user.catReptiles = checkBox_gatosyreptiles.isChecked
+        user.culturaGen = checkBox_culturageneral.isChecked
+        user.food = checkBox_comida.isChecked
+        user.terror = checkBox_terror.isChecked
+        user.arteGeo = checkBox_arteygeografia.isChecked
+        user.numPreguntas = spinner_numpreguntas.selectedItem.toString()
+        user.numPistas = spinner_pistas.selectedItem.toString().toInt()
+        user.habilitarPistas = switch_pistas.isChecked
     }
 
 
 
 
     private fun saveData(){
-        ModelPreferencesManager.put(settings, "SETTINGS")
+        repository.updateUser(user)
+        ModelPreferencesManager.put(user, "USER")
     }
 
 }

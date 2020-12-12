@@ -11,7 +11,31 @@ class QuizRepository(application: Application) {
 
 
     fun insertUser(user: Users) {
-        if (usersDao != null) InsertAsyncTask(usersDao).execute(user)
+        if (usersDao != null) InsertUserAsyncTask(usersDao).execute(user)
+    }
+
+    private class InsertUserAsyncTask(private val usersDao: UsersDao) :
+        AsyncTask<Users, Void, Void>() {
+        override fun doInBackground(vararg users: Users?): Void? {
+            for (user in users) {
+                if (user != null) usersDao.insert(user)
+            }
+            return null
+        }
+    }
+
+    fun updateUser(user: Users) {
+        if (usersDao != null) UpdateUserAsyncTask(usersDao).execute(user)
+    }
+
+    private class UpdateUserAsyncTask(private val usersDao: UsersDao) :
+        AsyncTask<Users, Void, Void>() {
+        override fun doInBackground(vararg users: Users?): Void? {
+            for (user in users) {
+                if (user != null) usersDao.update(user)
+            }
+            return null
+        }
     }
 
     fun insertQuestion(question: Question){
@@ -26,21 +50,4 @@ class QuizRepository(application: Application) {
     fun getUsers(): LiveData<List<Users>> {
         return usersDao?.getAll() ?: MutableLiveData<List<Users>>()
     }
-
-    private class InsertAsyncTask(private val usersDao: UsersDao) :
-        AsyncTask<Users, Void, Void>() {
-        override fun doInBackground(vararg users: Users?): Void? {
-
-            for (user in users) {
-                if (user != null) usersDao.insert(user)
-            }
-
-            return null
-        }
-    }
-
-
-
-
-
 }
