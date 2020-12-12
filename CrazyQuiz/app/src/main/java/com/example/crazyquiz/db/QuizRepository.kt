@@ -19,6 +19,10 @@ class QuizRepository(application: Application) {
 
     }
 
+    fun getUserByEmailPassword(email: String, password: String): LiveData<Users> {
+        return usersDao?.getByEmailPassword(email, password) ?: MutableLiveData<Users>()
+    }
+
     fun getUsers(): LiveData<List<Users>> {
         return usersDao?.getAll() ?: MutableLiveData<List<Users>>()
     }

@@ -1,6 +1,7 @@
 package com.example.crazyquiz.ui.login
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,20 +16,26 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.crazyquiz.OptionsActivity
+import com.example.crazyquiz.*
 
-import com.example.crazyquiz.R
-import com.example.crazyquiz.RegisterActivity
+import com.example.crazyquiz.db.QuizRepository
+import com.example.crazyquiz.db.Users
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var registrar: Button
+    private lateinit var repository: QuizRepository
+    private lateinit var application_: Application
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
+        var this_ = this
+        application_ = this.application
+        repository = QuizRepository(application_)
+        ModelPreferencesManager.with(application_)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -97,7 +104,31 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                //loginViewModel.login(username.text.toString(), password.text.toString())
+                var user = repository.getUserByEmailPassword(username.text.toString(), password.text.toString())
+                val observer = Observer<Users> { user ->
+                    loading.visibility = View.GONE
+                    if (user != null) {
+                       Toast.makeText(
+                           this_,
+                           "Usuario encontrado",
+                           Toast.LENGTH_SHORT
+                       ).show()
+                        ModelPreferencesManager.put(user, "USER")
+                        val intent = Intent(this_, MainActivity::class.java)
+                        startActivity(intent)
+                   } else {
+                       Toast.makeText(
+                           this_,
+                           "Usuario incorrecto",
+                           Toast.LENGTH_SHORT
+                       ).show()
+                   }
+               }
+               user.observe(this_, observer)
+   //            for (us in users) {
+   //
+   //            }
             }
         }
         registrar.setOnClickListener {
