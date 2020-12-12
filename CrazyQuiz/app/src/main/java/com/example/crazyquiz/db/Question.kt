@@ -4,14 +4,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity
+@Entity(tableName = "questions")
 
 data class Question(
     @PrimaryKey(autoGenerate = true) val preguntaId : Int,
-    val Correcta: Int,
-    val answer1: Int,
-    val answer2: Int,
-    val answer3: Int,
-    val answer4: Int,
-    val Categoria: Int
+    val pregunta: String,
+    val correcta: Int,
+    val answer1: String,
+    val answer2: String,
+    val answer3: String,
+    val answer4: String,
+    val categoria: Int
 )
