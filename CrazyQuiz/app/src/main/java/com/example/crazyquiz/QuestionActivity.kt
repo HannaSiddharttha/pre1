@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import com.example.crazyquiz.db.QuizRepository
+import com.example.crazyquiz.db.Users
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlin.math.roundToInt
 
@@ -40,7 +41,6 @@ class QuestionActivity : AppCompatActivity() {
         ModelPreferencesManager.with(this.application)
         repository = QuizRepository(this.application) //hace referencia al repositorio de la bd
 
-
         prevButton = findViewById(R.id.prev_button)
         nextButton = findViewById(R.id.next_button)
         preguntaTextView = findViewById(R.id.preguntaTextView)
@@ -53,29 +53,29 @@ class QuestionActivity : AppCompatActivity() {
         numPistas = findViewById(R.id.btnPistas)
 
         // obtiene los settings, si los encuentra los asigna a settings.
-        val savedSettings = ModelPreferencesManager.get<Settings>("SETTINGS")
-        if(savedSettings != null) {
-            model.settings = savedSettings
+        val savedUser = ModelPreferencesManager.get<Users>("USER")
+        if(savedUser != null) {
+            model.user = savedUser
         }
         model.filterQuestions()
 
         // ocultar opciones dependiendo de dificultad
 
         // dificultad media - ocultar ultima pregunta
-        if(model.settings.dificultad == 2) {
+        if(model.user.dificultad == 2) {
             Opcion4.setVisibility(View.GONE)
         }
 
         // dificultad baja - ocultar ultimas 2 preguntas
-        if(model.settings.dificultad == 1) {
+        if(model.user.dificultad == 1) {
             Opcion3.setVisibility(View.GONE)
             Opcion4.setVisibility(View.GONE)
         }
 
-        if(!model.settings.habilitarPistas) {
+        if(!model.user.habilitarPistas) {
             numPistas.setVisibility(View.INVISIBLE)
         } else {
-            numPistas.setText("Pistas: ${model.settings.numPistas}")
+            numPistas.setText("Pistas: ${model.user.numPistas}")
         }
 
         // se pone la primera pregunta
@@ -91,11 +91,11 @@ class QuestionActivity : AppCompatActivity() {
         }
         numPistas.setOnClickListener { view: View ->
             // si no esta respondida, te quedan pistas y hay al menos 2 botones sin bloquear continúa
-            if(!model.currentQuestion.isAnswered() && model.settings.numPistas > 0 && model.notLockedButtons() >= 2) {
-                model.settings.numPistas--
+            if(!model.currentQuestion.isAnswered() && model.user.numPistas > 0 && model.notLockedButtons() >= 2) {
+                model.user.numPistas--
                 model.blockButton()
                 loadQuestion()
-                numPistas.setText("Pistas: ${model.settings.numPistas}")
+                numPistas.setText("Pistas: ${model.user.numPistas}")
             }
         }
 
@@ -142,7 +142,7 @@ class QuestionActivity : AppCompatActivity() {
 
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
-                var maxPuntos = model.selectedQuestions.size * model.settings.dificultad
+                var maxPuntos = model.selectedQuestions.size * model.user.dificultad
                 var totalPuntos = model.totalPuntos()
                 var porcentaje : Int = (((totalPuntos.toFloat()/maxPuntos.toFloat()).toFloat())*100).roundToInt()
                 PuntuacionTotal.text = "final: ${totalPuntos} pts ${porcentaje}%"
@@ -171,10 +171,10 @@ class QuestionActivity : AppCompatActivity() {
         numPreguntaTextView.setText("${model.currentQuestionNumber}/${model.questionsSize}")
         Opcion1.setText(model.currentQuestion.answer1)
         Opcion2.setText(model.currentQuestion.answer2)
-        if(model.settings.dificultad >= 2) {
+        if(model.user.dificultad >= 2) {
             Opcion3.setText(model.currentQuestion.answer3)
         }
-        if(model.settings.dificultad == 3) {
+        if(model.user.dificultad == 3) {
             Opcion4.setText(model.currentQuestion.answer4)
         }
         AnsColor()

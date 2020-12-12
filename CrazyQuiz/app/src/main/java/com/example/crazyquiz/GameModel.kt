@@ -1,6 +1,7 @@
 package com.example.crazyquiz
 
 import androidx.lifecycle.ViewModel
+import com.example.crazyquiz.db.Users
 import kotlin.random.Random
 
 class GameModel : ViewModel() {
@@ -14,12 +15,12 @@ class GameModel : ViewModel() {
     val CULTURA_GENERAL = 5
     val ARTE_GEOGRAFIA = 6
 
-    lateinit var settings: Settings
+    lateinit var user: Users
     lateinit var questionBank: MutableList<Question>
     lateinit var selectedQuestions: MutableList<SelectedQuestion>
 
     init {
-        settings = Settings(true, false, false, false, false, false, false, "6", 2, false, 2)
+        user = Users(0,"","","",true, false, false, false, false, false, false, "6", 2, false, 2)
         selectedQuestions = mutableListOf<SelectedQuestion>()
         setQuestionBank()
     }
@@ -127,7 +128,7 @@ class GameModel : ViewModel() {
         var puntos: Int = 0
 
         // 3 puntos para alta, 2 para media y 1 para baja
-        var maxPerQuestion: Int = settings.dificultad
+        var maxPerQuestion: Int = user.dificultad
         selectedQuestions.forEach() {
             if(it.isCorrect()) {
                 // se agregan los puntos maximos, pero se restan puntos si se usa alguna pista
@@ -212,18 +213,18 @@ class GameModel : ViewModel() {
         questionBank.forEach() {
 
             // si esta marcado "todos" se agrega a fuerza
-            if(settings.allThemes) {
+            if(user.allThemes) {
                 filteredQuestions.add(it)
             } else {
 
                 //si las categorias estan marcadas en settings esas se agregan a la lista nueva
                 if(
-                    (settings.harryPotter && it.Categoria == HARRY_POTTER) ||
-                    (settings.catReptiles && it.Categoria == CATS_REPTILES) ||
-                    (settings.culturaGen && it.Categoria == CULTURA_GENERAL) ||
-                    (settings.food && it.Categoria == FOOD) ||
-                    (settings.terror && it.Categoria == TERROR) ||
-                    (settings.arteGeo && it.Categoria == ARTE_GEOGRAFIA)
+                    (user.harryPotter && it.Categoria == HARRY_POTTER) ||
+                    (user.catReptiles && it.Categoria == CATS_REPTILES) ||
+                    (user.culturaGen && it.Categoria == CULTURA_GENERAL) ||
+                    (user.food && it.Categoria == FOOD) ||
+                    (user.terror && it.Categoria == TERROR) ||
+                    (user.arteGeo && it.Categoria == ARTE_GEOGRAFIA)
                 ) {
                     filteredQuestions.add(it)
                 }
@@ -232,7 +233,7 @@ class GameModel : ViewModel() {
 
         var x : Int = 0
         // ciclo para acumular preguntas aleatoreamente
-        while(x < settings.numPreguntas.toInt()) {
+        while(x < user.numPreguntas.toInt()) {
 
             // se obtiene un numero al azar no mayor al numero de elementos de la lista
             var index = rand(0, filteredQuestions.size - 1)
@@ -242,7 +243,7 @@ class GameModel : ViewModel() {
             if(selectedQuestions.find { it.question.strRestId == randomQuestion.strRestId } == null) {
 
                 // dificultad alta
-                if(settings.dificultad == 3) {
+                if(user.dificultad == 3) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
                     var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
 
@@ -262,7 +263,7 @@ class GameModel : ViewModel() {
                 }
 
                 // dificultad media
-                if(settings.dificultad == 2) {
+                if(user.dificultad == 2) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
                     var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3)
 
@@ -282,7 +283,7 @@ class GameModel : ViewModel() {
                 }
 
                 // dificultad baja
-                if(settings.dificultad == 1) {
+                if(user.dificultad == 1) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
                     var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2)
 
