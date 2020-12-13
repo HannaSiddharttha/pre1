@@ -9,7 +9,6 @@ class QuizRepository(application: Application) {
     private val usersDao: UsersDao? = AppDatabase.getInstance(application)?.UsersDao()
     private val questionDao: QuestionDao? = AppDatabase.getInstance(application)?.QuestionDao()
 
-
     fun insertUser(user: Users) {
         if (usersDao != null) InsertUserAsyncTask(usersDao).execute(user)
     }
@@ -38,10 +37,7 @@ class QuizRepository(application: Application) {
         }
     }
 
-    fun insertQuestion(question: Question){
-       
 
-    }
 
     fun getUserByEmailPassword(email: String, password: String): LiveData<Users> {
         return usersDao?.getByEmailPassword(email, password) ?: MutableLiveData<Users>()

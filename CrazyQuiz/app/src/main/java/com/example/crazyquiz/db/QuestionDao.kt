@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface QuestionDao {
 
-    @Query("Select * from Question")
+    @Query("Select * from questions")
     fun getAll(): LiveData<List<Question>>
 
-    @Query("Select * from Question where preguntaId = :id")
+    @Query("Select * from questions where preguntaId = :id")
     fun getById(id: Int): Question
 
 
