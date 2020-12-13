@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_puntuaciones_perfil.*
 
 class PuntuacionesPerfilActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -13,23 +14,13 @@ class PuntuacionesPerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puntuaciones_perfil)
+        setupRecyclerView()
 
-        viewManager = LinearLayoutManager(this)
-        var strings = arrayOf<String>("perro","gato","raton")
-        viewAdapter = MyAdapter(strings)
 
-        recyclerView = findViewById<RecyclerView>(R.id.reciclerview).apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
-
-            // use a linear layout manager
-            layoutManager = viewManager
-
-            // specify an viewAdapter (see also next example)
-            adapter = viewAdapter
-
-        }
     }
-    // ...
+
+    private fun setupRecyclerView(){
+        reciclerview.layoutManager = LinearLayoutManager(this)
+    }
 }
+
