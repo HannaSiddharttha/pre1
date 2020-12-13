@@ -16,3 +16,4 @@ data class Question(
     val answer4: String,
     val categoria: Int
 )
+
