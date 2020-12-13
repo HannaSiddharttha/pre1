@@ -9,6 +9,7 @@ import com.example.crazyquiz.Question
 data class SelectedQuestion (
     var answer : Int,
     var questionId: Int,
+
     var gameId : Int,
     var answer1: Int,
     var answer2: Int,
