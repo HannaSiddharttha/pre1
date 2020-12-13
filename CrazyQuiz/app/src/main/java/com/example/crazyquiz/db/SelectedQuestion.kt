@@ -2,21 +2,23 @@ package com.example.crazyquiz.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.crazyquiz.Question
+import androidx.room.Relation
 
-@Entity(tableName = "selectedquestions")
+@Entity(tableName = "selectedQuestions")
 
 data class SelectedQuestion (
+    @PrimaryKey(autoGenerate = true)
+    var selectedQuestionId: Int,
     var answer : Int,
     var questionId: Int,
 
     var gameId : Int,
-    var answer1: Int,
-    var answer2: Int,
-    var answer3: Int,
-    var answer4: Int,
-    var answer1Locked: Boolean,
-    var answer2Locked: Boolean,
-    var answer3Locked: Boolean,
-    var answer4Locked: Boolean
+    var answer1: String = "",
+    var answer2: String = "",
+    var answer3: String = "",
+    var answer4: String = "",
+    var answer1Locked: Boolean = false,
+    var answer2Locked: Boolean = false,
+    var answer3Locked: Boolean = false,
+    var answer4Locked: Boolean = false
 )

@@ -12,9 +12,10 @@ import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
-import com.example.crazyquiz.db.QuizRepository
-import com.example.crazyquiz.db.Users
+import androidx.lifecycle.Observer
+import com.example.crazyquiz.db.*
 import kotlinx.android.synthetic.main.activity_question.*
+import java.util.*
 import kotlin.math.roundToInt
 
 class QuestionActivity : AppCompatActivity() {
@@ -57,7 +58,53 @@ class QuestionActivity : AppCompatActivity() {
         if(savedUser != null) {
             model.user = savedUser
         }
-        model.filterQuestions()
+
+        // obtener el banco de preguntas desde base de datos
+        var questions = repository.getAllQuestions()
+        val observer = Observer<List<Question>> { questions ->
+            if (questions != null) {
+                model.questionBank = questions.toMutableList()
+
+                // obtener un juego activo, si no hay se debe crear uno en ese momento.
+                var currentGame = repository.getActiveGameByUser(model.user.userId)
+                val observer2 = Observer<GameWithSelectedQuestions> { game ->
+                    if (game != null) {
+                        model.game = game.game
+                        model.selectedQuestions = game.selectedQuestions.toMutableList()
+                        model.filterQuestions()
+                        loadQuestion()
+                    } else {
+                        repository.insertGame(Game(0,model.user.userId,true,0, Date()))
+                        // obtener juego recien agregado
+                        var currentGame = repository.getActiveGameByUser(model.user.userId)
+                        val observer = Observer<GameWithSelectedQuestions> { game ->
+                            if(game != null) {
+                                model.game = game.game
+                                model.filterQuestions()
+                                for(selectedQuestion in model.selectedQuestions) {
+                                    //selectedQuestion.gameId = newGame.
+                                    repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                                }
+                                // se pone la primera pregunta
+                                loadQuestion()
+                            }
+                        }
+                        currentGame.observe(this, observer)
+                    }
+                }
+                currentGame.observe(this, observer2)
+
+
+            } else {
+                makeText(
+                    this,
+                    "Preguntas no encontradas",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        questions.observe(this, observer)
+
 
         // ocultar opciones dependiendo de dificultad
 
@@ -77,9 +124,6 @@ class QuestionActivity : AppCompatActivity() {
         } else {
             numPistas.setText("Pistas: ${model.user.numPistas}")
         }
-
-        // se pone la primera pregunta
-        loadQuestion()
 
         prevButton.setOnClickListener { view: View ->
             model.prevQuestion()
@@ -101,16 +145,16 @@ class QuestionActivity : AppCompatActivity() {
 
         //Opción1 ---
         Opcion1.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer1)
+            optionEvent(1)
         }
         Opcion2.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer2)
+            optionEvent(2)
         }
         Opcion3.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer3)
+            optionEvent(3)
         }
         Opcion4.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer4)
+            optionEvent(4)
         }
     }
 
@@ -124,7 +168,7 @@ class QuestionActivity : AppCompatActivity() {
             ).show()
         } else {
             // se selecciono la opcion
-            model.currentQuestion.answer = selectedOption
+            model.currentQuestion.selectedQuestion.answer = selectedOption
 
             // mensaje si la respuesta fue correcta o no
             val result = if (model.currentQuestion.isCorrect()) "correcto" else "incorrecto"
@@ -138,7 +182,6 @@ class QuestionActivity : AppCompatActivity() {
             if(model.currentQuestion.isCorrect()) {
                 model.puntuacion_actual++
             }
-
 
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
@@ -167,15 +210,15 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     fun loadQuestion() {
-        preguntaTextView.setText(model.currentQuestion.question.strRestId)
+        preguntaTextView.setText(model.currentQuestion.question.pregunta)
         numPreguntaTextView.setText("${model.currentQuestionNumber}/${model.questionsSize}")
-        Opcion1.setText(model.currentQuestion.answer1)
-        Opcion2.setText(model.currentQuestion.answer2)
+        Opcion1.setText(model.currentQuestion.selectedQuestion.answer1)
+        Opcion2.setText(model.currentQuestion.selectedQuestion.answer2)
         if(model.user.dificultad >= 2) {
-            Opcion3.setText(model.currentQuestion.answer3)
+            Opcion3.setText(model.currentQuestion.selectedQuestion.answer3)
         }
         if(model.user.dificultad == 3) {
-            Opcion4.setText(model.currentQuestion.answer4)
+            Opcion4.setText(model.currentQuestion.selectedQuestion.answer4)
         }
         AnsColor()
     }
@@ -192,28 +235,28 @@ class QuestionActivity : AppCompatActivity() {
         Opcion3.setTextColor(white)
         Opcion4.setTextColor(white)
 
-        if(model.currentQuestion.answer1Locked) {
+        if(model.currentQuestion.selectedQuestion.answer1Locked) {
             Opcion1.setTextColor(gray)
             Opcion1.setEnabled(false)
         } else {
             Opcion1.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer2Locked) {
+        if(model.currentQuestion.selectedQuestion.answer2Locked) {
             Opcion2.setTextColor(gray)
             Opcion2.setEnabled(false)
         } else {
             Opcion2.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer3Locked) {
+        if(model.currentQuestion.selectedQuestion.answer3Locked) {
             Opcion3.setTextColor(gray)
             Opcion3.setEnabled(false)
         } else {
             Opcion3.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer4Locked) {
+        if(model.currentQuestion.selectedQuestion.answer4Locked) {
             Opcion4.setTextColor(gray)
             Opcion4.setEnabled(false)
         } else {
@@ -221,28 +264,28 @@ class QuestionActivity : AppCompatActivity() {
         }
 
         if (model.currentQuestion.isAnswered()) {
-            if(model.currentQuestion.answer == model.currentQuestion.answer1) {
+            if(model.currentQuestion.selectedQuestion.answer == 1) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion1.setTextColor(green) // verde
                 } else {
                     Opcion1.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer2) {
+            if(model.currentQuestion.selectedQuestion.answer == 2) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion2.setTextColor(green) // verde
                 } else {
                     Opcion2.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer3) {
+            if(model.currentQuestion.selectedQuestion.answer == 3) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion3.setTextColor(green) // verde
                 } else {
                     Opcion3.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer4) {
+            if(model.currentQuestion.selectedQuestion.answer == 4) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion4.setTextColor(green) // verde
                 } else {
