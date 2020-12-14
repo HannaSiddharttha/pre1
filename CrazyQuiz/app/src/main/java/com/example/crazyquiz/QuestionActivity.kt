@@ -10,11 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
-import com.example.crazyquiz.db.QuizRepository
-import com.example.crazyquiz.db.Users
+import androidx.lifecycle.Observer
+import com.example.crazyquiz.db.*
 import kotlinx.android.synthetic.main.activity_question.*
+import java.util.*
 import kotlin.math.roundToInt
 
 class QuestionActivity : AppCompatActivity() {
@@ -31,6 +33,7 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var PuntuacionTotal: TextView
     private lateinit var numPistas: Button
     private lateinit var repository: QuizRepository
+    private var alertShowed: Boolean = false
 
 
     private val model: GameModel by viewModels()
@@ -57,7 +60,78 @@ class QuestionActivity : AppCompatActivity() {
         if(savedUser != null) {
             model.user = savedUser
         }
-        model.filterQuestions()
+
+        // obtener el banco de preguntas desde base de datos
+        var questions = repository.getAllQuestions()
+        val observer = Observer<List<Question>> { questions ->
+            if (questions != null) {
+                model.questionBank = questions.toMutableList()
+
+                // obtener un juego activo, si no hay se debe crear uno en ese momento.
+                var currentGame = repository.getActiveGameByUser(model.user.userId)
+                val observer2 = Observer<GameWithSelectedQuestions> { game ->
+                    if (game != null) {
+                        if(!alertShowed) {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setMessage("Se detectó una partida, deseas continuarla?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes") { dialog, id ->
+                                    model.game = game.game
+                                    if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                        model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                    }
+                                    refreshGameQuestions(game)
+                                }
+                                .setNegativeButton("No") { dialog, id ->
+                                    repository.deleteGame(game.game)
+                                    newGameProcess()
+                                }
+                            val alert = builder.create()
+                            alert.show()
+                            alertShowed = true
+                        } else {
+                            model.game = game.game
+                            if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                model.selectedQuestions = game.selectedQuestions.toMutableList()
+                            }
+                            refreshGameQuestions(game)
+                        }
+
+
+
+                    } else {
+                        alertShowed = true
+                        newGameProcess()
+                        /*
+                        repository.insertGame(Game(0,model.user.userId,true,0, Date()))
+                        // obtener juego recien agregado
+                        var currentGame = repository.getActiveGameByUser(model.user.userId)
+                        val observer3 = Observer<GameWithSelectedQuestions> { game ->
+                            if(game != null) {
+                                model.game = game.game
+                                if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                    model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                }
+                                refreshGameQuestions(game)
+                            }
+                        }
+                        currentGame.observe(this, observer3)
+                        */
+                    }
+                }
+                currentGame.observe(this, observer2)
+
+
+            } else {
+                makeText(
+                    this,
+                    "Preguntas no encontradas",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        questions.observe(this, observer)
+
 
         // ocultar opciones dependiendo de dificultad
 
@@ -77,9 +151,6 @@ class QuestionActivity : AppCompatActivity() {
         } else {
             numPistas.setText("Pistas: ${model.user.numPistas}")
         }
-
-        // se pone la primera pregunta
-        loadQuestion()
 
         prevButton.setOnClickListener { view: View ->
             model.prevQuestion()
@@ -101,17 +172,48 @@ class QuestionActivity : AppCompatActivity() {
 
         //Opción1 ---
         Opcion1.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer1)
+            optionEvent(1)
         }
         Opcion2.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer2)
+            optionEvent(2)
         }
         Opcion3.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer3)
+            optionEvent(3)
         }
         Opcion4.setOnClickListener { view: View ->
-            optionEvent(model.currentQuestion.answer4)
+            optionEvent(4)
         }
+    }
+
+    fun newGameProcess() {
+        repository.insertGame(Game(0,model.user.userId,true,0, Date()))
+        // obtener juego recien agregado
+        var currentGame = repository.getActiveGameByUser(model.user.userId)
+
+        val observer3 = Observer<GameWithSelectedQuestions> { game ->
+            if(game != null) {
+                model.game = game.game
+                if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                    model.selectedQuestions = game.selectedQuestions.toMutableList()
+                }
+                refreshGameQuestions(game)
+            }
+        }
+        currentGame.observe(this, observer3)
+
+    }
+
+    fun refreshGameQuestions(game: GameWithSelectedQuestions) {
+        if(game.selectedQuestions.isEmpty() && model.selectedQuestions.isEmpty()) {
+            model.filterQuestions()
+            for(selectedQuestion in model.selectedQuestions) {
+                //selectedQuestion.gameId = newGame.
+                selectedQuestion.selectedQuestion.gameId = model.game.gameId
+                repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+            }
+            game.selectedQuestions = model.selectedQuestions
+        }
+        loadQuestion()
     }
 
     fun optionEvent(selectedOption : Int) {
@@ -124,7 +226,8 @@ class QuestionActivity : AppCompatActivity() {
             ).show()
         } else {
             // se selecciono la opcion
-            model.currentQuestion.answer = selectedOption
+            model.currentQuestion.selectedQuestion.answer = selectedOption
+            repository.updateSelectedQuestion(model.currentQuestion.selectedQuestion)
 
             // mensaje si la respuesta fue correcta o no
             val result = if (model.currentQuestion.isCorrect()) "correcto" else "incorrecto"
@@ -135,10 +238,11 @@ class QuestionActivity : AppCompatActivity() {
             ).show()
 
             //si es correcta suma puntaje
+            /*
             if(model.currentQuestion.isCorrect()) {
                 model.puntuacion_actual++
             }
-
+            */
 
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
@@ -147,35 +251,40 @@ class QuestionActivity : AppCompatActivity() {
                 var porcentaje : Int = (((totalPuntos.toFloat()/maxPuntos.toFloat()).toFloat())*100).roundToInt()
                 PuntuacionTotal.text = "final: ${totalPuntos} pts ${porcentaje}%"
 
+                model.game.isActive = false
+                model.game.date = Date()
+                model.game.score = totalPuntos
+                repository.updateGame(model.game)
 
-                    val intent = Intent(this, FinalScoreActivity::class.java)
-                    intent.putExtra("Porcentaje", porcentaje)
-                    startActivity(intent)
+                val intent = Intent(this, FinalScoreActivity::class.java)
+                intent.putExtra("Porcentaje", porcentaje)
+                startActivity(intent)
+                // if (model.puntuacion_actual == model.questionsSize) {
+                    Toast.makeText(
+                        this,
+                        "Game Over",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                //}
+
             } else {
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
 
-            if (model.puntuacion_actual == model.questionsSize) {
-                Toast.makeText(
-                    this,
-                    "Game Over",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
             AnsColor()
         }
     }
 
     fun loadQuestion() {
-        preguntaTextView.setText(model.currentQuestion.question.strRestId)
+        preguntaTextView.setText(model.currentQuestion.question.pregunta)
         numPreguntaTextView.setText("${model.currentQuestionNumber}/${model.questionsSize}")
-        Opcion1.setText(model.currentQuestion.answer1)
-        Opcion2.setText(model.currentQuestion.answer2)
+        Opcion1.setText(model.currentQuestion.selectedQuestion.answer1)
+        Opcion2.setText(model.currentQuestion.selectedQuestion.answer2)
         if(model.user.dificultad >= 2) {
-            Opcion3.setText(model.currentQuestion.answer3)
+            Opcion3.setText(model.currentQuestion.selectedQuestion.answer3)
         }
         if(model.user.dificultad == 3) {
-            Opcion4.setText(model.currentQuestion.answer4)
+            Opcion4.setText(model.currentQuestion.selectedQuestion.answer4)
         }
         AnsColor()
     }
@@ -192,28 +301,28 @@ class QuestionActivity : AppCompatActivity() {
         Opcion3.setTextColor(white)
         Opcion4.setTextColor(white)
 
-        if(model.currentQuestion.answer1Locked) {
+        if(model.currentQuestion.selectedQuestion.answer1Locked) {
             Opcion1.setTextColor(gray)
             Opcion1.setEnabled(false)
         } else {
             Opcion1.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer2Locked) {
+        if(model.currentQuestion.selectedQuestion.answer2Locked) {
             Opcion2.setTextColor(gray)
             Opcion2.setEnabled(false)
         } else {
             Opcion2.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer3Locked) {
+        if(model.currentQuestion.selectedQuestion.answer3Locked) {
             Opcion3.setTextColor(gray)
             Opcion3.setEnabled(false)
         } else {
             Opcion3.setEnabled(true)
         }
 
-        if(model.currentQuestion.answer4Locked) {
+        if(model.currentQuestion.selectedQuestion.answer4Locked) {
             Opcion4.setTextColor(gray)
             Opcion4.setEnabled(false)
         } else {
@@ -221,28 +330,28 @@ class QuestionActivity : AppCompatActivity() {
         }
 
         if (model.currentQuestion.isAnswered()) {
-            if(model.currentQuestion.answer == model.currentQuestion.answer1) {
+            if(model.currentQuestion.selectedQuestion.answer == 1) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion1.setTextColor(green) // verde
                 } else {
                     Opcion1.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer2) {
+            if(model.currentQuestion.selectedQuestion.answer == 2) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion2.setTextColor(green) // verde
                 } else {
                     Opcion2.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer3) {
+            if(model.currentQuestion.selectedQuestion.answer == 3) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion3.setTextColor(green) // verde
                 } else {
                     Opcion3.setTextColor(red) // rojo
                 }
             }
-            if(model.currentQuestion.answer == model.currentQuestion.answer4) {
+            if(model.currentQuestion.selectedQuestion.answer == 4) {
                 if (model.currentQuestion.isCorrect()) {
                     Opcion4.setTextColor(green) // verde
                 } else {
@@ -250,5 +359,20 @@ class QuestionActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Desea salir del juego?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                super.onBackPressed()
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }

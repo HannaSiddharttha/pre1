@@ -1,7 +1,7 @@
 package com.example.crazyquiz
 
 import androidx.lifecycle.ViewModel
-import com.example.crazyquiz.db.Users
+import com.example.crazyquiz.db.*
 import kotlin.random.Random
 
 class GameModel : ViewModel() {
@@ -16,15 +16,17 @@ class GameModel : ViewModel() {
     val ARTE_GEOGRAFIA = 6
 
     lateinit var user: Users
+    lateinit var game: Game
     lateinit var questionBank: MutableList<Question>
-    lateinit var selectedQuestions: MutableList<SelectedQuestion>
+    lateinit var selectedQuestions: MutableList<SelectedQuestionAndQuestion>
 
     init {
         user = Users(0,"","","",true, false, false, false, false, false, false, "6", 2, false, 2)
-        selectedQuestions = mutableListOf<SelectedQuestion>()
-        setQuestionBank()
+        selectedQuestions = mutableListOf<SelectedQuestionAndQuestion>()
+        //setQuestionBank()
     }
 
+    /*
     fun setQuestionBank() {
         questionBank = mutableListOf<Question>()
         questionBank.addAll(
@@ -97,13 +99,14 @@ class GameModel : ViewModel() {
             )
         )
     }
+    */
     //----
     var numberOfGoodAnswers: Int = 0
-    var puntuacion_actual: Int =  0
+    //var puntuacion_actual: Int =  0
 
     private var currentIndex = 0
 
-    val currentQuestion: SelectedQuestion
+    val currentQuestion: SelectedQuestionAndQuestion
         get() = selectedQuestions[currentIndex]
 
     val questionsSize: Int
@@ -133,16 +136,16 @@ class GameModel : ViewModel() {
             if(it.isCorrect()) {
                 // se agregan los puntos maximos, pero se restan puntos si se usa alguna pista
                 puntos += maxPerQuestion
-                if(it.answer1Locked) {
+                if(it.selectedQuestion.answer1Locked) {
                     puntos--
                 }
-                if(it.answer2Locked) {
+                if(it.selectedQuestion.answer2Locked) {
                     puntos--
                 }
-                if(it.answer3Locked) {
+                if(it.selectedQuestion.answer3Locked) {
                     puntos--
                 }
-                if(it.answer4Locked) {
+                if(it.selectedQuestion.answer4Locked) {
                     puntos--
                 }
             }
@@ -161,16 +164,16 @@ class GameModel : ViewModel() {
 
     fun notLockedButtons() : Int {
         var notLockedButtons : Int = 0
-        if(!currentQuestion.answer1Locked) {
+        if(!currentQuestion.selectedQuestion.answer1Locked) {
             notLockedButtons++
         }
-        if(!currentQuestion.answer2Locked) {
+        if(!currentQuestion.selectedQuestion.answer2Locked) {
             notLockedButtons++
         }
-        if(currentQuestion.answer3 != 0 && !currentQuestion.answer3Locked) {
+        if(currentQuestion.selectedQuestion.answer3.equals("") && !currentQuestion.selectedQuestion.answer3Locked) {
             notLockedButtons++
         }
-        if(currentQuestion.answer4 != 0 && !currentQuestion.answer4Locked) {
+        if(currentQuestion.selectedQuestion.answer4.equals("") && !currentQuestion.selectedQuestion.answer4Locked) {
             notLockedButtons++
         }
         return notLockedButtons
@@ -186,20 +189,20 @@ class GameModel : ViewModel() {
         while (!buttonFound) {
             var randomNumber = rand(1,4)
             // si reviso la primera respuesta, y no esta bloqueada y NO ES LA RESPUESTA CORRECTA
-            if(randomNumber == 1 && !currentQuestion.answer1Locked && currentQuestion.answer1 != currentQuestion.question.Correcta) {
-                currentQuestion.answer1Locked = true
+            if(randomNumber == 1 && !currentQuestion.selectedQuestion.answer1Locked && randomNumber != currentQuestion.question.correcta) {
+                currentQuestion.selectedQuestion.answer1Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 2 && !currentQuestion.answer2Locked && currentQuestion.answer2 != currentQuestion.question.Correcta) {
-                currentQuestion.answer2Locked = true
+            if(randomNumber == 2 && !currentQuestion.selectedQuestion.answer2Locked && randomNumber != currentQuestion.question.correcta) {
+                currentQuestion.selectedQuestion.answer2Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 3 && !currentQuestion.answer3Locked && currentQuestion.answer3 != currentQuestion.question.Correcta) {
-                currentQuestion.answer3Locked = true
+            if(randomNumber == 3 && !currentQuestion.selectedQuestion.answer3Locked && randomNumber != currentQuestion.question.correcta) {
+                currentQuestion.selectedQuestion.answer3Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 4 && !currentQuestion.answer4Locked && currentQuestion.answer4 != currentQuestion.question.Correcta) {
-                currentQuestion.answer4Locked = true
+            if(randomNumber == 4 && !currentQuestion.selectedQuestion.answer4Locked && randomNumber != currentQuestion.question.correcta) {
+                currentQuestion.selectedQuestion.answer4Locked = true
                 buttonFound = true
             }
         }
@@ -219,12 +222,12 @@ class GameModel : ViewModel() {
 
                 //si las categorias estan marcadas en settings esas se agregan a la lista nueva
                 if(
-                    (user.harryPotter && it.Categoria == HARRY_POTTER) ||
-                    (user.catReptiles && it.Categoria == CATS_REPTILES) ||
-                    (user.culturaGen && it.Categoria == CULTURA_GENERAL) ||
-                    (user.food && it.Categoria == FOOD) ||
-                    (user.terror && it.Categoria == TERROR) ||
-                    (user.arteGeo && it.Categoria == ARTE_GEOGRAFIA)
+                    (user.harryPotter && it.categoria == HARRY_POTTER) ||
+                    (user.catReptiles && it.categoria == CATS_REPTILES) ||
+                    (user.culturaGen && it.categoria == CULTURA_GENERAL) ||
+                    (user.food && it.categoria == FOOD) ||
+                    (user.terror && it.categoria == TERROR) ||
+                    (user.arteGeo && it.categoria == ARTE_GEOGRAFIA)
                 ) {
                     filteredQuestions.add(it)
                 }
@@ -232,6 +235,7 @@ class GameModel : ViewModel() {
         }
 
         var x : Int = 0
+
         // ciclo para acumular preguntas aleatoreamente
         while(x < user.numPreguntas.toInt()) {
 
@@ -240,12 +244,12 @@ class GameModel : ViewModel() {
             var randomQuestion : Question = filteredQuestions.get(index)
 
             // si la preguntas aleatoria no se ha agregado, se agregará.
-            if(selectedQuestions.find { it.question.strRestId == randomQuestion.strRestId } == null) {
+            if(selectedQuestions.find { it.question.preguntaId == randomQuestion.preguntaId } == null) {
 
                 // dificultad alta
                 if(user.dificultad == 3) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
-                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
+                    var randomAnswers = mutableListOf<String>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3, randomQuestion.answer4)
 
                     // las respuesta se ordenan al azar
                     randomAnswers.shuffle()
@@ -253,19 +257,21 @@ class GameModel : ViewModel() {
                     // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
                     var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
                         0,
-                        randomQuestion,
+                        0,
+                        randomQuestion.preguntaId,
+                        game.gameId,
                         randomAnswers[0],
                         randomAnswers[1],
                         randomAnswers[2],
                         randomAnswers[3]
                     )
-                    selectedQuestions.add(currentSelectedQuestion)
+                    selectedQuestions.add(SelectedQuestionAndQuestion(currentSelectedQuestion,randomQuestion))
                 }
 
                 // dificultad media
                 if(user.dificultad == 2) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
-                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3)
+                    var randomAnswers = mutableListOf<String>(randomQuestion.answer1, randomQuestion.answer2, randomQuestion.answer3)
 
                     // las respuesta se ordenan al azar
                     randomAnswers.shuffle()
@@ -273,19 +279,20 @@ class GameModel : ViewModel() {
                     // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
                     var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
                         0,
-                        randomQuestion,
+                        0,
+                        randomQuestion.preguntaId,
+                        game.gameId,
                         randomAnswers[0],
                         randomAnswers[1],
-                        randomAnswers[2],
-                        0
+                        randomAnswers[2]
                     )
-                    selectedQuestions.add(currentSelectedQuestion)
+                    selectedQuestions.add(SelectedQuestionAndQuestion(currentSelectedQuestion,randomQuestion))
                 }
 
                 // dificultad baja
                 if(user.dificultad == 1) {
                     // lista de las 4 posibles respuestas de la pregunta seleccionada
-                    var randomAnswers = mutableListOf<Int>(randomQuestion.answer1, randomQuestion.answer2)
+                    var randomAnswers = mutableListOf<String>(randomQuestion.answer1, randomQuestion.answer2)
 
                     // las respuesta se ordenan al azar
                     randomAnswers.shuffle()
@@ -293,13 +300,13 @@ class GameModel : ViewModel() {
                     // la pregunta y el nuevo order de respuestas se agrega a la lista de "selectedQuestions"
                     var currentSelectedQuestion: SelectedQuestion = SelectedQuestion(
                         0,
-                        randomQuestion,
-                        randomAnswers[0],
-                        randomAnswers[1],
                         0,
-                        0
+                        randomQuestion.preguntaId,
+                        game.gameId,
+                        randomAnswers[0],
+                        randomAnswers[1]
                     )
-                    selectedQuestions.add(currentSelectedQuestion)
+                    selectedQuestions.add(SelectedQuestionAndQuestion(currentSelectedQuestion,randomQuestion))
                 }
                 x++
             }
