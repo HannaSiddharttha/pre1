@@ -1,4 +1,10 @@
 package com.example.crazyquiz.modelo
 
-data class puntuaciones (val nombre:String,val imagen:String){
+import com.example.crazyquiz.db.GameWithSelectedQuestions
+
+data class Puntuaciones (
+    val nombre: String,
+    val imagen: String,
+    val game: GameWithSelectedQuestions
+) {
 }
