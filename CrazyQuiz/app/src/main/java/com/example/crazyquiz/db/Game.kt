@@ -10,8 +10,8 @@ import java.util.*
 data class Game (
     @PrimaryKey(autoGenerate = true)
     val gameId : Int,
-    val userId: Int,
-    val isActive: Boolean,
-    val score: Int,
-    val date: Date,
+    var userId: Int,
+    var isActive: Boolean,
+    var score: Int,
+    var date: Date,
 )

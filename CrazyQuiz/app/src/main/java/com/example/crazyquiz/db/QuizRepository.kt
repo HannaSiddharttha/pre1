@@ -37,6 +37,7 @@ class QuizRepository(application: Application) {
             return null
         }
     }
+
     fun insertGame(game: Game) {
         if (gameDao != null) InsertGameAsyncTask(gameDao).execute(game)
     }
@@ -50,6 +51,20 @@ class QuizRepository(application: Application) {
         }
     }
 
+    fun updateGame(game: Game) {
+        if (gameDao != null) UpdateGameAsyncTask(gameDao).execute(game)
+    }
+    private class UpdateGameAsyncTask(private val gameDao: GameDao) :
+        AsyncTask<Game, Void, Void>() {
+        override fun doInBackground(vararg games: Game?): Void? {
+            for (game in games) {
+                if (game != null) gameDao.update(game)
+            }
+            return null
+        }
+    }
+
+
     fun insertSelectedQuestion(selectedQuestion: SelectedQuestion) {
         if (selectedQuestionDao != null) InsertSelectedQuestionAsyncTask(selectedQuestionDao).execute(selectedQuestion)
     }
@@ -58,6 +73,19 @@ class QuizRepository(application: Application) {
         override fun doInBackground(vararg selectedQuestions: SelectedQuestion?): Void? {
             for (selectedQuestion in selectedQuestions) {
                 if (selectedQuestion != null) selectedQuestionDao.insert(selectedQuestion)
+            }
+            return null
+        }
+    }
+
+    fun updateSelectedQuestion(selectedQuestion: SelectedQuestion) {
+        if (selectedQuestionDao != null) UpdateSelectedQuestionAsyncTask(selectedQuestionDao).execute(selectedQuestion)
+    }
+    private class UpdateSelectedQuestionAsyncTask(val selectedQuestionDao: SelectedQuestionDao) :
+        AsyncTask<SelectedQuestion, Void, Void>() {
+        override fun doInBackground(vararg selectedQuestions: SelectedQuestion?): Void? {
+            for (selectedQuestion in selectedQuestions) {
+                if (selectedQuestion != null) selectedQuestionDao.update(selectedQuestion)
             }
             return null
         }

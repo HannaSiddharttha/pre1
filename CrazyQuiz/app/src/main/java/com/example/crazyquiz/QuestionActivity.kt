@@ -70,26 +70,47 @@ class QuestionActivity : AppCompatActivity() {
                 val observer2 = Observer<GameWithSelectedQuestions> { game ->
                     if (game != null) {
                         model.game = game.game
-                        model.selectedQuestions = game.selectedQuestions.toMutableList()
-                        model.filterQuestions()
+                        if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                            model.selectedQuestions = game.selectedQuestions.toMutableList()
+                        }
+                        refreshGameQuestions(game)
+                        /*
+                        if(game.selectedQuestions.isEmpty()) {
+                            model.filterQuestions()
+                            for(selectedQuestion in model.selectedQuestions) {
+                                //selectedQuestion.gameId = newGame.
+                                selectedQuestion.selectedQuestion.gameId = model.game.gameId
+                                repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                            }
+                        }
                         loadQuestion()
+                        */
                     } else {
                         repository.insertGame(Game(0,model.user.userId,true,0, Date()))
                         // obtener juego recien agregado
                         var currentGame = repository.getActiveGameByUser(model.user.userId)
-                        val observer = Observer<GameWithSelectedQuestions> { game ->
+                        val observer3 = Observer<GameWithSelectedQuestions> { game ->
                             if(game != null) {
                                 model.game = game.game
-                                model.filterQuestions()
-                                for(selectedQuestion in model.selectedQuestions) {
-                                    //selectedQuestion.gameId = newGame.
-                                    repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                                if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                    model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                }
+                                refreshGameQuestions(game)
+                                /*
+                                if(game.selectedQuestions.isEmpty()) {
+                                    model.filterQuestions()
+                                    for(selectedQuestion in model.selectedQuestions) {
+                                        //selectedQuestion.gameId = newGame.
+                                        selectedQuestion.selectedQuestion.gameId = model.game.gameId
+                                        repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                                    }
                                 }
                                 // se pone la primera pregunta
                                 loadQuestion()
+                                */
                             }
                         }
-                        currentGame.observe(this, observer)
+                        currentGame.observe(this, observer3)
                     }
                 }
                 currentGame.observe(this, observer2)
@@ -158,6 +179,19 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
+    fun refreshGameQuestions(game: GameWithSelectedQuestions) {
+        if(game.selectedQuestions.isEmpty() && model.selectedQuestions.isEmpty()) {
+            model.filterQuestions()
+            for(selectedQuestion in model.selectedQuestions) {
+                //selectedQuestion.gameId = newGame.
+                selectedQuestion.selectedQuestion.gameId = model.game.gameId
+                repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+            }
+            game.selectedQuestions = model.selectedQuestions
+        }
+        loadQuestion()
+    }
+
     fun optionEvent(selectedOption : Int) {
         if (model.currentQuestion.isAnswered()) {
             Toast.makeText(
@@ -169,6 +203,7 @@ class QuestionActivity : AppCompatActivity() {
         } else {
             // se selecciono la opcion
             model.currentQuestion.selectedQuestion.answer = selectedOption
+            repository.updateSelectedQuestion(model.currentQuestion.selectedQuestion)
 
             // mensaje si la respuesta fue correcta o no
             val result = if (model.currentQuestion.isCorrect()) "correcto" else "incorrecto"
@@ -179,9 +214,11 @@ class QuestionActivity : AppCompatActivity() {
             ).show()
 
             //si es correcta suma puntaje
+            /*
             if(model.currentQuestion.isCorrect()) {
                 model.puntuacion_actual++
             }
+            */
 
             if(model.gameFinished()) {
                 // PuntuacionTotal.text = "Final: ${(model.numberOfGoodAnswers.toFloat() / (model.questionsSize).toFloat()) * 100} pts"
@@ -190,21 +227,26 @@ class QuestionActivity : AppCompatActivity() {
                 var porcentaje : Int = (((totalPuntos.toFloat()/maxPuntos.toFloat()).toFloat())*100).roundToInt()
                 PuntuacionTotal.text = "final: ${totalPuntos} pts ${porcentaje}%"
 
+                model.game.isActive = false
+                model.game.date = Date()
+                model.game.score = totalPuntos
+                repository.updateGame(model.game)
 
-                    val intent = Intent(this, FinalScoreActivity::class.java)
-                    intent.putExtra("Porcentaje", porcentaje)
-                    startActivity(intent)
+                val intent = Intent(this, FinalScoreActivity::class.java)
+                intent.putExtra("Porcentaje", porcentaje)
+                startActivity(intent)
+                // if (model.puntuacion_actual == model.questionsSize) {
+                    Toast.makeText(
+                        this,
+                        "Game Over",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                //}
+
             } else {
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
 
-            if (model.puntuacion_actual == model.questionsSize) {
-                Toast.makeText(
-                    this,
-                    "Game Over",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
             AnsColor()
         }
     }

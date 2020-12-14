@@ -102,7 +102,7 @@ class GameModel : ViewModel() {
     */
     //----
     var numberOfGoodAnswers: Int = 0
-    var puntuacion_actual: Int =  0
+    //var puntuacion_actual: Int =  0
 
     private var currentIndex = 0
 
@@ -235,6 +235,7 @@ class GameModel : ViewModel() {
         }
 
         var x : Int = 0
+
         // ciclo para acumular preguntas aleatoreamente
         while(x < user.numPreguntas.toInt()) {
 
