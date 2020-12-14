@@ -100,8 +100,11 @@ class QuestionActivity : AppCompatActivity() {
 
 
                     } else {
-                        alertShowed = true
-                        newGameProcess()
+                        if(!alertShowed) {
+                            alertShowed = true
+                            newGameProcess()
+                        }
+
                         /*
                         repository.insertGame(Game(0,model.user.userId,true,0, Date()))
                         // obtener juego recien agregado

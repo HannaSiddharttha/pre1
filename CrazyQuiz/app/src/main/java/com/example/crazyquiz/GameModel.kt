@@ -189,19 +189,19 @@ class GameModel : ViewModel() {
         while (!buttonFound) {
             var randomNumber = rand(1,4)
             // si reviso la primera respuesta, y no esta bloqueada y NO ES LA RESPUESTA CORRECTA
-            if(randomNumber == 1 && !currentQuestion.selectedQuestion.answer1Locked && randomNumber != currentQuestion.question.correcta) {
+            if(randomNumber == 1 && !currentQuestion.selectedQuestion.answer1Locked && !currentQuestion.selectedQuestion.answer1.equals(currentQuestion.question.answer1)) {
                 currentQuestion.selectedQuestion.answer1Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 2 && !currentQuestion.selectedQuestion.answer2Locked && randomNumber != currentQuestion.question.correcta) {
+            if(randomNumber == 2 && !currentQuestion.selectedQuestion.answer2Locked && !currentQuestion.selectedQuestion.answer2.equals(currentQuestion.question.answer1)) {
                 currentQuestion.selectedQuestion.answer2Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 3 && !currentQuestion.selectedQuestion.answer3Locked && randomNumber != currentQuestion.question.correcta) {
+            if(randomNumber == 3 && !currentQuestion.selectedQuestion.answer3Locked && !currentQuestion.selectedQuestion.answer3.equals(currentQuestion.question.answer1)) {
                 currentQuestion.selectedQuestion.answer3Locked = true
                 buttonFound = true
             }
-            if(randomNumber == 4 && !currentQuestion.selectedQuestion.answer4Locked && randomNumber != currentQuestion.question.correcta) {
+            if(randomNumber == 4 && !currentQuestion.selectedQuestion.answer4Locked && !currentQuestion.selectedQuestion.answer4.equals(currentQuestion.question.answer1)) {
                 currentQuestion.selectedQuestion.answer4Locked = true
                 buttonFound = true
             }

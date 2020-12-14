@@ -72,18 +72,18 @@ class MainActivity : AppCompatActivity() {
                     this, "Deseas cerrar sesion?", Toast.LENGTH_LONG
                 ).show()
             }
-            button_options.setOnClickListener { View ->
-                val intent = Intent(this, OptionsActivity::class.java)
-                startActivity(intent)
-            }
-            button_juego.setOnClickListener { View ->
-                val intent = Intent(this, QuestionActivity::class.java)
-                startActivity(intent)
-            }
-            button_puntaje.setOnClickListener { View ->
-                val intent = Intent(this, PuntuacionesPerfilActivity::class.java)
-                startActivity(intent)
-            }
+        }
+        button_options.setOnClickListener { View ->
+            val intent = Intent(this, OptionsActivity::class.java)
+            startActivity(intent)
+        }
+        button_juego.setOnClickListener { View ->
+            val intent = Intent(this, QuestionActivity::class.java)
+            startActivity(intent)
+        }
+        button_puntaje.setOnClickListener { View ->
+            val intent = Intent(this, PuntuacionesPerfilActivity::class.java)
+            startActivity(intent)
         }
     }
 }
