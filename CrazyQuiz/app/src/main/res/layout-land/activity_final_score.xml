@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/acti_finalscore"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".FinalScoreActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="308dp"
+        android:layout_height="259dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:paddingBottom="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/GatoImageView"
+            android:layout_width="248dp"
+            android:layout_height="75dp"
+            app:srcCompat="@drawable/happy1" />
+
+        <TextView
+            android:id="@+id/idScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="Score"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/idPuntos"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="100 pts"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="317dp"
+        android:layout_height="242dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <Button
+            android:id="@+id/idMenuPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginVertical="100dp"
+            android:background="@drawable/custom_button"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="Menu Principal"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
