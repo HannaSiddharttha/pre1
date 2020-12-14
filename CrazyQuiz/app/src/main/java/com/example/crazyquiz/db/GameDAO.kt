@@ -11,7 +11,7 @@ interface GameDao {
     fun getAll(): LiveData<List<Game>>
 
     @Query("Select * from games where userId = :userId")
-    fun getByUser(userId: Int): LiveData<List<Game>>
+    fun getByUser(userId: Int): LiveData<List<GameWithSelectedQuestions>>
 
     @Query("Select * from games where userId = :userId and isActive order by gameId desc limit 1")
     fun getActiveByUser(userId: Int): LiveData<GameWithSelectedQuestions>

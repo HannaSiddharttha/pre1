@@ -112,8 +112,8 @@ class QuizRepository(application: Application) {
         return usersDao?.getAll() ?: MutableLiveData<List<Users>>()
     }
 
-    fun getGamesByUser(userId: Int) : LiveData<List<Game>> {
-        return gameDao?.getByUser(userId) ?: MutableLiveData<List<Game>>()
+    fun getGamesByUser(userId: Int) : LiveData<List<GameWithSelectedQuestions>> {
+        return gameDao?.getByUser(userId) ?: MutableLiveData<List<GameWithSelectedQuestions>>()
     }
 
     fun getActiveGameByUser(userId: Int) : LiveData<GameWithSelectedQuestions> {

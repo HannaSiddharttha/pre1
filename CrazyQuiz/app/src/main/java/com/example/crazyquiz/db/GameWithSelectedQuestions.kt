@@ -11,5 +11,11 @@ data class GameWithSelectedQuestions(
         parentColumn = "gameId",
         entityColumn = "gameId"
     )
-    var selectedQuestions: List<SelectedQuestionAndQuestion>
+    var selectedQuestions: List<SelectedQuestionAndQuestion>,
+    @Relation(
+        entity = Users::class,
+        parentColumn = "userId",
+        entityColumn = "userId"
+    )
+    var user: Users,
 )

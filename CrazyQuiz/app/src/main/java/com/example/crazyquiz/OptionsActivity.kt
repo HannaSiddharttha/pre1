@@ -143,7 +143,6 @@ class OptionsActivity : AppCompatActivity() {
 
         //settings = Settings(true, false, false, false, false, false, false, "6", 2, false, "2")
         var savedUser = ModelPreferencesManager.get<Users>("USER")
-
         if(savedUser != null) {
             user = savedUser
         }
