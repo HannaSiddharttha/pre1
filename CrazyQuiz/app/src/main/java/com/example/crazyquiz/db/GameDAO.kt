@@ -8,21 +8,30 @@ import java.util.*
 interface GameDao {
 
     @Query("Select * from games")
-    fun getAll(): LiveData<List<Question>>
+    fun getAll(): LiveData<List<Game>>
 
     @Query("Select * from games where userId = :userId")
-    fun getByUser(userId: Int): Question
+    fun getByUser(userId: Int): LiveData<List<Game>>
+
+    @Query("Select * from games where userId = :userId and isActive order by gameId desc limit 1")
+    fun getActiveByUser(userId: Int): LiveData<GameWithSelectedQuestions>
 
     @Query("Select * from games where date = :date")
-    fun getByDate(date: Date): Question
+    fun getByDate(date: Date): LiveData<List<Game>>
+
+    @Query("Select * from games where gameId = :gameId")
+    fun getById(gameId: Int): LiveData<Game>
+
+    //@Query("Select selectedQuestions.* from games, selectedquestions where date = :date")
+    //fun getWithSelectedQuestions(gameId: Int): Game
 
     @Update
-    fun update(users: Users)
+    fun update(game: Game)
 
     @Insert
-    fun insert(question: Question)
+    fun insert(game: Game)
     //fun insert(people: List<Users>)
 
     @Delete
-    fun delete(question: Question)
+    fun delete(game: Game)
 }

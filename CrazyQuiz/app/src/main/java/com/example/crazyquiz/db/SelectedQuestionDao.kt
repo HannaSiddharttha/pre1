@@ -1,15 +1,26 @@
 package com.example.crazyquiz.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface SelectedQuestionDao {
 
-    @Query("Select * from questions")
+    @Query("Select * from selectedQuestions")
     fun getAll(): LiveData<List<SelectedQuestion>>
 
+    @Query("Select * from selectedQuestions where gameId = :gameId")
+    fun getByGameId(gameId: Int): LiveData<List<SelectedQuestion>>
+
+    @Update
+    fun update(selectedQuestion: SelectedQuestion)
+
+    @Insert
+    fun insert(selectedQuestion: SelectedQuestion)
+    // fun insert(questions: List<SelectedQuestion>)
+
+    @Delete
+    fun delete(selectedQuestion: SelectedQuestion)
 
 
 }

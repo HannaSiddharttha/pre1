@@ -115,11 +115,6 @@ class LoginActivity : AppCompatActivity() {
                 val observer = Observer<Users> { user ->
                     loading.visibility = View.GONE
                     if (user != null) {
-                       Toast.makeText(
-                           this_,
-                           "Usuario encontrado",
-                           Toast.LENGTH_SHORT
-                       ).show()
                         ModelPreferencesManager.put(user, "USER")
                         val intent = Intent(this_, MainActivity::class.java)
                         startActivity(intent)

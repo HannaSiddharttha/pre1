@@ -45,11 +45,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,PuntuacionesPerfilActivity::class.java)
             startActivity(intent)
         }
-
-
-
-        }
-
-
     }
+}
 
