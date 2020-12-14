@@ -1,10 +1,21 @@
 package com.example.crazyquiz.db
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 
-@Entity(tableName = "selectedQuestions")
+@Entity(
+    tableName = "selectedQuestions",
+    foreignKeys = [
+        ForeignKey(
+            entity = Game::class,
+            parentColumns = ["gameId"],
+            childColumns = ["gameId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 
 data class SelectedQuestion (
     @PrimaryKey(autoGenerate = true)

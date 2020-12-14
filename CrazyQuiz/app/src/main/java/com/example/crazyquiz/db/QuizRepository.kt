@@ -64,6 +64,19 @@ class QuizRepository(application: Application) {
         }
     }
 
+    fun deleteGame(game: Game) {
+        if (gameDao != null) DeleteGameAsyncTask(gameDao).execute(game)
+    }
+    private class DeleteGameAsyncTask(private val gameDao: GameDao) :
+        AsyncTask<Game, Void, Void>() {
+        override fun doInBackground(vararg games: Game?): Void? {
+            for (game in games) {
+                if (game != null) gameDao.delete(game)
+            }
+            return null
+        }
+    }
+
 
     fun insertSelectedQuestion(selectedQuestion: SelectedQuestion) {
         if (selectedQuestionDao != null) InsertSelectedQuestionAsyncTask(selectedQuestionDao).execute(selectedQuestion)

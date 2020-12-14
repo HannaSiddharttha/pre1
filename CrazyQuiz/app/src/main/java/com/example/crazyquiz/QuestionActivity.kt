@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -32,6 +33,7 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var PuntuacionTotal: TextView
     private lateinit var numPistas: Button
     private lateinit var repository: QuizRepository
+    private var alertShowed: Boolean = false
 
 
     private val model: GameModel by viewModels()
@@ -69,23 +71,38 @@ class QuestionActivity : AppCompatActivity() {
                 var currentGame = repository.getActiveGameByUser(model.user.userId)
                 val observer2 = Observer<GameWithSelectedQuestions> { game ->
                     if (game != null) {
-                        model.game = game.game
-                        if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
-                            model.selectedQuestions = game.selectedQuestions.toMutableList()
-                        }
-                        refreshGameQuestions(game)
-                        /*
-                        if(game.selectedQuestions.isEmpty()) {
-                            model.filterQuestions()
-                            for(selectedQuestion in model.selectedQuestions) {
-                                //selectedQuestion.gameId = newGame.
-                                selectedQuestion.selectedQuestion.gameId = model.game.gameId
-                                repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                        if(!alertShowed) {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setMessage("Se detectó una partida, deseas continuarla?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes") { dialog, id ->
+                                    model.game = game.game
+                                    if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                        model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                    }
+                                    refreshGameQuestions(game)
+                                }
+                                .setNegativeButton("No") { dialog, id ->
+                                    repository.deleteGame(game.game)
+                                    newGameProcess()
+                                }
+                            val alert = builder.create()
+                            alert.show()
+                            alertShowed = true
+                        } else {
+                            model.game = game.game
+                            if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                                model.selectedQuestions = game.selectedQuestions.toMutableList()
                             }
+                            refreshGameQuestions(game)
                         }
-                        loadQuestion()
-                        */
+
+
+
                     } else {
+                        alertShowed = true
+                        newGameProcess()
+                        /*
                         repository.insertGame(Game(0,model.user.userId,true,0, Date()))
                         // obtener juego recien agregado
                         var currentGame = repository.getActiveGameByUser(model.user.userId)
@@ -96,21 +113,10 @@ class QuestionActivity : AppCompatActivity() {
                                     model.selectedQuestions = game.selectedQuestions.toMutableList()
                                 }
                                 refreshGameQuestions(game)
-                                /*
-                                if(game.selectedQuestions.isEmpty()) {
-                                    model.filterQuestions()
-                                    for(selectedQuestion in model.selectedQuestions) {
-                                        //selectedQuestion.gameId = newGame.
-                                        selectedQuestion.selectedQuestion.gameId = model.game.gameId
-                                        repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
-                                    }
-                                }
-                                // se pone la primera pregunta
-                                loadQuestion()
-                                */
                             }
                         }
                         currentGame.observe(this, observer3)
+                        */
                     }
                 }
                 currentGame.observe(this, observer2)
@@ -177,6 +183,24 @@ class QuestionActivity : AppCompatActivity() {
         Opcion4.setOnClickListener { view: View ->
             optionEvent(4)
         }
+    }
+
+    fun newGameProcess() {
+        repository.insertGame(Game(0,model.user.userId,true,0, Date()))
+        // obtener juego recien agregado
+        var currentGame = repository.getActiveGameByUser(model.user.userId)
+
+        val observer3 = Observer<GameWithSelectedQuestions> { game ->
+            if(game != null) {
+                model.game = game.game
+                if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
+                    model.selectedQuestions = game.selectedQuestions.toMutableList()
+                }
+                refreshGameQuestions(game)
+            }
+        }
+        currentGame.observe(this, observer3)
+
     }
 
     fun refreshGameQuestions(game: GameWithSelectedQuestions) {
@@ -335,5 +359,20 @@ class QuestionActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Desea salir del juego?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                super.onBackPressed()
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }
