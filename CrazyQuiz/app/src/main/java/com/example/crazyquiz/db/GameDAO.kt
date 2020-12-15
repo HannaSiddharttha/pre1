@@ -25,6 +25,9 @@ interface GameDao {
     //@Query("Select selectedQuestions.* from games, selectedquestions where date = :date")
     //fun getWithSelectedQuestions(gameId: Int): Game
 
+    @Query ("Select * from games where not isActive  order by score desc limit 5")
+    fun getTopFive(): LiveData<List<GameWithSelectedQuestions>>
+
     @Update
     fun update(game: Game)
 

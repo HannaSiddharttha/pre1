@@ -196,7 +196,7 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
-    fun newGameProcess() {
+    fun newGameProcess() {  //proceso del juego *
         repository.insertGame(Game(0,model.user.userId,true,0, Date()))
         // obtener juego recien agregado
         var currentGame = repository.getActiveGameByUser(model.user.userId)

@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Query
 import java.util.*
 
 class QuizRepository(application: Application) {
@@ -104,6 +105,7 @@ class QuizRepository(application: Application) {
         }
     }
 
+
     fun getUserByEmailPassword(email: String, password: String): LiveData<Users> {
         return usersDao?.getByEmailPassword(email, password) ?: MutableLiveData<Users>()
     }
@@ -118,6 +120,10 @@ class QuizRepository(application: Application) {
 
     fun getActiveGameByUser(userId: Int) : LiveData<GameWithSelectedQuestions> {
         return gameDao?.getActiveByUser(userId) ?: MutableLiveData<GameWithSelectedQuestions>()
+    }
+
+    fun getTopFive(): LiveData<List<GameWithSelectedQuestions>>{
+        return gameDao?.getTopFive() ?: MutableLiveData<List<GameWithSelectedQuestions>>()
     }
 
     fun getGamesByDate(date: Date) : LiveData<List<Game>> {
