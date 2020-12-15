@@ -16,7 +16,7 @@ interface SelectedQuestionDao {
     fun update(selectedQuestion: SelectedQuestion)
 
     @Insert
-    fun insert(selectedQuestion: SelectedQuestion)
+    fun insert(selectedQuestion: SelectedQuestion) : Long
     // fun insert(questions: List<SelectedQuestion>)
 
     @Delete

@@ -13,6 +13,8 @@ class QuizRepository(application: Application) {
     private val selectedQuestionDao: SelectedQuestionDao? = AppDatabase.getInstance(application)?.SelectedQuestionDao()
     private val gameDao: GameDao? = AppDatabase.getInstance(application)?.GameDao()
 
+    private val result_id: Long = 0
+
     fun insertUser(user: Users) {
         if (usersDao != null) InsertUserAsyncTask(usersDao).execute(user)
     }
@@ -79,14 +81,22 @@ class QuizRepository(application: Application) {
     }
 
 
-    fun insertSelectedQuestion(selectedQuestion: SelectedQuestion) {
-        if (selectedQuestionDao != null) InsertSelectedQuestionAsyncTask(selectedQuestionDao).execute(selectedQuestion)
+    fun insertSelectedQuestion(selectedQuestion: SelectedQuestion) : Long {
+        /*
+        return Single.fromCallable(
+            Callable<Long> { studentDao.insertStudent(student) }
+        )
+        */
+//        var id: Long
+//        if (selectedQuestionDao != null) InsertSelectedQuestionAsyncTask(selectedQuestionDao).execute(selectedQuestion,null,id)
+        if (selectedQuestionDao != null) return selectedQuestionDao.insert(selectedQuestion)
+        return 0
     }
     private class InsertSelectedQuestionAsyncTask(private val selectedQuestionDao: SelectedQuestionDao) :
-        AsyncTask<SelectedQuestion, Void, Void>() {
-        override fun doInBackground(vararg selectedQuestions: SelectedQuestion?): Void? {
+        AsyncTask<SelectedQuestion, Void, Long>() {
+        override fun doInBackground(vararg selectedQuestions: SelectedQuestion?): Long? {
             for (selectedQuestion in selectedQuestions) {
-                if (selectedQuestion != null) selectedQuestionDao.insert(selectedQuestion)
+                if (selectedQuestion != null) return selectedQuestionDao.insert(selectedQuestion)
             }
             return null
         }

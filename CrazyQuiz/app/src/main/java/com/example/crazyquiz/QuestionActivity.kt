@@ -80,8 +80,9 @@ class QuestionActivity : AppCompatActivity() {
                                     model.currentIndex = game.game.currentQuestion - 1
                                     if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
                                         model.selectedQuestions = game.selectedQuestions.toMutableList()
-                                        PuntuacionTotal.text = "${model.totalPuntos()} pts"
                                     }
+                                    PuntuacionTotal.text = "${model.totalPuntos()} pts"
+                                    numPistas.setText("Pistas: ${model.game.numPistas}")
                                     refreshGameQuestions(game)
                                 }
                                 .setNegativeButton("No") { dialog, id ->
@@ -96,38 +97,19 @@ class QuestionActivity : AppCompatActivity() {
                             model.currentIndex = game.game.currentQuestion - 1
                             if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
                                 model.selectedQuestions = game.selectedQuestions.toMutableList()
-                                PuntuacionTotal.text = "${model.totalPuntos()} pts"
+                                //PuntuacionTotal.text = "${model.totalPuntos()} pts"
+                                //numPistas.setText("Pistas: ${model.game.numPistas}")
                             }
                             refreshGameQuestions(game)
                         }
-
-
-
                     } else {
                         if(!alertShowed) {
                             alertShowed = true
                             newGameProcess()
                         }
-
-                        /*
-                        repository.insertGame(Game(0,model.user.userId,true,0, Date()))
-                        // obtener juego recien agregado
-                        var currentGame = repository.getActiveGameByUser(model.user.userId)
-                        val observer3 = Observer<GameWithSelectedQuestions> { game ->
-                            if(game != null) {
-                                model.game = game.game
-                                if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
-                                    model.selectedQuestions = game.selectedQuestions.toMutableList()
-                                }
-                                refreshGameQuestions(game)
-                            }
-                        }
-                        currentGame.observe(this, observer3)
-                        */
                     }
                 }
                 currentGame.observe(this, observer2)
-
 
             } else {
                 makeText(
@@ -175,6 +157,8 @@ class QuestionActivity : AppCompatActivity() {
             // si no esta respondida, te quedan pistas y hay al menos 2 botones sin bloquear continúa
             if(!model.currentQuestion.isAnswered() && model.user.numPistas > 0 && model.notLockedButtons() >= 2) {
                 model.user.numPistas--
+                model.game.numPistas = model.user.numPistas
+                repository.updateGame(model.game)
                 model.blockButton()
                 loadQuestion()
                 numPistas.setText("Pistas: ${model.user.numPistas}")
@@ -221,7 +205,8 @@ class QuestionActivity : AppCompatActivity() {
             for(selectedQuestion in model.selectedQuestions) {
                 //selectedQuestion.gameId = newGame.
                 selectedQuestion.selectedQuestion.gameId = model.game.gameId
-                repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                var selectedId = repository.insertSelectedQuestion(selectedQuestion.selectedQuestion)
+                selectedQuestion.selectedQuestion.selectedQuestionId = selectedId.toInt();
             }
             game.selectedQuestions = model.selectedQuestions
         }
@@ -239,6 +224,7 @@ class QuestionActivity : AppCompatActivity() {
         } else {
             // se selecciono la opcion
             model.currentQuestion.selectedQuestion.answer = selectedOption
+
             repository.updateSelectedQuestion(model.currentQuestion.selectedQuestion)
 
             // mensaje si la respuesta fue correcta o no
