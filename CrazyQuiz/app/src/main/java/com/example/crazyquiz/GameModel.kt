@@ -104,7 +104,7 @@ class GameModel : ViewModel() {
     var numberOfGoodAnswers: Int = 0
     //var puntuacion_actual: Int =  0
 
-    private var currentIndex = 0
+    public var currentIndex = 0
 
     val currentQuestion: SelectedQuestionAndQuestion
         get() = selectedQuestions[currentIndex]

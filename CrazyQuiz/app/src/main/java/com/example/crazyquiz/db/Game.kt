@@ -14,4 +14,6 @@ data class Game (
     var isActive: Boolean,
     var score: Int,
     var date: Date,
+    var currentQuestion: Int = 1,
+    var numPistas: Int = 3
 )

@@ -77,8 +77,10 @@ class QuestionActivity : AppCompatActivity() {
                                 .setCancelable(false)
                                 .setPositiveButton("Yes") { dialog, id ->
                                     model.game = game.game
+                                    model.currentIndex = game.game.currentQuestion - 1
                                     if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
                                         model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                        PuntuacionTotal.text = "${model.totalPuntos()} pts"
                                     }
                                     refreshGameQuestions(game)
                                 }
@@ -91,8 +93,10 @@ class QuestionActivity : AppCompatActivity() {
                             alertShowed = true
                         } else {
                             model.game = game.game
+                            model.currentIndex = game.game.currentQuestion - 1
                             if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
                                 model.selectedQuestions = game.selectedQuestions.toMutableList()
+                                PuntuacionTotal.text = "${model.totalPuntos()} pts"
                             }
                             refreshGameQuestions(game)
                         }
@@ -157,10 +161,14 @@ class QuestionActivity : AppCompatActivity() {
 
         prevButton.setOnClickListener { view: View ->
             model.prevQuestion()
+            model.game.currentQuestion = model.currentQuestionNumber
+            repository.updateGame(model.game)
             loadQuestion()
         }
         nextButton.setOnClickListener { view: View ->
             model.nextQuestion()
+            model.game.currentQuestion = model.currentQuestionNumber
+            repository.updateGame(model.game)
             loadQuestion()
         }
         numPistas.setOnClickListener { view: View ->
@@ -196,6 +204,7 @@ class QuestionActivity : AppCompatActivity() {
         val observer3 = Observer<GameWithSelectedQuestions> { game ->
             if(game != null) {
                 model.game = game.game
+                model.game.numPistas = model.user.numPistas
                 if(model.selectedQuestions.isEmpty() && !game.selectedQuestions.isEmpty()) {
                     model.selectedQuestions = game.selectedQuestions.toMutableList()
                 }
@@ -271,6 +280,8 @@ class QuestionActivity : AppCompatActivity() {
                 //}
 
             } else {
+                model.game.score = model.totalPuntos()
+                repository.updateGame(model.game)
                 PuntuacionTotal.text = "${model.totalPuntos()} pts"
             }
 
