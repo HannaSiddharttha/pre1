@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.crazyquiz.ui.login.LoginActivity
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ModelPreferencesManager.with(this.application)
 
         //Para poder mostrar la bd en Chrome.
         Stetho.initializeWithDefaults(this)
@@ -72,10 +74,12 @@ class MainActivity : AppCompatActivity() {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Desea cerrar sesión?")
                     .setCancelable(false)
-                    .setPositiveButton("Yes") { dialog, id ->
-                        super.onBackPressed()
+                    .setPositiveButton("SI") { dialog, id ->
+                        ModelPreferencesManager.delete("USER")
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
                     }
-                    .setNegativeButton("No") { dialog, id ->
+                    .setNegativeButton("NO") { dialog, id ->
                         dialog.dismiss()
                     }
                 val alert = builder.create()

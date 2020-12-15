@@ -36,6 +36,12 @@ object ModelPreferencesManager {
         preferences.edit().putString(key, jsonString).apply()
     }
 
+    fun delete(key: String) {
+        preferences.edit().remove(key).commit();
+    }
+
+
+
     /**
      * Used to retrieve object from the Preferences.
      *
