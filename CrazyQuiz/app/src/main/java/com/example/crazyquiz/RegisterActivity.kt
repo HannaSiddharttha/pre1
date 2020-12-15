@@ -3,6 +3,7 @@ package com.example.crazyquiz
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -48,37 +49,41 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
         }
         buttonregistrar2.setOnClickListener {
-            /*
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            */
+
             var user = Users(0,editTextTextPersonName.text.toString() ,editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString(), true, false , false, false, false, false,false, "10", 3, true,3)
-            repository.insertUser(user)
-            Toast.makeText(
-                this,
-                 "Se ha registrado Correctamente",
-                Toast.LENGTH_SHORT
-            ).show()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            /*   var users = repository.getUsers()
-               val observer = Observer<List<Users>> { users ->
-                   if (users != null) {
-                       var text = ""
-                       for (user in users) {
-   //                        text += contact.lastName + " " + contact.firstName + " - " + contact.phoneNumber + "\n"
-                       }
-   //                    contacts_textView.text = text
-                   }
-               }
-               users.observe(this, observer)
-   //            for (us in users) {
-   //
-   //            }*/
-            Log.d("TAG", "hola")
+            var error: Boolean = false
 
+            if(!user.userEmail.isEmailValid()) {
+                Toast.makeText(
+                    this,
+                    "El formato de correo no es válido",
+                    Toast.LENGTH_SHORT
+                ).show()
+                error = true
+            }
+            if(user.userPassword.length < 6) {
+                Toast.makeText(
+                    this,
+                    "La contraseña debe ser mayor a 6 caracteres",
+                    Toast.LENGTH_SHORT
+                ).show()
+                error = true
+            }
 
+            if(!error) {
+                repository.insertUser(user)
+                Toast.makeText(
+                    this,
+                    "Se ha registrado Correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
+    }
+    fun String.isEmailValid(): Boolean {
+        return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
     }
 
 }

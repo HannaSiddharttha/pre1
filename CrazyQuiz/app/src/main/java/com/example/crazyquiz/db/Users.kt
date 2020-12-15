@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 data class Users(
     @PrimaryKey(autoGenerate = true)
     val userId: Int,
-    val userName: String,
-    val userEmail: String,
-    val userPassword: String,
+    var userName: String,
+    var userEmail: String,
+    var userPassword: String,
     var allThemes: Boolean,
     var harryPotter: Boolean,
     var catReptiles: Boolean,
