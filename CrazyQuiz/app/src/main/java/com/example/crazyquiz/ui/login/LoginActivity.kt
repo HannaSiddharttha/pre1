@@ -36,12 +36,13 @@ class LoginActivity : AppCompatActivity() {
         application_ = this.application
         repository = QuizRepository(application_)
         ModelPreferencesManager.with(application_)
-
+        /*
         var user = ModelPreferencesManager.get<Users>("USER")
         if(user != null) {
             val intent = Intent(this_, MainActivity::class.java)
             startActivity(intent)
         }
+        */
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)

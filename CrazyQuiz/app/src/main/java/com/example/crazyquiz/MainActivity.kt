@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -68,9 +69,17 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             button_exit.setOnClickListener { View ->
-                Toast.makeText(
-                    this, "Deseas cerrar sesion?", Toast.LENGTH_LONG
-                ).show()
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Desea cerrar sesión?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        super.onBackPressed()
+                    }
+                    .setNegativeButton("No") { dialog, id ->
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
         }
         button_options.setOnClickListener { View ->
