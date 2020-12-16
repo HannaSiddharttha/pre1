@@ -11,14 +11,14 @@ data class UserWithGames(
         parentColumn = "userId",
         entityColumn = "userId"
     )
-    var games: List<Game>,
+    var games: List<GameWithSelectedQuestions>,
 ) {
     val globalScore: Int
     get() {
         var total : Int = 0
         for (game in games) {
-            if(!game.isActive && game.score > 0) {
-                total = total + game.score
+            if(!game.game.isActive && game.game.score > 0) {
+                total = total + game.game.score
             }
         }
         return total;
@@ -29,7 +29,7 @@ data class UserWithGames(
         if(games.isEmpty()) {
             return null
         }
-        return games.last().date
+        return games.last().game.date
     }
 
 }

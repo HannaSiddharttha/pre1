@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crazyquiz.db.*
 import com.example.crazyquiz.modelo.Puntuaciones
+import com.example.crazyquiz.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_puntuaciones_perfil.*
 
 class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntajeClickListener {
@@ -95,6 +97,20 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
     }
 
     override fun onItemClick(user: UserWithGames) {
+        var message: String = "";
+        var cont: Int = 1
+        for(game in user.games) {
+            message += "P$cont: score ${game.game.score}, pistas: ${game.pistasUsadas} \n"
+            cont++
+        }
+
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton("OK") { dialog, id ->
+            }
+        val alert = builder.create()
+        alert.show()
         Toast.makeText(this,"Info: ${user.globalScore} ${user.lastDate}", Toast.LENGTH_SHORT).show()
     }
 }
