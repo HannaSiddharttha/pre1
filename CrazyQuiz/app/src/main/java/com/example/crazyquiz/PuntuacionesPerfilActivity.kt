@@ -10,10 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crazyquiz.db.GameWithSelectedQuestions
-import com.example.crazyquiz.db.QuizRepository
-import com.example.crazyquiz.db.SelectedQuestionAndQuestion
-import com.example.crazyquiz.db.Users
+import com.example.crazyquiz.db.*
 import com.example.crazyquiz.modelo.Puntuaciones
 import kotlinx.android.synthetic.main.activity_puntuaciones_perfil.*
 
@@ -65,35 +62,16 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
 
 
         val listPuntaje = mutableListOf<Puntuaciones>()
-        var games = repository.getGamesByUser(user.userId);
+        var users = repository.getUsers();
 
 //        var currentGame = repository.getActiveGameByUser(model.user.userId)
-        val observer = Observer<List<GameWithSelectedQuestions>> { games ->
-            for(game in games) {
-                listPuntaje.add(Puntuaciones(game.user.userName,"https://www.tierragamer.com/wp-content/uploads/2019/08/One-Piece-Monkey-D-Luffy-Cosplay-Gato.jpg",game))
+        val observer = Observer<List<UserWithGames>> { users ->
+            for(user in users) {
+                listPuntaje.add(Puntuaciones(user.user.userName,"https://www.tierragamer.com/wp-content/uploads/2019/08/One-Piece-Monkey-D-Luffy-Cosplay-Gato.jpg",user))
             }
             recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
         }
-        games.observe(this, observer)
-
-        /*
-        val listPuntaje: List<Puntuaciones> = listOf(
-            Puntuaciones(
-                "Chirimole",
-                "https://www.tierragamer.com/wp-content/uploads/2019/08/One-Piece-Monkey-D-Luffy-Cosplay-Gato.jpg"
-            ),
-            Puntuaciones(
-                "Flerky",
-                "https://i.pinimg.com/originals/cc/c6/da/ccc6da24c9cf69967fd65061433af9ed.jpg"
-            ),
-            Puntuaciones(
-                "Bola",
-                "https://i.pinimg.com/originals/65/37/49/65374935e22d777a2d0696466900cead.png"
-            )
-        )
-        */
-
-        //recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
+        users.observe(this, observer)
     }
 
     override fun onImageClick(imagen: String) {
@@ -103,8 +81,8 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
 
     }
 
-    override fun onItemClick(game: GameWithSelectedQuestions) {
-        Toast.makeText(this,"Este perfil es de: ${game.game.score} ${game.game.date}", Toast.LENGTH_SHORT).show()
+    override fun onItemClick(user: UserWithGames) {
+        Toast.makeText(this,"Info: ${user.globalScore()} ${user.lastDate()}", Toast.LENGTH_SHORT).show()
     }
 }
 

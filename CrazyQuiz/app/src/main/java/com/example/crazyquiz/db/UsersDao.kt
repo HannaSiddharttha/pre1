@@ -8,7 +8,7 @@ import com.example.crazyquiz.db.Users
 interface UsersDao {
 
     @Query("Select * from Users")
-     fun getAll(): LiveData<List<Users>>
+     fun getAll(): LiveData<List<UserWithGames>>
 
     @Query("Select * from Users where userEmail = :email and userPassword = :password")
     fun getByEmailPassword(email: String, password: String) : LiveData<Users>

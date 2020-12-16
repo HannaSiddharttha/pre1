@@ -120,8 +120,8 @@ class QuizRepository(application: Application) {
         return usersDao?.getByEmailPassword(email, password) ?: MutableLiveData<Users>()
     }
 
-    fun getUsers(): LiveData<List<Users>> {
-        return usersDao?.getAll() ?: MutableLiveData<List<Users>>()
+    fun getUsers(): LiveData<List<UserWithGames>> {
+        return usersDao?.getAll() ?: MutableLiveData<List<UserWithGames>>()
     }
 
     fun getGamesByUser(userId: Int) : LiveData<List<GameWithSelectedQuestions>> {
