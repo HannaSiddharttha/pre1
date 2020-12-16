@@ -123,7 +123,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="132dp"
-        android:src="@drawable/ic_baseline_exit_to_app_24"
+        android:src="@drawable/ic_baseline_delete_forever_24"
         android:visibility="invisible"
         app:backgroundTint="@color/verde"
         app:elevation="6dp"
