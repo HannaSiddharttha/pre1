@@ -13,7 +13,6 @@ class InicioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_inicio)
         ModelPreferencesManager.with(this.application)
 
-        Thread.sleep(1000)
 
         var user = ModelPreferencesManager.get<Users>("USER")
         if(user != null) {
