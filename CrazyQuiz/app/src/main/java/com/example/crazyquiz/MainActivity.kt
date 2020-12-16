@@ -51,16 +51,19 @@ class MainActivity : AppCompatActivity() {
             if (isOpen) {
                 edit_button.startAnimation(fabClosed)
                 button_exit.startAnimation(fabClosed)
+                button_delete.startAnimation(fabClosed)
                 fab_button.startAnimation(fabRAntiClockwise)
 
                 isOpen = false
             } else {
                 edit_button.startAnimation(fabOpen)
                 button_exit.startAnimation(fabOpen)
+                button_delete.startAnimation(fabOpen)
                 fab_button.startAnimation(fabRClockwise)
 
                 edit_button.isClickable
                 button_exit.isClickable
+                button_delete.isClickable
 
 
 
@@ -80,6 +83,19 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     .setNegativeButton("NO") { dialog, id ->
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
+            }
+            button_delete.setOnClickListener { View ->
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Desea eliminar este perfil?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        super.onBackPressed()
+                    }
+                    .setNegativeButton("No") { dialog, id ->
                         dialog.dismiss()
                     }
                 val alert = builder.create()
