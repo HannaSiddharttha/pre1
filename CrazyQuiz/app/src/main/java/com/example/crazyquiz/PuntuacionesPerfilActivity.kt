@@ -15,11 +15,14 @@ import com.example.crazyquiz.modelo.Puntuaciones
 import kotlinx.android.synthetic.main.activity_puntuaciones_perfil.*
 
 class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntajeClickListener {
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var repository: QuizRepository
-    private  lateinit var user: Users
+    private lateinit var user: Users
+    private lateinit var listPuntaje: MutableList<Puntuaciones>
+    //private lateinit var listPuntaje:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
         setSupportActionBar(findViewById(R.id.toolbar))
         repository = QuizRepository(this.application)
         recyclerView = findViewById(R.id.reciclerview)
+        listPuntaje = mutableListOf<Puntuaciones>()
 
         var savedUser = ModelPreferencesManager.get<Users>("USER")
         if(savedUser != null) {
@@ -46,10 +50,22 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
         return true
     }
 
+    fun orderByDate() {
+        listPuntaje.sortByDescending { it.user.lastDate }
+        recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
+        Toast.makeText(this, "fecha", Toast.LENGTH_SHORT).show()
+    }
+
+    fun orderByScore() {
+        listPuntaje.sortByDescending { it.user.globalScore }
+        recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
+        Toast.makeText(this, "puntaje", Toast.LENGTH_SHORT).show()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.date_menu_item,
-            R.id.points_menu_item, -> showItemToast(item.title.toString())
+            R.id.date_menu_item, -> orderByDate()
+            R.id.points_menu_item, -> orderByScore()
             else -> super.onOptionsItemSelected(item)
 
         }
@@ -60,8 +76,6 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
         reciclerview.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration((DividerItemDecoration(this,DividerItemDecoration.VERTICAL)))
 
-
-        val listPuntaje = mutableListOf<Puntuaciones>()
         var users = repository.getUsers();
 
 //        var currentGame = repository.getActiveGameByUser(model.user.userId)
@@ -82,7 +96,7 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
     }
 
     override fun onItemClick(user: UserWithGames) {
-        Toast.makeText(this,"Info: ${user.globalScore()} ${user.lastDate()}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Info: ${user.globalScore} ${user.lastDate}", Toast.LENGTH_SHORT).show()
     }
 }
 

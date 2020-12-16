@@ -38,9 +38,9 @@ class RecyclerAdapter (private val context: Context, val listaPuntaje:List<Puntu
         override fun bind(item: Puntuaciones, position: Int) {
             itemView.setOnClickListener{itemClickListener.onItemClick(item.user)}
             itemView.img_perfil.setOnClickListener{itemClickListener.onImageClick(item.imagen)}
-            itemView.txt_puntaje.setText(item.user.globalScore().toString())
+            itemView.txt_puntaje.setText(item.user.globalScore.toString())
 
-            var lastDate: Date? = item.user.lastDate()
+            var lastDate: Date? = item.user.lastDate
 
             //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
 

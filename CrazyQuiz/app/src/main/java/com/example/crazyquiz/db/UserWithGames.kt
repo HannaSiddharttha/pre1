@@ -13,7 +13,8 @@ data class UserWithGames(
     )
     var games: List<Game>,
 ) {
-    fun globalScore(): Int {
+    val globalScore: Int
+    get() {
         var total : Int = 0
         for (game in games) {
             if(!game.isActive && game.score > 0) {
@@ -22,10 +23,13 @@ data class UserWithGames(
         }
         return total;
     }
-    fun lastDate(): Date? {
+
+    val lastDate: Date?
+    get() {
         if(games.isEmpty()) {
             return null
         }
         return games.last().date
     }
+
 }
