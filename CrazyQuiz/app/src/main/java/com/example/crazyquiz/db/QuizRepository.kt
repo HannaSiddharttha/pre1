@@ -80,6 +80,19 @@ class QuizRepository(application: Application) {
         }
     }
 
+    fun deleteUser(user: Users) {
+        if (usersDao != null) DeleteUserAsyncTask(usersDao).execute(user)
+    }
+    private class DeleteUserAsyncTask(private val usersDao: UsersDao) :
+        AsyncTask<Users, Void, Void>() {
+        override fun doInBackground(vararg users: Users?): Void? {
+            for (user in users) {
+                if (user != null) usersDao.delete(user)
+            }
+            return null
+        }
+    }
+
 
     fun insertSelectedQuestion(selectedQuestion: SelectedQuestion) : Long {
         /*

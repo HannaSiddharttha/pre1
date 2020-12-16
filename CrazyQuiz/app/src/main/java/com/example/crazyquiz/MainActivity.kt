@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.crazyquiz.db.QuizRepository
+import com.example.crazyquiz.db.Users
 import com.example.crazyquiz.ui.login.LoginActivity
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +26,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button_juego: Button
     private lateinit var button_options: Button
     private lateinit var button_puntaje: Button
+    private lateinit var user: Users
     var isOpen = false
+    private lateinit var repository: QuizRepository
 
     private val model: GameModel by viewModels()
 
@@ -33,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ModelPreferencesManager.with(this.application)
+        repository = QuizRepository(this.application)
 
         //Para poder mostrar la bd en Chrome.
         Stetho.initializeWithDefaults(this)
@@ -41,11 +46,15 @@ class MainActivity : AppCompatActivity() {
         val fabRClockwise = AnimationUtils.loadAnimation(this, R.anim.rotate_clockwise)
         val fabRAntiClockwise = AnimationUtils.loadAnimation(this, R.anim.rotate_anticlockwise)
 
-
-
         button_juego = findViewById(R.id.button_juego)
         button_options = findViewById(R.id.button_options)
         button_puntaje = findViewById(R.id.button_puntaje)
+
+        // obtiene los settings, si los encuentra los asigna a settings.
+        val savedUser = ModelPreferencesManager.get<Users>("USER")
+        if(savedUser != null) {
+            user = savedUser
+        }
 
         fab_button.setOnClickListener {
             if (isOpen) {
@@ -64,9 +73,6 @@ class MainActivity : AppCompatActivity() {
                 edit_button.isClickable
                 button_exit.isClickable
                 button_delete.isClickable
-
-
-
                 isOpen = true
             }
             edit_button.setOnClickListener { View ->
@@ -92,10 +98,12 @@ class MainActivity : AppCompatActivity() {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Desea eliminar este perfil?")
                     .setCancelable(false)
-                    .setPositiveButton("Yes") { dialog, id ->
-                        super.onBackPressed()
+                    .setPositiveButton("SI") { dialog, id ->
+                        repository.deleteUser(user);
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
                     }
-                    .setNegativeButton("No") { dialog, id ->
+                    .setNegativeButton("NO") { dialog, id ->
                         dialog.dismiss()
                     }
                 val alert = builder.create()

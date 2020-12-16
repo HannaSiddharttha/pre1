@@ -66,20 +66,25 @@ class FinalScoreActivity : AppCompatActivity() {
         var top = repository.getTopFive()
 
         val topObserver = Observer<List<GameWithSelectedQuestions>> { games ->
-            if(indexExists(games,0)) {
-                p_alta_1.setText("${games.get(0).user.userName} | score: ${games.get(0).game.score} | p ${games.get(0).pistasUsadas}")
+            // Se ordena descendentemente los juegos por puntuación y luego se aplica otro filtro ascendente para las pistas usadas.
+            val sortedGames =  ArrayList(games)
+                .sortedWith(compareByDescending<GameWithSelectedQuestions> { it.game.score }
+                    .thenBy { it.pistasUsadas })
+
+            if(indexExists(sortedGames,0)) {
+                p_alta_1.setText("${sortedGames.get(0).user.userName} | score: ${sortedGames.get(0).game.score} | p ${sortedGames.get(0).pistasUsadas}")
             }
-            if(indexExists(games,1)) {
-                p_alta_2.setText("${games.get(1).user.userName} | score: ${games.get(1).game.score} | p ${games.get(1).pistasUsadas}")
+            if(indexExists(sortedGames,1)) {
+                p_alta_2.setText("${sortedGames.get(1).user.userName} | score: ${sortedGames.get(1).game.score} | p ${sortedGames.get(1).pistasUsadas}")
             }
-            if(indexExists(games,2)) {
-                p_alta_3.setText("${games.get(2).user.userName} | score: ${games.get(2).game.score} | p ${games.get(2).pistasUsadas}")
+            if(indexExists(sortedGames,2)) {
+                p_alta_3.setText("${sortedGames.get(2).user.userName} | score: ${sortedGames.get(2).game.score} | p ${sortedGames.get(2).pistasUsadas}")
             }
-            if(indexExists(games,3)) {
-                p_alta_4.setText("${games.get(3).user.userName} | score: ${games.get(3).game.score} | p ${games.get(3).pistasUsadas}")
+            if(indexExists(sortedGames,3)) {
+                p_alta_4.setText("${sortedGames.get(3).user.userName} | score: ${sortedGames.get(3).game.score} | p ${sortedGames.get(3).pistasUsadas}")
             }
-            if(indexExists(games,4)) {
-                p_alta_5.setText("${games.get(4).user.userName} | score: ${games.get(4).game.score} | p ${games.get(4).pistasUsadas}")
+            if(indexExists(sortedGames,4)) {
+                p_alta_5.setText("${sortedGames.get(4).user.userName} | score: ${sortedGames.get(4).game.score} | p ${sortedGames.get(4).pistasUsadas}")
             }
         }
         top.observe(this, topObserver)
