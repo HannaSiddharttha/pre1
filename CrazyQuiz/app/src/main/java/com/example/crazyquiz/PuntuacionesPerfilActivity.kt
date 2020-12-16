@@ -52,17 +52,20 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
     }
 
     fun orderByDate() {
+        // función de orden descendente para filtro por fecha
         listPuntaje.sortByDescending { it.user.lastDate }
         recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
         Toast.makeText(this, "fecha", Toast.LENGTH_SHORT).show()
     }
 
     fun orderByScore() {
+        // función de orden descendente para filtro por puntaje global
         listPuntaje.sortByDescending { it.user.globalScore }
         recyclerView.adapter = RecyclerAdapter(this, listPuntaje,this)
         Toast.makeText(this, "puntaje", Toast.LENGTH_SHORT).show()
     }
 
+    // eventos del toolbae
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.date_menu_item, -> orderByDate()
@@ -96,14 +99,17 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
 
     }
 
+    // click de cada fila de recyclerview
     override fun onItemClick(user: UserWithGames) {
         var message: String = "";
         var cont: Int = 1
+        //obtiene mensaje para desglose de juegos
         for(game in user.games) {
             message += "P$cont: score ${game.game.score}, pistas: ${game.pistasUsadas} \n"
             cont++
         }
 
+        // muestra alertdialog con mensaje
         val builder = AlertDialog.Builder(this)
         builder.setMessage(message)
             .setCancelable(false)
@@ -111,7 +117,7 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
             }
         val alert = builder.create()
         alert.show()
-        Toast.makeText(this,"Info: ${user.globalScore} ${user.lastDate}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,"Info: ${user.globalScore} ${user.lastDate}", Toast.LENGTH_SHORT).show()
     }
 }
 
