@@ -7,6 +7,78 @@
     android:background="@drawable/background5"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_delete4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        android:visibility="invisible"
+        app:backgroundTint="@color/verde"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/edit_button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:pressedTranslationZ="12dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:visibility="invisible"
+        app:backgroundTint="@color/verde"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/button_exit4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:pressedTranslationZ="12dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_exit4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/ic_baseline_exit_to_app_24"
+        android:visibility="invisible"
+        app:backgroundTint="@color/verde"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fab_button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:pressedTranslationZ="12dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        app:backgroundTint="@color/verdecito"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
     <ImageView
         android:id="@+id/imageView_logo"
         android:layout_width="182dp"
