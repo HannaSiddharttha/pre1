@@ -1,19 +1,14 @@
 package com.example.crazyquiz
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
-import com.example.crazyquiz.db.Game
 import com.example.crazyquiz.db.GameWithSelectedQuestions
 import com.example.crazyquiz.db.QuizRepository
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_final_score.*
-import kotlinx.android.synthetic.main.activity_final_score.view.*
 
 class FinalScoreActivity : AppCompatActivity() {
 
@@ -58,18 +53,33 @@ class FinalScoreActivity : AppCompatActivity() {
         else if (porcentaje>=0 && porcentaje<50){
             GatoImageView.setImageResource(R.drawable.sad1)
         }
+        topFive()
 
     }
 
-    fun TopFive() {  //Saca el top 5 de los jugadores
+    fun indexExists(list: List<*>, index: Int): Boolean {
+        return index >= 0 && index < list.size
+    }
+
+    fun topFive() {  //Saca el top 5 de los jugadores
 
         var top = repository.getTopFive()
 
         val topObserver = Observer<List<GameWithSelectedQuestions>> { games ->
-            for(game in games) {
-            // se agregan elementos a cada Textview
-
-            //en caso de que se usó pistas se pone visible*
+            if(indexExists(games,0)) {
+                p_alta_1.setText("${games.get(0).user.userName} | score: ${games.get(0).game.score} | p ${games.get(0).pistasUsadas}")
+            }
+            if(indexExists(games,1)) {
+                p_alta_2.setText("${games.get(1).user.userName} | score: ${games.get(1).game.score} | p ${games.get(1).pistasUsadas}")
+            }
+            if(indexExists(games,2)) {
+                p_alta_3.setText("${games.get(2).user.userName} | score: ${games.get(2).game.score} | p ${games.get(2).pistasUsadas}")
+            }
+            if(indexExists(games,3)) {
+                p_alta_4.setText("${games.get(3).user.userName} | score: ${games.get(3).game.score} | p ${games.get(3).pistasUsadas}")
+            }
+            if(indexExists(games,4)) {
+                p_alta_5.setText("${games.get(4).user.userName} | score: ${games.get(4).game.score} | p ${games.get(4).pistasUsadas}")
             }
         }
         top.observe(this, topObserver)

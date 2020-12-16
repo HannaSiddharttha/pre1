@@ -18,4 +18,13 @@ data class GameWithSelectedQuestions(
         entityColumn = "userId"
     )
     var user: Users,
-)
+) {
+    val pistasUsadas: Int
+        get() {
+            var total : Int = 0
+            for (selectedQuestion in selectedQuestions) {
+                total += selectedQuestion.selectedQuestion.pistasUsadas
+            }
+            return total;
+        }
+}

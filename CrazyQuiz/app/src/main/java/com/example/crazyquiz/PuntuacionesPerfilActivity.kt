@@ -22,7 +22,6 @@ class PuntuacionesPerfilActivity : AppCompatActivity(),RecyclerAdapter.OnPuntaje
     private lateinit var repository: QuizRepository
     private lateinit var user: Users
     private lateinit var listPuntaje: MutableList<Puntuaciones>
-    //private lateinit var listPuntaje:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

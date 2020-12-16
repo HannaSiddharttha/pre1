@@ -32,4 +32,22 @@ data class SelectedQuestion (
     var answer2Locked: Boolean = false,
     var answer3Locked: Boolean = false,
     var answer4Locked: Boolean = false
-)
+) {
+    val pistasUsadas: Int
+    get() {
+        var total: Int = 0
+        if(answer1Locked) {
+            total++
+        }
+        if(answer2Locked) {
+            total++
+        }
+        if(answer3Locked) {
+            total++
+        }
+        if(answer4Locked) {
+            total++
+        }
+        return total
+    }
+}
