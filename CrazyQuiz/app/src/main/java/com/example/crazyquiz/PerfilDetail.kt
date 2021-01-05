@@ -15,8 +15,5 @@ class PerfilDetail : AppCompatActivity() {
         if(intent.extras != null){
             Glide.with(this).load(intent.getStringExtra("imageUrl")).into(photo_view)
         }
-
-
-
     }
 }

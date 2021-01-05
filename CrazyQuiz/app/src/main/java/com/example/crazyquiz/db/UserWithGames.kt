@@ -13,17 +13,19 @@ data class UserWithGames(
     )
     var games: List<GameWithSelectedQuestions>,
 ) {
+    // obtiene los puntos totales entre todos los juegos
     val globalScore: Int
     get() {
         var total : Int = 0
         for (game in games) {
             if(!game.game.isActive && game.game.score > 0) {
-                total = total + game.game.score
+                total += game.game.score
             }
         }
         return total;
     }
 
+    // fecha del ultimo juego realizado
     val lastDate: Date?
     get() {
         if(games.isEmpty()) {

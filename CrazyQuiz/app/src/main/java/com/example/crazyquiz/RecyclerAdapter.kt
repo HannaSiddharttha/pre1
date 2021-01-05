@@ -36,14 +36,14 @@ class RecyclerAdapter (private val context: Context, val listaPuntaje:List<Puntu
 
     inner class PuntajeViewHolder(itemView: View):BaseViewHolder<Puntuaciones>(itemView){
         override fun bind(item: Puntuaciones, position: Int) {
+
+            // se definen los eventos de click para cada fila
             itemView.setOnClickListener{itemClickListener.onItemClick(item.user)}
             itemView.img_perfil.setOnClickListener{itemClickListener.onImageClick(item.imagen)}
             itemView.txt_puntaje.setText(item.user.globalScore.toString())
 
+            // poner fecha del último juego
             var lastDate: Date? = item.user.lastDate
-
-            //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-
             if(lastDate != null) {
                 val pattern = "yyyy-MM-dd HH:mm:ss"
                 val simpleDateFormat = SimpleDateFormat(pattern)
@@ -53,7 +53,6 @@ class RecyclerAdapter (private val context: Context, val listaPuntaje:List<Puntu
             }
 
             //itemView.txt_pistas.setText(item.game.game.numPistas.toString())
-            //itemView..setText(item.game.game.date.toString())
             Glide.with(context).load(item.imagen).into(itemView.img_perfil)
             itemView.txt_usuario1.text = item.nombre
         }
