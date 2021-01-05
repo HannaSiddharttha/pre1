@@ -118,6 +118,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
         }
+        button_juego.setOnClickListener { View ->
+            val intent = Intent(this, MemoramaActivity::class.java)
+            startActivity(intent)
+        }
         button_puntaje.setOnClickListener { View ->
             val intent = Intent(this, PuntuacionesPerfilActivity::class.java)
             startActivity(intent)

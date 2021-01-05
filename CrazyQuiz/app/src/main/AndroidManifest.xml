@@ -11,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        android:theme="@style/AppTheme">
+        <activity android:name=".MemoramaActivity"></activity>
         <activity android:name=".InicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
@@ -31,8 +33,7 @@
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity android:name=".FinalScoreActivity" />
         <activity android:name=".QuestionActivity" />
         <activity android:name=".OptionsActivity" />
