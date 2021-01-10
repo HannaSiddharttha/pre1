@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button_juego: Button
     private lateinit var button_options: Button
     private lateinit var button_puntaje: Button
+    private lateinit var button_memorama: Button
     private lateinit var user: Users
     var isOpen = false
     private lateinit var repository: QuizRepository
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         button_juego = findViewById(R.id.button_juego)
         button_options = findViewById(R.id.button_options)
         button_puntaje = findViewById(R.id.button_puntaje)
-
+        button_memorama = findViewById(R.id.button_memorama)
         // obtiene los settings, si los encuentra los asigna a settings.
         val savedUser = ModelPreferencesManager.get<Users>("USER")
         if(savedUser != null) {
@@ -118,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
         }
-        button_juego.setOnClickListener { View ->
+        button_memorama.setOnClickListener { View ->
             val intent = Intent(this, MemoramaActivity::class.java)
             startActivity(intent)
         }
