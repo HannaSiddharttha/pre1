@@ -47,7 +47,7 @@ class MemoramaActivity : AppCompatActivity() {
         var lastClicked = -1
 
         images.shuffle()
-        for (i in 0..16) {
+        for (i in 0..15) {
             //buttons[i].text = "cardBack"
             //buttons[i].textSize = 0.0F
                 imageViews[i].setImageResource(images[i])
