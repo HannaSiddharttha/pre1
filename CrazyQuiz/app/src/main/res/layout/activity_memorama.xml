@@ -122,6 +122,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView1"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="0"
@@ -141,8 +142,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatocool"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -156,6 +160,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="0"
@@ -175,8 +180,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatotrabajando"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -190,6 +198,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="0"
@@ -209,8 +218,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatoincomodo"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                     />
 
                 <TextView
@@ -224,6 +236,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="0"
@@ -243,8 +256,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatokhe"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -258,6 +274,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="1"
@@ -277,8 +294,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatolopuseaqui"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -292,6 +312,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView6"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="1"
@@ -311,8 +332,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatobatma"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                     />
 
                 <TextView
@@ -326,6 +350,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView7"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="1"
@@ -345,8 +370,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatoduren"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -360,6 +388,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView8"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="1"
@@ -379,8 +408,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatosospechozo"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                     />
 
                 <TextView
@@ -394,6 +426,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView9"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="2"
@@ -413,8 +446,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatosospechozo"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                 />
 
                 <TextView
@@ -428,6 +464,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView10"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="2"
@@ -447,8 +484,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatocool"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -463,6 +503,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView11"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="2"
@@ -482,8 +523,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatoduren"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                     />
 
                 <TextView
@@ -497,6 +541,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView12"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="2"
@@ -516,8 +561,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatoincomodo"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                     />
 
                 <TextView
@@ -531,6 +579,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView13"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="3"
@@ -550,8 +599,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatotrabajando"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -566,6 +618,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView14"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="3"
@@ -585,8 +638,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatokhe"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -600,6 +656,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView15"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="3"
@@ -619,8 +676,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/gatolopuseaqui"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
                      />
 
                 <TextView
@@ -634,6 +694,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView16"
             android:layout_width="86dp"
             android:layout_height="22dp"
             android:layout_row="3"
@@ -653,8 +714,12 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView16"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gatobatma"
+                    android:background="@drawable/ic_baseline_local_fire_department_24"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
