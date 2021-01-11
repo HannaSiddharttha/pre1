@@ -1,18 +1,67 @@
 package com.example.crazyquiz
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crazyquiz.R.drawable.*
-import android.os.Bundle
-import android.widget.Toast
+import com.example.crazyquiz.firebaseModels.Tablero
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_memorama.*
 
 class MemoramaActivity : AppCompatActivity() {
+
+    private lateinit var database: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memorama)
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("tablero")
+
+        //var value = myRef.
+        //var casilla1 = myRef.child("casilla1");
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                //val post = dataSnapshot.getValue<Post>()
+                val estatusTablero = dataSnapshot.child("estatus").getValue()
+                val tablero2 = dataSnapshot.value
+                val tablero = dataSnapshot.getValue(Tablero::class.java)
+                if(estatusTablero == 0) {
+
+                }
+                // ...
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+
+        val postListener2 = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                //val post = dataSnapshot.getValue<Post>()
+                val value = dataSnapshot
+                // ...
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        myRef.addListenerForSingleValueEvent(postListener)
+        myRef.addValueEventListener(postListener2)
 
         val images: MutableList<Int> = mutableListOf(
             gatocool,
