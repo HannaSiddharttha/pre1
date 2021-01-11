@@ -111,10 +111,10 @@
         android:textSize="20sp" />
 
     <GridLayout
-        android:layout_width="391dp"
-        android:layout_height="466dp"
+        android:layout_width="388dp"
+        android:layout_height="288dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:columnCount="4"
@@ -145,9 +145,8 @@
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatocool"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatocool" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -183,9 +182,8 @@
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatotrabajando"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatotrabajando" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -221,9 +219,8 @@
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatoincomodo"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                    />
+                    android:src="@drawable/gatoincomodo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -259,9 +256,8 @@
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatokhe"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatokhe" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -297,9 +293,8 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatolopuseaqui"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatolopuseaqui" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -335,9 +330,8 @@
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatobatma"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                    />
+                    android:src="@drawable/gatobatma" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -373,9 +367,8 @@
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatoduren"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatoduren" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -411,9 +404,8 @@
                     android:id="@+id/imageView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatosospechozo"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                    />
+                    android:src="@drawable/gatosospechozo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -449,9 +441,8 @@
                     android:id="@+id/imageView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatosospechozo"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                />
+                    android:src="@drawable/gatosospechozo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -487,9 +478,8 @@
                     android:id="@+id/imageView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatocool"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatocool" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -526,9 +516,8 @@
                     android:id="@+id/imageView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatoduren"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                    />
+                    android:src="@drawable/gatoduren" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -564,9 +553,8 @@
                     android:id="@+id/imageView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatoincomodo"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                    />
+                    android:src="@drawable/gatoincomodo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -602,9 +590,8 @@
                     android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatotrabajando"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatotrabajando" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -641,9 +628,8 @@
                     android:id="@+id/imageView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatokhe"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatokhe" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -679,9 +665,8 @@
                     android:id="@+id/imageView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatolopuseaqui"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
-                     />
+                    android:src="@drawable/gatolopuseaqui" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -717,8 +702,8 @@
                     android:id="@+id/imageView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gatobatma"
-                    android:background="@drawable/ic_baseline_local_fire_department_24"/>
+                    android:background="@drawable/ic_baseline_local_fire_department_24"
+                    android:src="@drawable/gatobatma" />
 
 
                 <TextView
