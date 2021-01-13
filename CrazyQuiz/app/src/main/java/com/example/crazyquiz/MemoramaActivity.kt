@@ -39,18 +39,10 @@ class MemoramaActivity : AppCompatActivity() {
             user = savedUser
         }
 
-        //var value = myRef.
-        //var casilla1 = myRef.child("casilla1");
-
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                //val post = dataSnapshot.getValue<Post>()
-//                val estatusTablero = dataSnapshot.child("estatus").getValue()
-                val tablero2 = dataSnapshot.value
+                // Obtener tablero
                 var tableroFirebase = dataSnapshot.getValue(Tablero::class.java)
-                //var esperaFirebase = dataSnapshot.getValue(Espera::class.java)
-                //var esperaFirebase2 = dataSnapshot.child("espera").getValue("lista")
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
                     var correo1 = tablero.jugador1.get("correo")
@@ -90,263 +82,68 @@ class MemoramaActivity : AppCompatActivity() {
         myRef.addListenerForSingleValueEvent(postListener)
         myRef.addValueEventListener(postListener2)
 
-        val images: MutableList<Int> = mutableListOf(
-            gatocool,
-            gatoduren,
-            gatoincomodo,
-            gatokhe,
-            gatolopuseaqui,
-            gatobatma,
-            gatosospechozo,
-            gatotrabajando,
-            gatocool,
-            gatoduren,
-            gatoincomodo,
-            gatokhe,
-            gatolopuseaqui,
-            gatobatma,
-            gatosospechozo,
-            gatotrabajando
-        )
-        val cardViews = arrayOf(
-            cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,
-            cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15,cardView16
-        )
-        val imageViews = arrayOf(
-            imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,
-            imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16
-        )
-        val cardBack = ic_baseline_local_fire_department_24
-        var clicked = 0
-        var turnOver = false
-        var lastClicked = -1
-
-        images.shuffle()
-
         cardView1.setOnClickListener {
-            var casilla1status : Long = tablero.casilla1.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla1status.toInt() == 0) {
-                    casilla1status = 1
-                    tablero.casilla1.set("estatus", casilla1status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla1, 1)
         }
 
         cardView2.setOnClickListener {
-            var casilla2status : Long = tablero.casilla2.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla2status.toInt() == 0) {
-                    casilla2status = 1
-                    tablero.casilla2.set("estatus", casilla2status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla2, 2)
         }
 
         cardView3.setOnClickListener {
-            var casilla3status : Long = tablero.casilla3.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla3status.toInt() == 0) {
-                    casilla3status = 1
-                    tablero.casilla3.set("estatus", casilla3status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla3, 3)
         }
 
         cardView4.setOnClickListener {
-            var casilla4status : Long = tablero.casilla4.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla4status.toInt() == 0) {
-                    casilla4status = 1
-                    tablero.casilla4.set("estatus", casilla4status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla4, 4)
         }
 
         cardView5.setOnClickListener {
-            var casilla5status : Long = tablero.casilla5.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla5status.toInt() == 0) {
-                    casilla5status = 1
-                    tablero.casilla5.set("estatus", casilla5status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla5, 5)
         }
 
         cardView6.setOnClickListener {
-            var casilla6status : Long = tablero.casilla6.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla6status.toInt() == 0) {
-                    casilla6status = 1
-                    tablero.casilla6.set("estatus", casilla6status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla6, 6)
         }
 
         cardView7.setOnClickListener {
-            var casilla7status : Long = tablero.casilla7.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla7status.toInt() == 0) {
-                    casilla7status = 1
-                    tablero.casilla7.set("estatus", casilla7status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla7, 7)
         }
 
         cardView8.setOnClickListener {
-            var casilla8status : Long = tablero.casilla8.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla8status.toInt() == 0) {
-                    casilla8status = 1
-                    tablero.casilla8.set("estatus", casilla8status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla8, 8)
         }
 
         cardView9.setOnClickListener {
-            var casilla9status : Long = tablero.casilla9.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla9status.toInt() == 0) {
-                    casilla9status = 1
-                    tablero.casilla9.set("estatus", casilla9status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla9, 9)
         }
 
         cardView10.setOnClickListener {
-            var casilla10status : Long = tablero.casilla10.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla10status.toInt() == 0) {
-                    casilla10status = 1
-                    tablero.casilla10.set("estatus", casilla10status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla10, 10)
         }
 
         cardView11.setOnClickListener {
-            var casilla11status : Long = tablero.casilla11.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla11status.toInt() == 0) {
-                    casilla11status = 1
-                    tablero.casilla11.set("estatus", casilla11status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla11, 11)
         }
 
         cardView12.setOnClickListener {
-            var casilla12status : Long = tablero.casilla12.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla12status.toInt() == 0) {
-                    casilla12status = 1
-                    tablero.casilla12.set("estatus", casilla12status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla12, 12)
         }
 
         cardView13.setOnClickListener {
-            var casilla13status : Long = tablero.casilla13.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla13status.toInt() == 0) {
-                    casilla13status = 1
-                    tablero.casilla13.set("estatus", casilla13status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla13, 13)
         }
 
         cardView14.setOnClickListener {
-            var casilla14status : Long = tablero.casilla14.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla14status.toInt() == 0) {
-                    casilla14status = 1
-                    tablero.casilla14.set("estatus", casilla14status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla14, 14)
         }
 
         cardView15.setOnClickListener {
-            var casilla15status : Long = tablero.casilla15.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla15status.toInt() == 0) {
-                    casilla15status = 1
-                    tablero.casilla15.set("estatus", casilla15status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
+            eventCasilla(tablero.casilla15, 15)
         }
 
         cardView16.setOnClickListener {
-            var casilla16status : Long = tablero.casilla16.get("estatus") as Long
-            if(itsYourTurn()) {
-                if(casilla16status.toInt() == 0) {
-                    casilla16status = 1
-                    tablero.casilla16.set("estatus", casilla16status)
-                    saveTablero()
-                }
-            } else {
-                cantClick()
-            }
-        }
-
-        
-
-       
-
-        for (i in 0..15) {
-            //buttons[i].text = "cardBack"
-            //buttons[i].textSize = 0.0F
-            imageViews[i].setImageResource(images[i])
-            /*
-            cardViews[i].setOnClickListener {
-                Toast.makeText( this,
-                    "Usuario incorrecto",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            */
+            eventCasilla(tablero.casilla16, 16)
         }
     }
 
@@ -362,6 +159,38 @@ class MemoramaActivity : AppCompatActivity() {
             "No puedes dar click aquí",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    fun eventCasilla(casilla: MutableMap<String, Any>, numero: Int) {
+
+        var casillaStatus : Long = casilla.get("estatus") as Long
+        if(itsYourTurn()) {
+            if(casillaStatus.toInt() == 0) {
+                casillaStatus = 1
+                when (numero) {
+                    1 -> tablero.casilla1.set("estatus", casillaStatus)
+                    2 -> tablero.casilla2.set("estatus", casillaStatus)
+                    3 -> tablero.casilla3.set("estatus", casillaStatus)
+                    4 -> tablero.casilla4.set("estatus", casillaStatus)
+                    5 -> tablero.casilla5.set("estatus", casillaStatus)
+                    6 -> tablero.casilla6.set("estatus", casillaStatus)
+                    7 -> tablero.casilla7.set("estatus", casillaStatus)
+                    8 -> tablero.casilla8.set("estatus", casillaStatus)
+                    9 -> tablero.casilla9.set("estatus", casillaStatus)
+                    10 -> tablero.casilla10.set("estatus", casillaStatus)
+                    11 -> tablero.casilla11.set("estatus", casillaStatus)
+                    12 -> tablero.casilla12.set("estatus", casillaStatus)
+                    13 -> tablero.casilla13.set("estatus", casillaStatus)
+                    14 -> tablero.casilla14.set("estatus", casillaStatus)
+                    15 -> tablero.casilla15.set("estatus", casillaStatus)
+                    16 -> tablero.casilla16.set("estatus", casillaStatus)
+                }
+                //tablero.casilla10.set("estatus", casilla10status)
+                saveTablero()
+            }
+        } else {
+            cantClick()
+        }
     }
 
     fun saveTablero() {
@@ -387,15 +216,6 @@ class MemoramaActivity : AppCompatActivity() {
             gatotrabajando,
             gatotrabajando
         )
-        val cardViews = arrayOf(
-            cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,
-            cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15,cardView16
-        )
-        val imageViews = arrayOf(
-            imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,
-            imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16
-        )
-        //tablero = Tablero()
 
         images.shuffle()
 
@@ -449,21 +269,6 @@ class MemoramaActivity : AppCompatActivity() {
         tablero.casilla16.put("estatus",defaultStatus)
         tablero.casilla16.put("imagen",getResources().getResourceEntryName(images[15]))
         tablero.casilla16.put("puntoPara", defaultStatus)
-
-        for (i in 0..15) {
-            //buttons[i].text = "cardBack"
-            //buttons[i].textSize = 0.0F
-
-            imageViews[i].setImageResource(images[i])
-            /*
-            cardViews[i].setOnClickListener {
-                Toast.makeText( this,
-                    "Usuario incorrecto",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            */
-        }
         saveTablero()
     }
 
@@ -599,6 +404,5 @@ class MemoramaActivity : AppCompatActivity() {
             val id16 = getResources().getIdentifier(tablero.casilla16.get("imagen").toString(), "drawable", getPackageName())
             imageView16.setImageResource(id16)
         }
-
     }
 }
