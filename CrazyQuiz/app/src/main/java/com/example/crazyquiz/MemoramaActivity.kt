@@ -122,42 +122,250 @@ class MemoramaActivity : AppCompatActivity() {
         var lastClicked = -1
 
         images.shuffle()
+
+        cardView1.setOnClickListener {
+            var casilla1status : Long = tablero.casilla1.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla1status.toInt() == 0) {
+                    casilla1status = 1
+                    tablero.casilla1.set("estatus", casilla1status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView2.setOnClickListener {
+            var casilla2status : Long = tablero.casilla2.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla2status.toInt() == 0) {
+                    casilla2status = 1
+                    tablero.casilla2.set("estatus", casilla2status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView3.setOnClickListener {
+            var casilla3status : Long = tablero.casilla3.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla3status.toInt() == 0) {
+                    casilla3status = 1
+                    tablero.casilla3.set("estatus", casilla3status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView4.setOnClickListener {
+            var casilla4status : Long = tablero.casilla4.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla4status.toInt() == 0) {
+                    casilla4status = 1
+                    tablero.casilla4.set("estatus", casilla4status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView5.setOnClickListener {
+            var casilla5status : Long = tablero.casilla5.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla5status.toInt() == 0) {
+                    casilla5status = 1
+                    tablero.casilla5.set("estatus", casilla5status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView6.setOnClickListener {
+            var casilla6status : Long = tablero.casilla6.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla6status.toInt() == 0) {
+                    casilla6status = 1
+                    tablero.casilla6.set("estatus", casilla6status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView7.setOnClickListener {
+            var casilla7status : Long = tablero.casilla7.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla7status.toInt() == 0) {
+                    casilla7status = 1
+                    tablero.casilla7.set("estatus", casilla7status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView8.setOnClickListener {
+            var casilla8status : Long = tablero.casilla8.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla8status.toInt() == 0) {
+                    casilla8status = 1
+                    tablero.casilla8.set("estatus", casilla8status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView9.setOnClickListener {
+            var casilla9status : Long = tablero.casilla9.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla9status.toInt() == 0) {
+                    casilla9status = 1
+                    tablero.casilla9.set("estatus", casilla9status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView10.setOnClickListener {
+            var casilla10status : Long = tablero.casilla10.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla10status.toInt() == 0) {
+                    casilla10status = 1
+                    tablero.casilla10.set("estatus", casilla10status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView11.setOnClickListener {
+            var casilla11status : Long = tablero.casilla11.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla11status.toInt() == 0) {
+                    casilla11status = 1
+                    tablero.casilla11.set("estatus", casilla11status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView12.setOnClickListener {
+            var casilla12status : Long = tablero.casilla12.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla12status.toInt() == 0) {
+                    casilla12status = 1
+                    tablero.casilla12.set("estatus", casilla12status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView13.setOnClickListener {
+            var casilla13status : Long = tablero.casilla13.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla13status.toInt() == 0) {
+                    casilla13status = 1
+                    tablero.casilla13.set("estatus", casilla13status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView14.setOnClickListener {
+            var casilla14status : Long = tablero.casilla14.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla14status.toInt() == 0) {
+                    casilla14status = 1
+                    tablero.casilla14.set("estatus", casilla14status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView15.setOnClickListener {
+            var casilla15status : Long = tablero.casilla15.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla15status.toInt() == 0) {
+                    casilla15status = 1
+                    tablero.casilla15.set("estatus", casilla15status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        cardView16.setOnClickListener {
+            var casilla16status : Long = tablero.casilla16.get("estatus") as Long
+            if(itsYourTurn()) {
+                if(casilla16status.toInt() == 0) {
+                    casilla16status = 1
+                    tablero.casilla16.set("estatus", casilla16status)
+                    saveTablero()
+                }
+            } else {
+                cantClick()
+            }
+        }
+
+        
+
+       
+
         for (i in 0..15) {
             //buttons[i].text = "cardBack"
             //buttons[i].textSize = 0.0F
-                imageViews[i].setImageResource(images[i])
+            imageViews[i].setImageResource(images[i])
+            /*
             cardViews[i].setOnClickListener {
                 Toast.makeText( this,
                     "Usuario incorrecto",
                     Toast.LENGTH_SHORT
                 ).show()
-            /*
-                if (buttons[i].text == "cardBack" && !turnOver) {
-                    buttons[i].setBackgroundResource(images[i])
-                    buttons[i].setText(images[i])
-                    if (clicked == 0) {
-                        lastClicked = i
-                    }
-                    clicked++
-                } else if (buttons[i].text !in "cardBack") {
-                    buttons[i].setBackgroundResource(cardBack)
-                    buttons[i].text = "cardBack"
-                    clicked--
-                }
-                if (clicked == 2) {
-                    turnOver = true
-                    if (buttons[i].text == buttons[lastClicked].text) {
-                        buttons[i].isClickable = false
-                        buttons[lastClicked].isClickable = false
-                        turnOver = false
-                        clicked = 0
-                    }
-                } else if (clicked == 0) {
-                    turnOver = false
-                }
-                */
             }
+            */
         }
+    }
+
+    fun itsYourTurn(): Boolean {
+        var correo1 = tablero.jugador1.get("correo").toString()
+        var correo2 = tablero.jugador1.get("correo").toString()
+        var correo = user.userEmail
+        return (tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo))
+    }
+
+    fun cantClick() {
+        Toast.makeText( this,
+            "No puedes dar click aquí",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    fun saveTablero() {
+        myRef.setValue(tablero)
     }
 
     fun startGame() {
@@ -187,101 +395,76 @@ class MemoramaActivity : AppCompatActivity() {
             imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,
             imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16
         )
-        tablero = Tablero()
-        var clicked = 0
-        var turnOver = false
-        var lastClicked = -1
+        //tablero = Tablero()
 
         images.shuffle()
 
-        tablero.casilla1.put("estatus",0)
+        val defaultStatus: Long = 0
+
+        tablero.casilla1.put("estatus", defaultStatus)
         tablero.casilla1.put("imagen",getResources().getResourceEntryName(images[0]))
-        tablero.casilla1.put("puntoPara", 0)
-        tablero.casilla2.put("estatus",0)
+        tablero.casilla1.put("puntoPara", defaultStatus)
+        tablero.casilla2.put("estatus",defaultStatus)
         tablero.casilla2.put("imagen",getResources().getResourceEntryName(images[1]))
-        tablero.casilla2.put("puntoPara", 0)
-        tablero.casilla3.put("estatus",0)
+        tablero.casilla2.put("puntoPara", defaultStatus)
+        tablero.casilla3.put("estatus",defaultStatus)
         tablero.casilla3.put("imagen",getResources().getResourceEntryName(images[2]))
-        tablero.casilla3.put("puntoPara", 0)
-        tablero.casilla4.put("estatus",0)
+        tablero.casilla3.put("puntoPara", defaultStatus)
+        tablero.casilla4.put("estatus",defaultStatus)
         tablero.casilla4.put("imagen",getResources().getResourceEntryName(images[3]))
-        tablero.casilla4.put("puntoPara", 0)
-        tablero.casilla5.put("estatus",0)
+        tablero.casilla4.put("puntoPara", defaultStatus)
+        tablero.casilla5.put("estatus",defaultStatus)
         tablero.casilla5.put("imagen",getResources().getResourceEntryName(images[4]))
-        tablero.casilla5.put("puntoPara", 0)
-        tablero.casilla6.put("estatus",0)
+        tablero.casilla5.put("puntoPara", defaultStatus)
+        tablero.casilla6.put("estatus",defaultStatus)
         tablero.casilla6.put("imagen",getResources().getResourceEntryName(images[5]))
-        tablero.casilla6.put("puntoPara", 0)
-        tablero.casilla7.put("estatus",0)
+        tablero.casilla6.put("puntoPara", defaultStatus)
+        tablero.casilla7.put("estatus",defaultStatus)
         tablero.casilla7.put("imagen",getResources().getResourceEntryName(images[6]))
-        tablero.casilla7.put("puntoPara", 0)
-        tablero.casilla8.put("estatus",0)
+        tablero.casilla7.put("puntoPara", defaultStatus)
+        tablero.casilla8.put("estatus",defaultStatus)
         tablero.casilla8.put("imagen",getResources().getResourceEntryName(images[7]))
-        tablero.casilla8.put("puntoPara", 0)
-        tablero.casilla9.put("estatus",0)
+        tablero.casilla8.put("puntoPara", defaultStatus)
+        tablero.casilla9.put("estatus",defaultStatus)
         tablero.casilla9.put("imagen",getResources().getResourceEntryName(images[8]))
-        tablero.casilla9.put("puntoPara", 0)
-        tablero.casilla10.put("estatus",0)
+        tablero.casilla9.put("puntoPara", defaultStatus)
+        tablero.casilla10.put("estatus",defaultStatus)
         tablero.casilla10.put("imagen",getResources().getResourceEntryName(images[9]))
-        tablero.casilla10.put("puntoPara", 0)
-        tablero.casilla11.put("estatus",0)
+        tablero.casilla10.put("puntoPara", defaultStatus)
+        tablero.casilla11.put("estatus",defaultStatus)
         tablero.casilla11.put("imagen",getResources().getResourceEntryName(images[10]))
-        tablero.casilla11.put("puntoPara", 0)
-        tablero.casilla12.put("estatus",0)
+        tablero.casilla11.put("puntoPara", defaultStatus)
+        tablero.casilla12.put("estatus",defaultStatus)
         tablero.casilla12.put("imagen",getResources().getResourceEntryName(images[11]))
-        tablero.casilla12.put("puntoPara", 0)
-        tablero.casilla13.put("estatus",0)
+        tablero.casilla12.put("puntoPara", defaultStatus)
+        tablero.casilla13.put("estatus",defaultStatus)
         tablero.casilla13.put("imagen",getResources().getResourceEntryName(images[12]))
-        tablero.casilla13.put("puntoPara", 0)
-        tablero.casilla14.put("estatus",0)
+        tablero.casilla13.put("puntoPara", defaultStatus)
+        tablero.casilla14.put("estatus",defaultStatus)
         tablero.casilla14.put("imagen",getResources().getResourceEntryName(images[13]))
-        tablero.casilla14.put("puntoPara", 0)
-        tablero.casilla15.put("estatus",0)
+        tablero.casilla14.put("puntoPara", defaultStatus)
+        tablero.casilla15.put("estatus",defaultStatus)
         tablero.casilla15.put("imagen",getResources().getResourceEntryName(images[14]))
-        tablero.casilla15.put("puntoPara", 0)
-        tablero.casilla16.put("estatus",0)
+        tablero.casilla15.put("puntoPara", defaultStatus)
+        tablero.casilla16.put("estatus",defaultStatus)
         tablero.casilla16.put("imagen",getResources().getResourceEntryName(images[15]))
-        tablero.casilla16.put("puntoPara", 0)
+        tablero.casilla16.put("puntoPara", defaultStatus)
 
         for (i in 0..15) {
             //buttons[i].text = "cardBack"
             //buttons[i].textSize = 0.0F
 
             imageViews[i].setImageResource(images[i])
-            //tablero.c
-
+            /*
             cardViews[i].setOnClickListener {
                 Toast.makeText( this,
                     "Usuario incorrecto",
                     Toast.LENGTH_SHORT
                 ).show()
-                /*
-                    if (buttons[i].text == "cardBack" && !turnOver) {
-                        buttons[i].setBackgroundResource(images[i])
-                        buttons[i].setText(images[i])
-                        if (clicked == 0) {
-                            lastClicked = i
-                        }
-                        clicked++
-                    } else if (buttons[i].text !in "cardBack") {
-                        buttons[i].setBackgroundResource(cardBack)
-                        buttons[i].text = "cardBack"
-                        clicked--
-                    }
-                    if (clicked == 2) {
-                        turnOver = true
-                        if (buttons[i].text == buttons[lastClicked].text) {
-                            buttons[i].isClickable = false
-                            buttons[lastClicked].isClickable = false
-                            turnOver = false
-                            clicked = 0
-                        }
-                    } else if (clicked == 0) {
-                        turnOver = false
-                    }
-                    */
             }
+            */
         }
+        saveTablero()
     }
 
     fun loadGame() {
@@ -303,7 +486,7 @@ class MemoramaActivity : AppCompatActivity() {
         var casilla13status : Long = tablero.casilla13.get("estatus") as Long
         var casilla14status : Long = tablero.casilla14.get("estatus") as Long
         var casilla15status : Long = tablero.casilla15.get("estatus") as Long
-        var casilla16status : Long = tablero.casilla15.get("estatus") as Long
+        var casilla16status : Long = tablero.casilla16.get("estatus") as Long
 
         if(casilla1status.toInt() == 0) {
             imageView1.setImageResource(cardBack)
