@@ -91,21 +91,20 @@
             "imagen": "",
             "estatus": 0,
             "puntoPara": 0
-        }
-
-    },
-    "espera": [
-        {
-            "correo": "",
-            "nombre": "" 
         },
-        {
-            "correo": "",
-            "nombre": "" 
-        },
-        {
-            "correo": "",
-            "nombre": "" 
-        }
-    ]
+        "espera": [
+            {
+                "correo": "",
+                "nombre": "" 
+            },
+            {
+                "correo": "",
+                "nombre": "" 
+            },
+            {
+                "correo": "",
+                "nombre": "" 
+            }
+        ]
+    }
 }

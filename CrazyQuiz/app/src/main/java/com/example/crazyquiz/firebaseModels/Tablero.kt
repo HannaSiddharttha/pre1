@@ -5,10 +5,10 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class Tablero (
-    var turno: Int? = 0,
-    var estatus: Int? = 1,
-    var puntos1: Int? = 0,
-    var puntos2: Int? = 0,
+    var turno: Int = 0,
+    var estatus: Int = 1,
+    var puntos1: Int = 0,
+    var puntos2: Int = 0,
     var jugador1: MutableMap<String, Any> = HashMap(),
     var jugador2: MutableMap<String, Any> = HashMap(),
     var casilla1: MutableMap<String, Any> = HashMap(),
@@ -27,6 +27,6 @@ data class Tablero (
     var casilla14: MutableMap<String, Any> = HashMap(),
     var casilla15: MutableMap<String, Any> = HashMap(),
     var casilla16: MutableMap<String, Any> = HashMap(),
-
+    var espera: MutableList<MutableMap<String, Any>> = mutableListOf<MutableMap<String, Any>>(),
 ) {
 }

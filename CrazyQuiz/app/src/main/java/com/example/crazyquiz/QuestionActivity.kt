@@ -35,7 +35,6 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var repository: QuizRepository
     private var alertShowed: Boolean = false
 
-
     private val model: GameModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
