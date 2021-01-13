@@ -1,10 +1,13 @@
 package com.example.crazyquiz
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.example.crazyquiz.R.drawable.*
 import com.example.crazyquiz.db.Users
 import com.example.crazyquiz.firebaseModels.Tablero
@@ -19,7 +22,11 @@ class MemoramaActivity : AppCompatActivity() {
     private lateinit var user: Users
     private lateinit var puntaje1: TextView
     private lateinit var puntaje2: TextView
+    var green : Int = Color.parseColor("#008F39")
+    var red : Int = Color.parseColor("#FF0000")
     private var cardBack: Int = 0
+    private lateinit var imageViews: MutableList<ImageView>
+    private lateinit var cardViews: MutableList<CardView>
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +40,12 @@ class MemoramaActivity : AppCompatActivity() {
 
         puntaje1 = findViewById(R.id.jugador1_puntaje)
         puntaje2 = findViewById(R.id.jugador2_puntaje)
+
+        imageViews = mutableListOf(imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,
+            imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
+
+        cardViews = mutableListOf(cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,
+            cardView8,cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15,cardView16)
 
         val savedUser = ModelPreferencesManager.get<Users>("USER")
         if (savedUser != null) {
@@ -154,12 +167,105 @@ class MemoramaActivity : AppCompatActivity() {
         return (tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo))
     }
 
+    fun getPlayerNumber(): Int {
+        var correo1 = tablero.jugador1.get("correo").toString()
+        var correo2 = tablero.jugador1.get("correo").toString()
+        var correo = user.userEmail
+        if(correo1.equals(correo)) {
+            return 1
+        }
+        if(correo2.equals(correo)) {
+            return 2
+        }
+        return 0
+    }
+
     fun cantClick() {
         Toast.makeText( this,
             "No puedes dar click aquí",
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    fun getStatusTableroList(): MutableList<Long>{
+        val statusTablero: MutableList<Long> = mutableListOf(
+            tablero.casilla1.get("estatus") as Long,
+            tablero.casilla2.get("estatus") as Long,
+            tablero.casilla3.get("estatus") as Long,
+            tablero.casilla4.get("estatus") as Long,
+            tablero.casilla5.get("estatus") as Long,
+            tablero.casilla6.get("estatus") as Long,
+            tablero.casilla7.get("estatus") as Long,
+            tablero.casilla8.get("estatus") as Long,
+            tablero.casilla9.get("estatus") as Long,
+            tablero.casilla10.get("estatus") as Long,
+            tablero.casilla11.get("estatus") as Long,
+            tablero.casilla12.get("estatus") as Long,
+            tablero.casilla13.get("estatus") as Long,
+            tablero.casilla14.get("estatus") as Long,
+            tablero.casilla15.get("estatus") as Long,
+            tablero.casilla16.get("estatus") as Long
+        )
+        return statusTablero
+    }
+
+    fun getPuntosParaList(): MutableList<Long>{
+        val puntosPara: MutableList<Long> = mutableListOf(
+            tablero.casilla1.get("puntoPara") as Long,
+            tablero.casilla2.get("puntoPara") as Long,
+            tablero.casilla3.get("puntoPara") as Long,
+            tablero.casilla4.get("puntoPara") as Long,
+            tablero.casilla5.get("puntoPara") as Long,
+            tablero.casilla6.get("puntoPara") as Long,
+            tablero.casilla7.get("puntoPara") as Long,
+            tablero.casilla8.get("puntoPara") as Long,
+            tablero.casilla9.get("puntoPara") as Long,
+            tablero.casilla10.get("puntoPara") as Long,
+            tablero.casilla11.get("puntoPara") as Long,
+            tablero.casilla12.get("puntoPara") as Long,
+            tablero.casilla13.get("puntoPara") as Long,
+            tablero.casilla14.get("puntoPara") as Long,
+            tablero.casilla15.get("puntoPara") as Long,
+            tablero.casilla16.get("puntoPara") as Long
+        )
+        return puntosPara
+    }
+
+    fun getImagenList(): MutableList<String>{
+        val puntosPara: MutableList<String> = mutableListOf(
+            tablero.casilla1.get("imagen") as String,
+            tablero.casilla2.get("imagen") as String,
+            tablero.casilla3.get("imagen") as String,
+            tablero.casilla4.get("imagen") as String,
+            tablero.casilla5.get("imagen") as String,
+            tablero.casilla6.get("imagen") as String,
+            tablero.casilla7.get("imagen") as String,
+            tablero.casilla8.get("imagen") as String,
+            tablero.casilla9.get("imagen") as String,
+            tablero.casilla10.get("imagen") as String,
+            tablero.casilla11.get("imagen") as String,
+            tablero.casilla12.get("imagen") as String,
+            tablero.casilla13.get("imagen") as String,
+            tablero.casilla14.get("imagen") as String,
+            tablero.casilla15.get("imagen") as String,
+            tablero.casilla16.get("imagen") as String
+        )
+        return puntosPara
+    }
+
+    fun turnFinished(): Boolean {
+        var clicks : Int = 0
+        val statusTablero = getStatusTableroList()
+        val puntosPara = getPuntosParaList()
+
+        for(i in 0..15) {
+            if(statusTablero[i].toInt() == 1 && puntosPara[i].toInt() == 0) {
+                clicks++
+            }
+        }
+        return clicks >= 2
+    }
+
 
     fun eventCasilla(casilla: MutableMap<String, Any>, numero: Int) {
 
@@ -185,12 +291,56 @@ class MemoramaActivity : AppCompatActivity() {
                     15 -> tablero.casilla15.set("estatus", casillaStatus)
                     16 -> tablero.casilla16.set("estatus", casillaStatus)
                 }
+
+                if(turnFinished()) {
+                    //tablero.estatus = 2
+                    updateScore()
+                }
                 //tablero.casilla10.set("estatus", casilla10status)
                 saveTablero()
             }
         } else {
             cantClick()
         }
+    }
+    fun updateScore() {
+        val statusTablero = getStatusTableroList()
+        val puntosPara = getPuntosParaList()
+        for(i in 0..15) {
+            // si esta volteada y no tiene punto para nadie
+            if(statusTablero[i].toInt() == 1 && puntosPara[i].toInt() == 0) {
+                when (i) {
+                    0 -> tablero.casilla1.set("puntoPara", getPlayerNumber())
+                    1 -> tablero.casilla2.set("puntoPara", getPlayerNumber())
+                    2 -> tablero.casilla3.set("puntoPara", getPlayerNumber())
+                    3 -> tablero.casilla4.set("puntoPara", getPlayerNumber())
+                    4 -> tablero.casilla5.set("puntoPara", getPlayerNumber())
+                    5 -> tablero.casilla6.set("puntoPara", getPlayerNumber())
+                    6 -> tablero.casilla7.set("puntoPara", getPlayerNumber())
+                    7 -> tablero.casilla8.set("puntoPara", getPlayerNumber())
+                    8 -> tablero.casilla9.set("puntoPara", getPlayerNumber())
+                    9 -> tablero.casilla10.set("puntoPara", getPlayerNumber())
+                    10 -> tablero.casilla11.set("puntoPara", getPlayerNumber())
+                    11 -> tablero.casilla12.set("puntoPara", getPlayerNumber())
+                    12 -> tablero.casilla13.set("puntoPara", getPlayerNumber())
+                    13 -> tablero.casilla14.set("puntoPara", getPlayerNumber())
+                    14 -> tablero.casilla15.set("puntoPara", getPlayerNumber())
+                    15 -> tablero.casilla16.set("puntoPara", getPlayerNumber())
+                }
+            }
+        }
+        if(getPlayerNumber() == 1) {
+            tablero.turno = 2
+        } else {
+            tablero.turno = 1
+        }
+    }
+
+    fun changeColor1(cardView: CardView) {
+        cardView.setCardBackgroundColor(green)
+    }
+    fun changeColor2(cardView: CardView) {
+        cardView.setCardBackgroundColor(red)
     }
 
     fun saveTablero() {
@@ -276,133 +426,26 @@ class MemoramaActivity : AppCompatActivity() {
         puntaje1.text = tablero.puntos1.toString()
         puntaje2.text = tablero.puntos2.toString()
 
-        var casilla1status : Long = tablero.casilla1.get("estatus") as Long
-        var casilla2status : Long = tablero.casilla2.get("estatus") as Long
-        var casilla3status : Long = tablero.casilla3.get("estatus") as Long
-        var casilla4status : Long = tablero.casilla4.get("estatus") as Long
-        var casilla5status : Long = tablero.casilla5.get("estatus") as Long
-        var casilla6status : Long = tablero.casilla6.get("estatus") as Long
-        var casilla7status : Long = tablero.casilla7.get("estatus") as Long
-        var casilla8status : Long = tablero.casilla8.get("estatus") as Long
-        var casilla9status : Long = tablero.casilla9.get("estatus") as Long
-        var casilla10status : Long = tablero.casilla10.get("estatus") as Long
-        var casilla11status : Long = tablero.casilla11.get("estatus") as Long
-        var casilla12status : Long = tablero.casilla12.get("estatus") as Long
-        var casilla13status : Long = tablero.casilla13.get("estatus") as Long
-        var casilla14status : Long = tablero.casilla14.get("estatus") as Long
-        var casilla15status : Long = tablero.casilla15.get("estatus") as Long
-        var casilla16status : Long = tablero.casilla16.get("estatus") as Long
+        var statusTablero = getStatusTableroList()
+        var puntosParaList = getPuntosParaList()
+        var images = getImagenList()
+        var playerNumber = getPlayerNumber()
 
-        if(casilla1status.toInt() == 0) {
-            imageView1.setImageResource(cardBack)
-        } else {
-            val id1 = getResources().getIdentifier(tablero.casilla1.get("imagen").toString(), "drawable", getPackageName())
-            imageView1.setImageResource(id1)
-        }
+        for(i in 0..15) {
+            if(statusTablero[i].toInt() == 0) {
+                imageViews[i].setImageResource(cardBack)
+            } else {
+                val id = getResources().getIdentifier(images[i], "drawable", getPackageName())
+                imageViews[i].setImageResource(id)
 
-        if(casilla2status.toInt() == 0) {
-            imageView2.setImageResource(cardBack)
-        } else {
-            val id2 = getResources().getIdentifier(tablero.casilla2.get("imagen").toString(), "drawable", getPackageName())
-            imageView2.setImageResource(id2)
-        }
-
-        if(casilla3status.toInt() == 0) {
-            imageView3.setImageResource(cardBack)
-        } else {
-            val id3 = getResources().getIdentifier(tablero.casilla3.get("imagen").toString(), "drawable", getPackageName())
-            imageView3.setImageResource(id3)
-        }
-
-        if(casilla4status.toInt() == 0) {
-            imageView4.setImageResource(cardBack)
-        } else {
-            val id4 = getResources().getIdentifier(tablero.casilla4.get("imagen").toString(), "drawable", getPackageName())
-            imageView4.setImageResource(id4)
-        }
-
-        if(casilla5status.toInt() == 0) {
-            imageView5.setImageResource(cardBack)
-        } else {
-            val id5 = getResources().getIdentifier(tablero.casilla5.get("imagen").toString(), "drawable", getPackageName())
-            imageView5.setImageResource(id5)
-        }
-
-        if(casilla6status.toInt() == 0) {
-            imageView6.setImageResource(cardBack)
-        } else {
-            val id6 = getResources().getIdentifier(tablero.casilla6.get("imagen").toString(), "drawable", getPackageName())
-            imageView6.setImageResource(id6)
-        }
-
-        if(casilla7status.toInt() == 0) {
-            imageView7.setImageResource(cardBack)
-        } else {
-            val id7 = getResources().getIdentifier(tablero.casilla7.get("imagen").toString(), "drawable", getPackageName())
-            imageView7.setImageResource(id7)
-        }
-
-        if(casilla8status.toInt() == 0) {
-            imageView8.setImageResource(cardBack)
-        } else {
-            val id8 = getResources().getIdentifier(tablero.casilla8.get("imagen").toString(), "drawable", getPackageName())
-            imageView8.setImageResource(id8)
-        }
-
-        if(casilla9status.toInt() == 0) {
-            imageView9.setImageResource(cardBack)
-        } else {
-            val id9 = getResources().getIdentifier(tablero.casilla9.get("imagen").toString(), "drawable", getPackageName())
-            imageView9.setImageResource(id9)
-        }
-
-        if(casilla10status.toInt() == 0) {
-            imageView10.setImageResource(cardBack)
-        } else {
-            val id10 = getResources().getIdentifier(tablero.casilla10.get("imagen").toString(), "drawable", getPackageName())
-            imageView10.setImageResource(id10)
-        }
-
-        if(casilla11status.toInt() == 0) {
-            imageView11.setImageResource(cardBack)
-        } else {
-            val id11 = getResources().getIdentifier(tablero.casilla11.get("imagen").toString(), "drawable", getPackageName())
-            imageView11.setImageResource(id11)
-        }
-
-        if(casilla12status.toInt() == 0) {
-            imageView12.setImageResource(cardBack)
-        } else {
-            val id12 = getResources().getIdentifier(tablero.casilla12.get("imagen").toString(), "drawable", getPackageName())
-            imageView12.setImageResource(id12)
-        }
-
-        if(casilla13status.toInt() == 0) {
-            imageView13.setImageResource(cardBack)
-        } else {
-            val id13 = getResources().getIdentifier(tablero.casilla13.get("imagen").toString(), "drawable", getPackageName())
-            imageView13.setImageResource(id13)
-        }
-
-        if(casilla14status.toInt() == 0) {
-            imageView14.setImageResource(cardBack)
-        } else {
-            val id14 = getResources().getIdentifier(tablero.casilla14.get("imagen").toString(), "drawable", getPackageName())
-            imageView14.setImageResource(id14)
-        }
-
-        if(casilla15status.toInt() == 0) {
-            imageView15.setImageResource(cardBack)
-        } else {
-            val id15 = getResources().getIdentifier(tablero.casilla15.get("imagen").toString(), "drawable", getPackageName())
-            imageView15.setImageResource(id15)
-        }
-
-        if(casilla16status.toInt() == 0) {
-            imageView16.setImageResource(cardBack)
-        } else {
-            val id16 = getResources().getIdentifier(tablero.casilla16.get("imagen").toString(), "drawable", getPackageName())
-            imageView16.setImageResource(id16)
+                // si esta volteada y tiene punto para
+                if(statusTablero[i].toInt() == 1 && puntosParaList[i].toInt() == 1) {
+                    changeColor1(cardViews[i])
+                }
+                if(statusTablero[i].toInt() == 1 && puntosParaList[i].toInt() == 2) {
+                    changeColor2(cardViews[i])
+                }
+            }
         }
     }
 }

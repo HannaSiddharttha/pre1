@@ -6,6 +6,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class Tablero (
     var turno: Int = 0,
+//    0 disponible para jugar, 1 juego en curso, 2 juego en curso pero bloqueado.
     var estatus: Int = 1,
     var puntos1: Int = 0,
     var puntos2: Int = 0,
