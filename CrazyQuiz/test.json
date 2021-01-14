@@ -1,17 +1,18 @@
 {
     "tablero": {
         "jugador1": {
-            "correo": "correo1@gmail.com",
-            "nombre": "-----"
+            "correo": "pepe@pepe.com",
+            "nombre": "test1"
         },
         "jugador2": {
-            "correo": "correo2@gmail.com",
-            "nombre": "-----"
+            "correo": "hannaromero123@gmail.com",
+            "nombre": "test2"
         },
         "turno": 1,
         "puntos1": 0,
         "puntos2": 0,
         "estatus": 0,
+        "fecha": "",
         "casilla1": {
             "imagen": "hola",
             "estatus": 0,

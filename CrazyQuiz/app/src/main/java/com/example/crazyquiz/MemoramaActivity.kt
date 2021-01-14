@@ -15,6 +15,8 @@ import com.example.crazyquiz.db.Users
 import com.example.crazyquiz.firebaseModels.Tablero
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_memorama.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MemoramaActivity : AppCompatActivity() {
 
@@ -24,12 +26,16 @@ class MemoramaActivity : AppCompatActivity() {
     private lateinit var user: Users
     private lateinit var puntaje1: TextView
     private lateinit var puntaje2: TextView
+    private lateinit var jugador1: TextView
+    private lateinit var jugador2: TextView
+    private lateinit var jugadorTurno: TextView
     var green : Int = Color.parseColor("#008F39")
     var red : Int = Color.parseColor("#FF0000")
     var white : Int = Color.parseColor("#FFFFFF")
     private var cardBack: Int = 0
     private lateinit var imageViews: MutableList<ImageView>
     private lateinit var cardViews: MutableList<CardView>
+    private lateinit var formatter: DateTimeFormatter
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +49,11 @@ class MemoramaActivity : AppCompatActivity() {
 
         puntaje1 = findViewById(R.id.jugador1_puntaje)
         puntaje2 = findViewById(R.id.jugador2_puntaje)
+        jugador1 = findViewById(R.id.Label_jugador1_puntaje)
+        jugador2 = findViewById(R.id.Label_jugador2_puntaje)
+        jugadorTurno = findViewById(R.id.jugador_en_turno)
+
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
         imageViews = mutableListOf(imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,
             imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
@@ -58,15 +69,27 @@ class MemoramaActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Obtener tablero
+                val tablero2 = dataSnapshot.value
                 var tableroFirebase = dataSnapshot.getValue(Tablero::class.java)
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
                     var correo1 = tablero.jugador1.get("correo")
-                    var correo2 = tablero.jugador1.get("correo")
-                    if(tablero.estatus == 0 && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
-                        startGame()
+                    var correo2 = tablero.jugador2.get("correo")
+                    if(!inGame()) {
+                        if(!inLine()) {
+                            val usuario: MutableMap<String, Any> = mutableMapOf<String, Any>()
+                            val current = LocalDateTime.now()
+                            usuario.put("correo", user.userEmail)
+                            usuario.put("nombre", user.userName)
+                            usuario.put("fecha", current.format(formatter))
+                            tablero.espera.add(usuario)
+                        }
                     } else {
+                        if(tablero.estatus == 0 && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
+                            startGame()
+                        } else {
 //                        waitMessage()
+                        }
                     }
                     loadGame()
                 }
@@ -169,6 +192,22 @@ class MemoramaActivity : AppCompatActivity() {
         var correo2 = tablero.jugador2.get("correo").toString()
         var correo = user.userEmail
         return tablero.estatus != 2 && ((tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo)))
+    }
+
+    fun inGame(): Boolean {
+        var correo1 = tablero.jugador1.get("correo").toString()
+        var correo2 = tablero.jugador2.get("correo").toString()
+        var correo = user.userEmail
+        return correo1.equals(correo) || correo2.equals(correo)
+    }
+
+    fun inLine(): Boolean {
+        tablero.espera.forEach {
+            if(it.get("correo").toString().equals(user.userEmail)) {
+                return true
+            }
+        }
+        return false
     }
 
     fun getPlayerNumber(): Int {
@@ -402,6 +441,12 @@ class MemoramaActivity : AppCompatActivity() {
                 }
             }
         }
+        if(playerNumber == 1) {
+            tablero.puntos1++
+        }
+        if(playerNumber == 2) {
+            tablero.puntos2++
+        }
     }
 
     fun changeColor1(cardView: CardView) {
@@ -432,6 +477,14 @@ class MemoramaActivity : AppCompatActivity() {
         myRef.setValue(tablero)
     }
 
+    fun setGameAvailable() {
+        tablero.jugador1.set("nombre", "")
+        tablero.jugador1.set("correo", "")
+        tablero.jugador2.set("nombre", "")
+        tablero.jugador2.set("correo", "")
+        tablero.estatus = 0
+    }
+
     fun startGame() {
         val images: MutableList<Int> = mutableListOf(
             gatocool,
@@ -455,6 +508,11 @@ class MemoramaActivity : AppCompatActivity() {
         images.shuffle()
 
         val defaultStatus: Long = 0
+
+        val current = LocalDateTime.now()
+        //val formatted = current.format(formatter)
+        tablero.fecha = current.format(formatter)
+        tablero.estatus == 1
 
         tablero.casilla1.put("estatus", defaultStatus)
         tablero.casilla1.put("imagen",getResources().getResourceEntryName(images[0]))
@@ -522,7 +580,7 @@ class MemoramaActivity : AppCompatActivity() {
         //-------------------------------------------------- Ganaste
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Ganaste! \n Tu puntuación es:")
-            .setCancelable(false)
+            .setCancelable(true)
         val alert = builder.create()
         alert.show()
     }
@@ -530,7 +588,7 @@ class MemoramaActivity : AppCompatActivity() {
     fun Perdiste(){  //-------------------------------------------------- Perdiste
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Perdiste! \n Tu puntuación es: ")
-            .setCancelable(false)
+            .setCancelable(true)
         val alert = builder.create()
         alert.show()
     }
@@ -538,11 +596,21 @@ class MemoramaActivity : AppCompatActivity() {
     fun loadGame() {
         puntaje1.text = tablero.puntos1.toString()
         puntaje2.text = tablero.puntos2.toString()
+        var jugador1str = tablero.jugador1.get("nombre").toString()
+        var jugador2str = tablero.jugador2.get("nombre").toString()
+        jugador1.text = jugador1str
+        jugador2.text = jugador2str
+
+        if(tablero.turno == 1) {
+            jugadorTurno.text = jugador1str
+        }
+        if(tablero.turno == 2) {
+            jugadorTurno.text = jugador2str
+        }
 
         var statusTablero = getStatusTableroList()
         var puntosParaList = getPuntosParaList()
         var images = getImagenList()
-        var playerNumber = getPlayerNumber()
 
         for(i in 0..15) {
             if(statusTablero[i].toInt() == 0) {
