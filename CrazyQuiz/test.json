@@ -1,12 +1,12 @@
 {
     "tablero": {
         "jugador1": {
-            "correo": "pepe@pepe.com",
-            "nombre": "test1"
+            "correo": "",
+            "nombre": ""
         },
         "jugador2": {
-            "correo": "hannaromero123@gmail.com",
-            "nombre": "test2"
+            "correo": "",
+            "nombre": ""
         },
         "turno": 1,
         "puntos1": 0,
@@ -94,18 +94,6 @@
             "puntoPara": 0
         },
         "espera": [
-            {
-                "correo": "",
-                "nombre": "" 
-            },
-            {
-                "correo": "",
-                "nombre": "" 
-            },
-            {
-                "correo": "",
-                "nombre": "" 
-            }
         ]
     }
 }

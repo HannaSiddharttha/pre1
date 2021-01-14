@@ -1,6 +1,7 @@
 package com.example.crazyquiz
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_memorama.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
 
 class MemoramaActivity : AppCompatActivity() {
 
@@ -36,6 +38,7 @@ class MemoramaActivity : AppCompatActivity() {
     private lateinit var imageViews: MutableList<ImageView>
     private lateinit var cardViews: MutableList<CardView>
     private lateinit var formatter: DateTimeFormatter
+    private lateinit var waitDialog: AlertDialog
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +69,11 @@ class MemoramaActivity : AppCompatActivity() {
             user = savedUser
         }
 
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Espera tu turno porfavor")
+            .setCancelable(false)
+        waitDialog = builder.create()
+
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Obtener tablero
@@ -73,8 +81,10 @@ class MemoramaActivity : AppCompatActivity() {
                 var tableroFirebase = dataSnapshot.getValue(Tablero::class.java)
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
+
                     var correo1 = tablero.jugador1.get("correo")
                     var correo2 = tablero.jugador2.get("correo")
+
                     if(!inGame()) {
                         if(!inLine()) {
                             val usuario: MutableMap<String, Any> = mutableMapOf<String, Any>()
@@ -83,10 +93,27 @@ class MemoramaActivity : AppCompatActivity() {
                             usuario.put("nombre", user.userName)
                             usuario.put("fecha", current.format(formatter))
                             tablero.espera.add(usuario)
+                            if(tablero.espera.size >= 2) {
+                                // agregar los jugadores en espera y borrarlos de la fila
+                                var jugador1 = tablero.espera.get(0)
+                                var jugador2 = tablero.espera.get(1)
+                                tablero.jugador1 = jugador1
+                                tablero.jugador2 = jugador2
+                                tablero.espera.removeAt(0)
+                                tablero.espera.removeAt(0)
+                                tablero.estatus = 1
+                                startGame()
+                            } else {
+                                showWaitDialog()
+                            }
+                            saveTablero()
+                        } else {
+                            showWaitDialog()
                         }
                     } else {
                         if(tablero.estatus == 0 && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
                             startGame()
+                            saveTablero()
                         } else {
 //                        waitMessage()
                         }
@@ -108,6 +135,23 @@ class MemoramaActivity : AppCompatActivity() {
                 var tableroFirebase = dataSnapshot.getValue(Tablero::class.java)
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
+                    var correo1 = tablero.jugador1.get("correo")
+                    var correo2 = tablero.jugador2.get("correo")
+                    if(tablero.estatus == 1 && waitDialog.isShowing()) {
+                        hideWaitDialog()
+                    }
+                    if(gameFinished()) {
+                        ganador()
+                        setGameAvailable()
+                        //tablero.jugador1.set("correo","")
+                        //tablero.jugador1.set("nombre","")
+                        //tablero.jugador2.set("correo","")
+                        //tablero.jugador2.set("nombre","")
+                        saveTablero()
+                    }
+                    if(tablero.estatus == 0 && !correo1!!.equals("") && !correo1!!.equals("") && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
+                        startGame()
+                    }
                     loadGame()
                 }
             }
@@ -184,7 +228,6 @@ class MemoramaActivity : AppCompatActivity() {
         cardView16.setOnClickListener {
             eventCasilla(tablero.casilla16, 16)
         }
-        //Ganador()
     }
 
     fun itsYourTurn(): Boolean {
@@ -307,6 +350,23 @@ class MemoramaActivity : AppCompatActivity() {
             }
         }
         return clicks >= 2
+    }
+
+    fun gameFinished(): Boolean {
+        return tablero.puntos1 + tablero.puntos2 >= 8
+    }
+
+    fun getWinner(): String {
+        if(tablero.puntos1 == tablero.puntos2) {
+            return "Empate"
+        }
+        if(tablero.puntos1 > tablero.puntos2) {
+            return tablero.jugador1.get("nombre").toString()
+        }
+        if(tablero.puntos1 < tablero.puntos2) {
+            return tablero.jugador2.get("nombre").toString()
+        }
+        return ""
     }
 
     fun gotAPoint(): Boolean {
@@ -482,7 +542,10 @@ class MemoramaActivity : AppCompatActivity() {
         tablero.jugador1.set("correo", "")
         tablero.jugador2.set("nombre", "")
         tablero.jugador2.set("correo", "")
+        tablero.fecha = LocalDateTime.now().format(formatter)
         tablero.estatus = 0
+        tablero.puntos1 = 0
+        tablero.puntos2 = 0
     }
 
     fun startGame() {
@@ -562,27 +625,27 @@ class MemoramaActivity : AppCompatActivity() {
         tablero.casilla16.put("estatus",defaultStatus)
         tablero.casilla16.put("imagen",getResources().getResourceEntryName(images[15]))
         tablero.casilla16.put("puntoPara", defaultStatus)
-        saveTablero()
     }
 
 
-    /* fun EnEspera(){  //-------------------------------------------------- En espera de turno
-      CardView.setOnClickListener { View ->
-          val builder = AlertDialog.Builder(this)
-          builder.setMessage("Espera tu turno")
-              .setCancelable(false)
-          val alert = builder.create()
-          alert.show()
-      }
-  }*/
+    fun showWaitDialog(){  //-------------------------------------------------- En espera de turno
+        waitDialog.show()
+    }
+    fun hideWaitDialog(){  //-------------------------------------------------- En espera de turno
+        waitDialog.hide()
+    }
 
-    fun Ganador(){
-        //-------------------------------------------------- Ganaste
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Ganaste! \n Tu puntuación es:")
-            .setCancelable(true)
-        val alert = builder.create()
-        alert.show()
+    fun ganador() {
+        if (!(this as Activity).isFinishing) {
+            //show dialog
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("El ganador es: ${getWinner()}")
+                .setCancelable(true)
+            val alert = builder.create()
+            // poner juego como disponible de nuevo
+            //tablero.estatus = 0
+            alert.show()
+        }
     }
 
     fun Perdiste(){  //-------------------------------------------------- Perdiste
