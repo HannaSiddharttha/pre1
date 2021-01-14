@@ -24,6 +24,7 @@ class MemoramaActivity : AppCompatActivity() {
     private lateinit var puntaje2: TextView
     var green : Int = Color.parseColor("#008F39")
     var red : Int = Color.parseColor("#FF0000")
+    var white : Int = Color.parseColor("#FFFFFF")
     private var cardBack: Int = 0
     private lateinit var imageViews: MutableList<ImageView>
     private lateinit var cardViews: MutableList<CardView>
@@ -266,6 +267,57 @@ class MemoramaActivity : AppCompatActivity() {
         return clicks >= 2
     }
 
+    fun gotAPoint(): Boolean {
+        var clicks : Int = 0
+        val statusTablero = getStatusTableroList()
+        val puntosPara = getPuntosParaList()
+        val images = getImagenList()
+        var image1: String = ""
+        var image2: String = ""
+
+        for(i in 0..15) {
+            if(statusTablero[i].toInt() == 1 && puntosPara[i].toInt() == 0) {
+                clicks++
+                if(clicks == 1) {
+                    image1 = images[i]
+                }
+                if(clicks == 2) {
+                    image2 = images[i]
+                }
+            }
+        }
+        return image1 == image2
+    }
+
+    fun hideCards() {
+        val statusTablero = getStatusTableroList()
+        val puntosPara = getPuntosParaList()
+        var casillaStatus : Long = 0
+
+        for(i in 0..15) {
+            if(statusTablero[i].toInt() == 1 && puntosPara[i].toInt() == 0) {
+                when (i) {
+                    0 -> tablero.casilla1.set("estatus", casillaStatus)
+                    1 -> tablero.casilla2.set("estatus", casillaStatus)
+                    2 -> tablero.casilla3.set("estatus", casillaStatus)
+                    3 -> tablero.casilla4.set("estatus", casillaStatus)
+                    4 -> tablero.casilla5.set("estatus", casillaStatus)
+                    5 -> tablero.casilla6.set("estatus", casillaStatus)
+                    6 -> tablero.casilla7.set("estatus", casillaStatus)
+                    7 -> tablero.casilla8.set("estatus", casillaStatus)
+                    8 -> tablero.casilla9.set("estatus", casillaStatus)
+                    9 -> tablero.casilla10.set("estatus", casillaStatus)
+                    10 -> tablero.casilla11.set("estatus", casillaStatus)
+                    11 -> tablero.casilla12.set("estatus", casillaStatus)
+                    12 -> tablero.casilla13.set("estatus", casillaStatus)
+                    13 -> tablero.casilla14.set("estatus", casillaStatus)
+                    14 -> tablero.casilla15.set("estatus", casillaStatus)
+                    15 -> tablero.casilla16.set("estatus", casillaStatus)
+                }
+            }
+        }
+    }
+
 
     fun eventCasilla(casilla: MutableMap<String, Any>, numero: Int) {
 
@@ -291,12 +343,17 @@ class MemoramaActivity : AppCompatActivity() {
                     15 -> tablero.casilla15.set("estatus", casillaStatus)
                     16 -> tablero.casilla16.set("estatus", casillaStatus)
                 }
+                loadGame()
 
                 if(turnFinished()) {
+
                     //tablero.estatus = 2
-                    updateScore()
+                    if(gotAPoint()) {
+                        updateScore()
+                    } else {
+                        hideCards()
+                    }
                 }
-                //tablero.casilla10.set("estatus", casilla10status)
                 saveTablero()
             }
         } else {
@@ -341,6 +398,9 @@ class MemoramaActivity : AppCompatActivity() {
     }
     fun changeColor2(cardView: CardView) {
         cardView.setCardBackgroundColor(red)
+    }
+    fun changeColor3(cardView: CardView) {
+        cardView.setCardBackgroundColor(white)
     }
 
     fun saveTablero() {
@@ -434,6 +494,7 @@ class MemoramaActivity : AppCompatActivity() {
         for(i in 0..15) {
             if(statusTablero[i].toInt() == 0) {
                 imageViews[i].setImageResource(cardBack)
+                changeColor3(cardViews[i])
             } else {
                 val id = getResources().getIdentifier(images[i], "drawable", getPackageName())
                 imageViews[i].setImageResource(id)
