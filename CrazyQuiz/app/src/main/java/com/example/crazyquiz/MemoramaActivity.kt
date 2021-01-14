@@ -3,6 +3,7 @@ package com.example.crazyquiz
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -167,7 +168,7 @@ class MemoramaActivity : AppCompatActivity() {
         var correo1 = tablero.jugador1.get("correo").toString()
         var correo2 = tablero.jugador2.get("correo").toString()
         var correo = user.userEmail
-        return (tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo))
+        return tablero.estatus != 2 && ((tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo)))
     }
 
     fun getPlayerNumber(): Int {
@@ -349,11 +350,18 @@ class MemoramaActivity : AppCompatActivity() {
 
                 if(turnFinished()) {
 
-                    //tablero.estatus = 2
                     if(gotAPoint()) {
                         updateScore()
                     } else {
-                        hideCards()
+                        tablero.estatus = 2
+                        saveTablero()
+                        Handler().postDelayed(object : Runnable {
+                            override fun run() {
+                                tablero.estatus = 1
+                                hideCards()
+                                saveTablero()
+                            }
+                        }, 2500)
                     }
                     if(getPlayerNumber() == 1) {
                         tablero.turno = 2
@@ -405,6 +413,20 @@ class MemoramaActivity : AppCompatActivity() {
     fun changeColor3(cardView: CardView) {
         cardView.setCardBackgroundColor(white)
     }
+
+    /*
+    fun () {
+        Handler().postDelayed(object : Runnable {
+            override fun run() {
+                Toast.makeText(
+                    this,
+                    "No puedes dar click aquí",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }, 3000)
+    }
+    */
 
     fun saveTablero() {
         myRef.setValue(tablero)
