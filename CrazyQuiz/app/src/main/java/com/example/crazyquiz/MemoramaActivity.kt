@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.crazyquiz.R.drawable.*
@@ -159,18 +160,19 @@ class MemoramaActivity : AppCompatActivity() {
         cardView16.setOnClickListener {
             eventCasilla(tablero.casilla16, 16)
         }
+        //Ganador()
     }
 
     fun itsYourTurn(): Boolean {
         var correo1 = tablero.jugador1.get("correo").toString()
-        var correo2 = tablero.jugador1.get("correo").toString()
+        var correo2 = tablero.jugador2.get("correo").toString()
         var correo = user.userEmail
         return (tablero.turno == 1 && correo1.equals(correo)) || (tablero.turno == 2 && correo2.equals(correo))
     }
 
     fun getPlayerNumber(): Int {
         var correo1 = tablero.jugador1.get("correo").toString()
-        var correo2 = tablero.jugador1.get("correo").toString()
+        var correo2 = tablero.jugador2.get("correo").toString()
         var correo = user.userEmail
         if(correo1.equals(correo)) {
             return 1
@@ -353,6 +355,11 @@ class MemoramaActivity : AppCompatActivity() {
                     } else {
                         hideCards()
                     }
+                    if(getPlayerNumber() == 1) {
+                        tablero.turno = 2
+                    } else {
+                        tablero.turno = 1
+                    }
                 }
                 saveTablero()
             }
@@ -363,33 +370,29 @@ class MemoramaActivity : AppCompatActivity() {
     fun updateScore() {
         val statusTablero = getStatusTableroList()
         val puntosPara = getPuntosParaList()
+        val playerNumber = getPlayerNumber()
         for(i in 0..15) {
             // si esta volteada y no tiene punto para nadie
             if(statusTablero[i].toInt() == 1 && puntosPara[i].toInt() == 0) {
                 when (i) {
-                    0 -> tablero.casilla1.set("puntoPara", getPlayerNumber())
-                    1 -> tablero.casilla2.set("puntoPara", getPlayerNumber())
-                    2 -> tablero.casilla3.set("puntoPara", getPlayerNumber())
-                    3 -> tablero.casilla4.set("puntoPara", getPlayerNumber())
-                    4 -> tablero.casilla5.set("puntoPara", getPlayerNumber())
-                    5 -> tablero.casilla6.set("puntoPara", getPlayerNumber())
-                    6 -> tablero.casilla7.set("puntoPara", getPlayerNumber())
-                    7 -> tablero.casilla8.set("puntoPara", getPlayerNumber())
-                    8 -> tablero.casilla9.set("puntoPara", getPlayerNumber())
-                    9 -> tablero.casilla10.set("puntoPara", getPlayerNumber())
-                    10 -> tablero.casilla11.set("puntoPara", getPlayerNumber())
-                    11 -> tablero.casilla12.set("puntoPara", getPlayerNumber())
-                    12 -> tablero.casilla13.set("puntoPara", getPlayerNumber())
-                    13 -> tablero.casilla14.set("puntoPara", getPlayerNumber())
-                    14 -> tablero.casilla15.set("puntoPara", getPlayerNumber())
-                    15 -> tablero.casilla16.set("puntoPara", getPlayerNumber())
+                    0 -> tablero.casilla1.set("puntoPara", playerNumber)
+                    1 -> tablero.casilla2.set("puntoPara", playerNumber)
+                    2 -> tablero.casilla3.set("puntoPara", playerNumber)
+                    3 -> tablero.casilla4.set("puntoPara", playerNumber)
+                    4 -> tablero.casilla5.set("puntoPara", playerNumber)
+                    5 -> tablero.casilla6.set("puntoPara", playerNumber)
+                    6 -> tablero.casilla7.set("puntoPara", playerNumber)
+                    7 -> tablero.casilla8.set("puntoPara", playerNumber)
+                    8 -> tablero.casilla9.set("puntoPara", playerNumber)
+                    9 -> tablero.casilla10.set("puntoPara", playerNumber)
+                    10 -> tablero.casilla11.set("puntoPara", playerNumber)
+                    11 -> tablero.casilla12.set("puntoPara", playerNumber)
+                    12 -> tablero.casilla13.set("puntoPara", playerNumber)
+                    13 -> tablero.casilla14.set("puntoPara", playerNumber)
+                    14 -> tablero.casilla15.set("puntoPara", playerNumber)
+                    15 -> tablero.casilla16.set("puntoPara", playerNumber)
                 }
             }
-        }
-        if(getPlayerNumber() == 1) {
-            tablero.turno = 2
-        } else {
-            tablero.turno = 1
         }
     }
 
@@ -493,24 +496,21 @@ class MemoramaActivity : AppCompatActivity() {
       }
   }*/
 
-    fun Ganador(){  //-------------------------------------------------- Ganaste
-        CardView.setOnClickListener {View ->
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Ganaste! \n Tu puntuación es:")
-                .setCancelable(false)
-            val alert = builder.create()
-            alert.show()
-        }
+    fun Ganador(){
+        //-------------------------------------------------- Ganaste
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Ganaste! \n Tu puntuación es:")
+            .setCancelable(false)
+        val alert = builder.create()
+        alert.show()
     }
 
     fun Perdiste(){  //-------------------------------------------------- Perdiste
-        CardView.setOnClickListener {View ->
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Perdiste! \n Tu puntuación es: ")
-                .setCancelable(false)
-            val alert = builder.create()
-            alert.show()
-        }
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Perdiste! \n Tu puntuación es: ")
+            .setCancelable(false)
+        val alert = builder.create()
+        alert.show()
     }
 
     fun loadGame() {
