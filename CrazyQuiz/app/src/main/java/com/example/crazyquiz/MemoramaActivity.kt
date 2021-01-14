@@ -482,6 +482,37 @@ class MemoramaActivity : AppCompatActivity() {
         saveTablero()
     }
 
+
+    /* fun EnEspera(){  //-------------------------------------------------- En espera de turno
+      CardView.setOnClickListener { View ->
+          val builder = AlertDialog.Builder(this)
+          builder.setMessage("Espera tu turno")
+              .setCancelable(false)
+          val alert = builder.create()
+          alert.show()
+      }
+  }*/
+
+    fun Ganador(){  //-------------------------------------------------- Ganaste
+        CardView.setOnClickListener {View ->
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Ganaste! \n Tu puntuación es:")
+                .setCancelable(false)
+            val alert = builder.create()
+            alert.show()
+        }
+    }
+
+    fun Perdiste(){  //-------------------------------------------------- Perdiste
+        CardView.setOnClickListener {View ->
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Perdiste! \n Tu puntuación es: ")
+                .setCancelable(false)
+            val alert = builder.create()
+            alert.show()
+        }
+    }
+
     fun loadGame() {
         puntaje1.text = tablero.puntos1.toString()
         puntaje2.text = tablero.puntos2.toString()
