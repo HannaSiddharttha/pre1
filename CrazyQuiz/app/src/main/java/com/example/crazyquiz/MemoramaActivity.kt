@@ -86,7 +86,7 @@ class MemoramaActivity : AppCompatActivity() {
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
 
-                    tablero.fecha
+                    /*
                     val date1 = LocalDateTime.parse(tablero.fecha, formatter);
                     val currentDate = LocalDateTime.now()
 
@@ -96,6 +96,7 @@ class MemoramaActivity : AppCompatActivity() {
                         setGameAvailable()
                         saveTablero()
                     }
+                    */
 
 
                     var correo1 = tablero.jugador1.get("correo")
@@ -148,9 +149,11 @@ class MemoramaActivity : AppCompatActivity() {
                     if(tablero.estatus == 1 && inGame() && waitDialog.isShowing()) {
                         hideWaitDialog()
                     }
-                    if(tablero.estatus == 0 && !inGame()) {
+                    /*
+                    if(tablero.estatus == 0 && !inGame() && !waitDialog.isShowing()) {
                         showWaitDialog()
                     }
+                    */
                     if(tablero.estatus == 0 && !inGame() && inLine()) {
                         if(tablero.espera.size >= 2) {
                             if(waitDialog.isShowing()) {
