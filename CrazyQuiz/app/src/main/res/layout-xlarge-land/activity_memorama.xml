@@ -25,14 +25,14 @@
 
     <TextView
         android:id="@+id/jugador_en_turno"
-        android:layout_width="108dp"
+        android:layout_width="197dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="242dp"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="122dp"
+        android:layout_marginEnd="239dp"
         android:fontFamily="cursive"
         android:text="Jugador 1"
         android:textAlignment="center"
@@ -41,15 +41,15 @@
 
     <TextView
         android:id="@+id/Label_jugador2_puntaje"
-        android:layout_width="85dp"
+        android:layout_width="287dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="271dp"
+        android:layout_marginStart="924dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginEnd="-4dp"
-        android:layout_marginBottom="528dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="652dp"
         android:fontFamily="cursive"
         android:text="Jugador 2"
         android:textAlignment="center"
@@ -58,15 +58,15 @@
 
     <TextView
         android:id="@+id/jugador1_puntaje"
-        android:layout_width="101dp"
+        android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
+        android:layout_marginStart="130dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginBottom="480dp"
+        android:layout_marginEnd="1047dp"
+        android:layout_marginBottom="613dp"
         android:fontFamily="cursive"
         android:text="0"
         android:textAlignment="center"
@@ -76,15 +76,15 @@
 
     <TextView
         android:id="@+id/jugador2_puntaje"
-        android:layout_width="101dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="290dp"
+        android:layout_marginStart="992dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="484dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="617dp"
         android:fontFamily="cursive"
         android:text="0"
         android:textAlignment="center"
@@ -94,15 +94,15 @@
 
     <TextView
         android:id="@+id/Label_jugador1_puntaje"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
+        android:layout_width="292dp"
+        android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="39dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginEnd="268dp"
-        android:layout_marginBottom="531dp"
+        android:layout_marginEnd="948dp"
+        android:layout_marginBottom="640dp"
         android:fontFamily="cursive"
         android:text="Jugador 1"
         android:textAlignment="center"
@@ -111,8 +111,8 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
+        android:layout_height="557dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:columnCount="4"
@@ -142,8 +142,8 @@
 
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatocool" />
 
@@ -173,8 +173,8 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatotrabajando" />
 
@@ -203,8 +203,8 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatoincomodo" />
 
@@ -234,8 +234,8 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatokhe" />
 
@@ -265,8 +265,8 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatolopuseaqui" />
 
@@ -296,8 +296,8 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatobatma" />
 
@@ -327,8 +327,8 @@
 
                 <ImageView
                     android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatoduren" />
 
@@ -358,8 +358,8 @@
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatosospechozo" />
 
@@ -389,8 +389,8 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatosospechozo" />
 
@@ -420,8 +420,8 @@
 
                 <ImageView
                     android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatocool" />
 
@@ -451,8 +451,8 @@
 
                 <ImageView
                     android:id="@+id/imageView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatoduren" />
 
@@ -482,8 +482,8 @@
 
                 <ImageView
                     android:id="@+id/imageView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatoincomodo" />
 
@@ -513,8 +513,8 @@
 
                 <ImageView
                     android:id="@+id/imageView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatotrabajando" />
 
@@ -544,8 +544,8 @@
 
                 <ImageView
                     android:id="@+id/imageView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatokhe" />
 
@@ -575,8 +575,8 @@
 
                 <ImageView
                     android:id="@+id/imageView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatolopuseaqui" />
 
@@ -606,11 +606,10 @@
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="81dp"
                     android:background="@drawable/ic_baseline_local_fire_department_24"
                     android:src="@drawable/gatobatma" />
-
 
 
             </LinearLayout>
