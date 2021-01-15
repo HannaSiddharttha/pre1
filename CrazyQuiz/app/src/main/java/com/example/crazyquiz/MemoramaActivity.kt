@@ -56,6 +56,8 @@ class MemoramaActivity : AppCompatActivity() {
         jugador2 = findViewById(R.id.Label_jugador2_puntaje)
         jugadorTurno = findViewById(R.id.jugador_en_turno)
 
+        tablero = Tablero()
+
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
         imageViews = mutableListOf(imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,
@@ -87,12 +89,7 @@ class MemoramaActivity : AppCompatActivity() {
 
                     if(!inGame()) {
                         if(!inLine()) {
-                            val usuario: MutableMap<String, Any> = mutableMapOf<String, Any>()
-                            val current = LocalDateTime.now()
-                            usuario.put("correo", user.userEmail)
-                            usuario.put("nombre", user.userName)
-                            usuario.put("fecha", current.format(formatter))
-                            tablero.espera.add(usuario)
+                            addToLine()
                             if(tablero.espera.size >= 2) {
                                 // agregar los jugadores en espera y borrarlos de la fila
                                 var jugador1 = tablero.espera.get(0)
@@ -140,14 +137,11 @@ class MemoramaActivity : AppCompatActivity() {
                     if(tablero.estatus == 1 && waitDialog.isShowing()) {
                         hideWaitDialog()
                     }
+                    if(!inGame() && inLine() && !waitDialog.isShowing()) {
+                        showWaitDialog()
+                    }
                     if(gameFinished()) {
                         ganador()
-                        setGameAvailable()
-                        //tablero.jugador1.set("correo","")
-                        //tablero.jugador1.set("nombre","")
-                        //tablero.jugador2.set("correo","")
-                        //tablero.jugador2.set("nombre","")
-                        saveTablero()
                     }
                     if(tablero.estatus == 0 && !correo1!!.equals("") && !correo1!!.equals("") && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
                         startGame()
@@ -251,6 +245,15 @@ class MemoramaActivity : AppCompatActivity() {
             }
         }
         return false
+    }
+
+    fun addToLine() {
+        val usuario: MutableMap<String, Any> = mutableMapOf<String, Any>()
+        val current = LocalDateTime.now()
+        usuario.put("correo", user.userEmail)
+        usuario.put("nombre", user.userName)
+        usuario.put("fecha", current.format(formatter))
+        tablero.espera.add(usuario)
     }
 
     fun getPlayerNumber(): Int {
@@ -638,10 +641,22 @@ class MemoramaActivity : AppCompatActivity() {
     fun ganador() {
         if (!(this as Activity).isFinishing) {
             //show dialog
+            val alert: AlertDialog
             val builder = AlertDialog.Builder(this)
             builder.setMessage("El ganador es: ${getWinner()}")
-                .setCancelable(true)
-            val alert = builder.create()
+                .setCancelable(false)
+            builder.setPositiveButton("NUEVO JUEGO") { dialog, which ->
+                setGameAvailable()
+                addToLine()
+                saveTablero()
+                //alert.hide()
+            }
+            builder.setNegativeButton("SALIR") { dialog, which ->
+                setGameAvailable()
+                saveTablero()
+                this.finish()
+            }
+            alert = builder.create()
             // poner juego como disponible de nuevo
             //tablero.estatus = 0
             alert.show()
