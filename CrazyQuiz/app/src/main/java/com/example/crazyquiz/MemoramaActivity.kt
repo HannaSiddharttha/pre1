@@ -57,7 +57,7 @@ class MemoramaActivity : AppCompatActivity() {
         jugadorTurno = findViewById(R.id.jugador_en_turno)
 
         tablero = Tablero()
-
+        
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
         imageViews = mutableListOf(imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,
@@ -91,21 +91,18 @@ class MemoramaActivity : AppCompatActivity() {
                         if(!inLine()) {
                             addToLine()
                             if(tablero.espera.size >= 2) {
-                                // agregar los jugadores en espera y borrarlos de la fila
-                                var jugador1 = tablero.espera.get(0)
-                                var jugador2 = tablero.espera.get(1)
-                                tablero.jugador1 = jugador1
-                                tablero.jugador2 = jugador2
-                                tablero.espera.removeAt(0)
-                                tablero.espera.removeAt(0)
-                                tablero.estatus = 1
-                                startGame()
+                                movePlayers()
                             } else {
                                 showWaitDialog()
                             }
                             saveTablero()
                         } else {
-                            showWaitDialog()
+                            //showWaitDialog()
+                            if(tablero.espera.size >= 2) {
+                                movePlayers()
+                            } else {
+                                showWaitDialog()
+                            }
                         }
                     } else {
                         if(tablero.estatus == 0 && (correo1!!.equals(user.userEmail) || correo2!!.equals(user.userEmail))) {
@@ -137,9 +134,19 @@ class MemoramaActivity : AppCompatActivity() {
                     if(tablero.estatus == 1 && waitDialog.isShowing()) {
                         hideWaitDialog()
                     }
-                    if(!inGame() && inLine() && !waitDialog.isShowing()) {
-                        showWaitDialog()
+                    if(tablero.estatus == 0 && !inGame() && inLine()) {
+                        if(tablero.espera.size >= 2) {
+                            if(waitDialog.isShowing()) {
+                                hideWaitDialog()
+                            }
+                            movePlayers()
+                            saveTablero()
+                        }
+                        else if(!waitDialog.isShowing()) {
+                            showWaitDialog()
+                        }
                     }
+
                     if(gameFinished()) {
                         ganador()
                     }
@@ -222,6 +229,17 @@ class MemoramaActivity : AppCompatActivity() {
         cardView16.setOnClickListener {
             eventCasilla(tablero.casilla16, 16)
         }
+    }
+
+    fun movePlayers() {
+        var jugador1 = tablero.espera.get(0)
+        var jugador2 = tablero.espera.get(1)
+        tablero.jugador1 = jugador1
+        tablero.jugador2 = jugador2
+        tablero.espera.removeAt(0)
+        tablero.espera.removeAt(0)
+        tablero.estatus = 1
+        startGame()
     }
 
     fun itsYourTurn(): Boolean {
@@ -522,20 +540,6 @@ class MemoramaActivity : AppCompatActivity() {
         cardView.setCardBackgroundColor(white)
     }
 
-    /*
-    fun () {
-        Handler().postDelayed(object : Runnable {
-            override fun run() {
-                Toast.makeText(
-                    this,
-                    "No puedes dar click aquí",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }, 3000)
-    }
-    */
-
     fun saveTablero() {
         myRef.setValue(tablero)
     }
@@ -649,6 +653,8 @@ class MemoramaActivity : AppCompatActivity() {
                 setGameAvailable()
                 addToLine()
                 saveTablero()
+                //dialog.dismiss()
+                //dialog.cancel()
                 //alert.hide()
             }
             builder.setNegativeButton("SALIR") { dialog, which ->
@@ -661,14 +667,6 @@ class MemoramaActivity : AppCompatActivity() {
             //tablero.estatus = 0
             alert.show()
         }
-    }
-
-    fun Perdiste(){  //-------------------------------------------------- Perdiste
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Perdiste! \n Tu puntuación es: ")
-            .setCancelable(true)
-        val alert = builder.create()
-        alert.show()
     }
 
     fun loadGame() {
