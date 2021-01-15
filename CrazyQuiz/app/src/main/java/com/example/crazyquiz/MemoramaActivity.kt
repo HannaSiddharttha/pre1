@@ -16,7 +16,9 @@ import com.example.crazyquiz.db.Users
 import com.example.crazyquiz.firebaseModels.Tablero
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_memorama.*
+import java.time.Duration
 import java.time.LocalDateTime
+import java.time.Period
 import java.time.format.DateTimeFormatter
 
 
@@ -57,7 +59,7 @@ class MemoramaActivity : AppCompatActivity() {
         jugadorTurno = findViewById(R.id.jugador_en_turno)
 
         tablero = Tablero()
-        
+
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
         imageViews = mutableListOf(imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,
@@ -83,6 +85,18 @@ class MemoramaActivity : AppCompatActivity() {
                 var tableroFirebase = dataSnapshot.getValue(Tablero::class.java)
                 if (tableroFirebase != null) {
                     tablero = tableroFirebase
+
+                    tablero.fecha
+                    val date1 = LocalDateTime.parse(tablero.fecha, formatter);
+                    val currentDate = LocalDateTime.now()
+
+                    val duration: Duration = Duration.between(date1, currentDate)
+                    var minutes = duration.toMinutes()
+                    if(minutes >= 5) {
+                        setGameAvailable()
+                        saveTablero()
+                    }
+
 
                     var correo1 = tablero.jugador1.get("correo")
                     var correo2 = tablero.jugador2.get("correo")
@@ -131,8 +145,11 @@ class MemoramaActivity : AppCompatActivity() {
                     tablero = tableroFirebase
                     var correo1 = tablero.jugador1.get("correo")
                     var correo2 = tablero.jugador2.get("correo")
-                    if(tablero.estatus == 1 && waitDialog.isShowing()) {
+                    if(tablero.estatus == 1 && inGame() && waitDialog.isShowing()) {
                         hideWaitDialog()
+                    }
+                    if(tablero.estatus == 0 && !inGame()) {
+                        showWaitDialog()
                     }
                     if(tablero.estatus == 0 && !inGame() && inLine()) {
                         if(tablero.espera.size >= 2) {
@@ -240,6 +257,17 @@ class MemoramaActivity : AppCompatActivity() {
         tablero.espera.removeAt(0)
         tablero.estatus = 1
         startGame()
+    }
+
+    fun getUserScore(): Int {
+        var number = getPlayerNumber()
+        if(number == 1) {
+            return tablero.puntos1
+        }
+        if(number == 2) {
+            return tablero.puntos2
+        }
+        return 0
     }
 
     fun itsYourTurn(): Boolean {
@@ -647,7 +675,7 @@ class MemoramaActivity : AppCompatActivity() {
             //show dialog
             val alert: AlertDialog
             val builder = AlertDialog.Builder(this)
-            builder.setMessage("El ganador es: ${getWinner()}")
+            builder.setMessage("El ganador es: ${getWinner()}, puntos: ${getUserScore()}")
                 .setCancelable(false)
             builder.setPositiveButton("NUEVO JUEGO") { dialog, which ->
                 setGameAvailable()
