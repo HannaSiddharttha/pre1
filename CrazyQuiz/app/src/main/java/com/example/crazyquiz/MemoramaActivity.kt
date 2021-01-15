@@ -149,9 +149,11 @@ class MemoramaActivity : AppCompatActivity() {
                     if(tablero.estatus == 1 && inGame() && waitDialog.isShowing()) {
                         hideWaitDialog()
                     }
+                    /*
                     if(tablero.estatus == 0 && !inGame() && !waitDialog.isShowing()) {
                         showWaitDialog()
                     }
+                    */
                     if(tablero.estatus == 0 && !inGame() && inLine()) {
                         if(tablero.espera.size >= 2) {
                             if(waitDialog.isShowing()) {
