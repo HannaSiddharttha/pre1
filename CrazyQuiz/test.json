@@ -1,17 +1,18 @@
 {
     "tablero": {
         "jugador1": {
-            "correo": "correo1@gmail.com",
-            "nombre": "-----"
+            "correo": "",
+            "nombre": ""
         },
         "jugador2": {
-            "correo": "correo2@gmail.com",
-            "nombre": "-----"
+            "correo": "",
+            "nombre": ""
         },
         "turno": 1,
         "puntos1": 0,
         "puntos2": 0,
         "estatus": 0,
+        "fecha": "",
         "casilla1": {
             "imagen": "hola",
             "estatus": 0,
@@ -93,18 +94,6 @@
             "puntoPara": 0
         },
         "espera": [
-            {
-                "correo": "",
-                "nombre": "" 
-            },
-            {
-                "correo": "",
-                "nombre": "" 
-            },
-            {
-                "correo": "",
-                "nombre": "" 
-            }
         ]
     }
 }
